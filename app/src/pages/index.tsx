@@ -1,9 +1,16 @@
-import { styled } from '../stitches';
+import { styled } from '../utils/stitches';
+import { trpc } from '../utils/trpc';
 
 const StyledHeading = styled('h1', {
 	color: 'Red'
 });
 
 export default function Home() {
-	return <StyledHeading>Hello world!</StyledHeading>;
+	const hello = trpc.useQuery(['example.hello']);
+
+	return (
+		<StyledHeading>
+			{hello.data ? hello.data.message : 'Loading...'}
+		</StyledHeading>
+	);
 }
