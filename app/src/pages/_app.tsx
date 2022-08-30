@@ -10,13 +10,22 @@ import { globalCss } from '../utils/stitches';
 const TRPC_API_URL = '/api/trpc';
 
 const useGlobalStyles = globalCss({
+	'*': {
+		boxSizing: 'border-box'
+	},
 	html: {
+		colorScheme: 'dark',
 		fontFamily: '$sans',
 		WebkitFontSmoothing: 'antialiased',
 		MozOsxFontSmoothing: 'grayscale',
 		WebkitTextSizeAdjust: '100%'
 	},
 	body: {
+		margin: 0,
+		background: '$gray1',
+		color: '$gray12'
+	},
+	'h1, h2, h3, h4, h5, h6': {
 		margin: 0
 	}
 });
