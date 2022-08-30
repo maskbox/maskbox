@@ -3,5 +3,6 @@ dist
 .next
 .DS_Store
 
+.env
 .pnpm-debug.log*
 *.tsbuildinfo

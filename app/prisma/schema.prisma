@@ -1,0 +1,16 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  // NOTE: We need to emulate referential integrity in the Prisma client because
+  // PlanetScale does not allow the use of foreign key constraints.
+  referentialIntegrity = "prisma"
+}
+
+model Example {
+  id String @id @default(cuid())
+}
