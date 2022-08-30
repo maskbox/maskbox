@@ -17,6 +17,9 @@ export const {
 		},
 		colors: {
 			...grayDark
+		},
+		fontSizes: {
+			base: '1rem'
 		}
 	}
 });
