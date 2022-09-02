@@ -1,11 +1,18 @@
 import { ErrorMessage as HookFormErrorMessage } from '@hookform/error-message';
 import { FieldErrors } from 'react-hook-form';
-import { styled } from '../../utils/stitches';
+import { keyframes, styled } from '../../utils/stitches';
+
+const fadeIn = keyframes({
+	'0%': { opacity: 0 },
+	'100%': { opacity: 1 }
+});
 
 const StyledErrorMessage = styled('p', {
 	fontSize: '$sm',
 	marginTop: '0.25rem',
-	color: '$red11'
+	paddingLeft: '0.125rem',
+	color: '$red11',
+	animation: `${fadeIn} 200ms`
 });
 
 export function ErrorMessage({

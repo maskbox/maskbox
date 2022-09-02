@@ -33,9 +33,9 @@ export default function SignIn() {
 		<StyledContent>
 			<StyledHeading>Sign in to Maskbox</StyledHeading>
 
-			<Form form={form} onSubmit={(data) => console.log(data)}>
+			<Form form={form} onSubmit={(data) => console.log(data)} noValidate>
 				<Input
-					// type="email"
+					type="email"
 					name="email"
 					label="Email"
 					placeholder="Enter your email address..."
