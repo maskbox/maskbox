@@ -1,6 +1,6 @@
 import { grayDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
-import type { PropertyValue } from '@stitches/react';
+import type { PropertyValue, ScaleValue } from '@stitches/react';
 
 export const {
 	styled,
@@ -35,7 +35,7 @@ export const {
 		}
 	},
 	utils: {
-		fontSize: (value: PropertyValue<'fontSize'>) => ({
+		fontSize: (value: ScaleValue<'fontSize'>) => ({
 			fontSize: value,
 			lineHeight: value
 		}),

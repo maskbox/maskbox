@@ -1,6 +1,7 @@
-import { Button } from '../ui/Button';
-import { Form } from '../ui/Form';
+import { z } from 'zod';
+import { Form, useZodForm } from '../ui/Form';
 import { Input } from '../ui/Form/Input';
+import { SubmitButton } from '../ui/Form/SubmitButton';
 import { styled } from '../utils/stitches';
 
 const StyledContent = styled('div', {
@@ -17,11 +18,20 @@ const StyledHeading = styled('h1', {
 });
 
 export default function SignIn() {
+	const form = useZodForm({
+		schema: z.object({
+			email: z.string().email()
+		}),
+		defaultValues: {
+			email: ''
+		}
+	});
+
 	return (
 		<StyledContent>
 			<StyledHeading>Sign in to Maskbox</StyledHeading>
 
-			<Form>
+			<Form form={form} onSubmit={(data) => console.log(data)}>
 				<Input
 					type="email"
 					name="email"
@@ -29,7 +39,7 @@ export default function SignIn() {
 					placeholder="Enter your email address..."
 				/>
 
-				<Button>Sign in</Button>
+				<SubmitButton>Sign in</SubmitButton>
 			</Form>
 		</StyledContent>
 	);

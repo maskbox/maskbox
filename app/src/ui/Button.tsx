@@ -8,8 +8,11 @@ export const Button = styled('button', {
 	borderRadius: '0.375rem',
 	background: '$gray12',
 	color: '$gray5',
-	baseTransition: 'color',
-	'&:hover': {
+	baseTransition: 'color, opacity',
+	'&:hover:enabled': {
 		color: '$gray1'
+	},
+	'&:disabled': {
+		opacity: 0.85
 	}
 });

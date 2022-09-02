@@ -1,4 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { styled } from '../../utils/stitches';
 
 const StyledGroup = styled('div', {
@@ -38,6 +39,8 @@ export function Input({
 	label: string;
 	placeholder: string;
 }) {
+	const { register } = useFormContext();
+
 	return (
 		<StyledGroup role="group">
 			<StyledLabel htmlFor={name}>{label}</StyledLabel>
@@ -45,8 +48,8 @@ export function Input({
 			<StyledInput
 				type={type}
 				id={name}
-				name={name}
 				placeholder={placeholder}
+				{...register(name)}
 			/>
 		</StyledGroup>
 	);
