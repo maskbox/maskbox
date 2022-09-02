@@ -1,4 +1,4 @@
-import { grayDark } from '@radix-ui/colors';
+import { grayDark, redDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import type { PropertyValue, ScaleValue } from '@stitches/react';
 
@@ -17,13 +17,16 @@ export const {
 			sans: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
 		},
 		colors: {
-			...grayDark
+			...grayDark,
+			...redDark
 		},
 		fontSizes: {
+			sm: '0.75rem',
 			base: '0.875rem',
 			lg: '1.25rem'
 		},
 		lineHeights: {
+			sm: '1rem',
 			base: '1.5rem',
 			lg: '1.75rem'
 		},

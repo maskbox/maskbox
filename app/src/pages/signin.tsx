@@ -20,7 +20,9 @@ const StyledHeading = styled('h1', {
 export default function SignIn() {
 	const form = useZodForm({
 		schema: z.object({
-			email: z.string().email()
+			email: z
+				.string()
+				.email({ message: 'Please enter a valid email address.' })
 		}),
 		defaultValues: {
 			email: ''
@@ -33,7 +35,7 @@ export default function SignIn() {
 
 			<Form form={form} onSubmit={(data) => console.log(data)}>
 				<Input
-					type="email"
+					// type="email"
 					name="email"
 					label="Email"
 					placeholder="Enter your email address..."
