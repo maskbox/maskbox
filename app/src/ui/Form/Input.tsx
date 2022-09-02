@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { styled } from '../../utils/stitches';
 
@@ -30,15 +30,15 @@ const StyledInput = styled('input', {
 
 export function Input({
 	name,
-	type,
+	type = 'text',
 	label,
-	placeholder
+	placeholder,
+	...props
 }: {
 	name: string;
-	type: HTMLInputTypeAttribute;
 	label: string;
 	placeholder: string;
-}) {
+} & ComponentProps<typeof StyledInput>) {
 	const { register } = useFormContext();
 
 	return (
@@ -46,6 +46,7 @@ export function Input({
 			<StyledLabel htmlFor={name}>{label}</StyledLabel>
 
 			<StyledInput
+				{...props}
 				type={type}
 				id={name}
 				placeholder={placeholder}

@@ -37,6 +37,7 @@ export default function SignIn() {
 					name="email"
 					label="Email"
 					placeholder="Enter your email address..."
+					autoComplete="email"
 				/>
 
 				<SubmitButton>Sign in</SubmitButton>
