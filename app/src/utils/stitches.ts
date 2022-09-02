@@ -1,5 +1,6 @@
 import { grayDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
+import type { PropertyValue } from '@stitches/react';
 
 export const {
 	styled,
@@ -19,7 +20,29 @@ export const {
 			...grayDark
 		},
 		fontSizes: {
-			base: '1rem'
+			base: '0.875rem',
+			lg: '1.25rem'
+		},
+		lineHeights: {
+			base: '1.5rem',
+			lg: '1.75rem'
+		},
+		fontWeights: {
+			normal: 400,
+			medium: 500,
+			semibold: 600,
+			bold: 700
 		}
+	},
+	utils: {
+		fontSize: (value: PropertyValue<'fontSize'>) => ({
+			fontSize: value,
+			lineHeight: value
+		}),
+		baseTransition: (value: PropertyValue<'transitionProperty'>) => ({
+			transitionProperty: value,
+			transitionTimingFunction: 'ease-in-out',
+			transitionDuration: '150ms'
+		})
 	}
 });

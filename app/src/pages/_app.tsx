@@ -4,15 +4,27 @@ import type { AppProps } from 'next/app';
 import superjson from 'superjson';
 import { useGlobalStyles } from '../hooks/use-global-styles';
 import type { AppRouter } from '../server/routers';
+import { styled } from '../utils/stitches';
 
 // NOTE: We don't want to use SSR, so relative URL is fine.
 // See: https://trpc.io/docs/ssr
 const TRPC_API_URL = '/api/trpc';
 
+const StyledMain = styled('main', {
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	minHeight: '100vh'
+});
+
 function App({ Component, pageProps }: AppProps) {
 	useGlobalStyles();
 
-	return <Component {...pageProps} />;
+	return (
+		<StyledMain>
+			<Component {...pageProps} />
+		</StyledMain>
+	);
 }
 
 export default withTRPC<AppRouter>({
