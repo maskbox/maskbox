@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Form, useZodForm } from '../ui/Form';
 import { Input } from '../ui/Form/Input';
@@ -7,10 +7,14 @@ import { authChallengeSchema } from '../utils/schema';
 import { styled } from '../utils/stitches';
 import { trpc } from '../utils/trpc';
 
-const variants = {
+const variants: Variants = {
 	initial: {
 		opacity: 0,
-		scale: 0.96
+		scale: 0.96,
+		transition: {
+			duration: 0.25,
+			ease: 'easeInOut'
+		}
 	},
 	animate: {
 		opacity: 1,
@@ -61,7 +65,6 @@ export default function SignIn() {
 				initial="initial"
 				animate="animate"
 				exit="initial"
-				transition={{ duration: 0.25, ease: 'easeInOut' }}
 			>
 				{data ? (
 					<>
