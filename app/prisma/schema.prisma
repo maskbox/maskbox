@@ -11,6 +11,10 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-model Example {
-  id String @id @default(cuid())
+model AuthenticationCode {
+  code      String   @default(cuid())
+  email     String
+  expiresAt DateTime
+
+  @@unique([code, email])
 }
