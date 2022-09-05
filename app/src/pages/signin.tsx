@@ -53,9 +53,7 @@ export default function SignIn() {
 		}
 	});
 
-	const { mutateAsync, data, reset } = trpc.useMutation(['auth.challenge'], {
-		onSuccess: () => form.reset()
-	});
+	const { mutateAsync, data, reset } = trpc.useMutation(['auth.challenge']);
 
 	return (
 		<AnimatePresence mode="wait" initial={false}>
@@ -81,7 +79,10 @@ export default function SignIn() {
 						<Button
 							variant="ghost"
 							css={{ marginTop: '1.75rem' }}
-							onClick={() => reset()}
+							onClick={() => {
+								form.reset();
+								reset();
+							}}
 						>
 							Back to sign in
 						</Button>
