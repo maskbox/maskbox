@@ -8,14 +8,12 @@ export const useGlobalStyles = globalCss({
 	html: {
 		colorScheme: 'dark',
 		fontFamily: '$sans',
-		fontSize: '$base',
-		lineHeight: 1.5,
 		WebkitFontSmoothing: 'antialiased',
 		MozOsxFontSmoothing: 'grayscale',
 		WebkitTextSizeAdjust: '100%'
 	},
 	body: {
-		lineHeight: 'inherit',
+		fontSize: '$base',
 		background: '$gray1',
 		color: '$gray12',
 		margin: 0
