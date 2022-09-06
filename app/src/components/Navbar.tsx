@@ -1,6 +1,7 @@
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
 const DummyLogoIcon = styled('div', {
@@ -69,6 +70,8 @@ function NavbarTab(props: LinkProps & { children: ReactNode }) {
 }
 
 export function Navbar() {
+	const { session } = useSession();
+
 	return (
 		<StyledNavbar>
 			<NavbarContent>
@@ -78,7 +81,7 @@ export function Navbar() {
 						<NavbarLogoText>Maskbox</NavbarLogoText>
 					</NavbarLogo>
 
-					<p>screfy@proton.me</p>
+					<p>{session?.email}</p>
 				</NavbarHeader>
 
 				<NavbarTabs>

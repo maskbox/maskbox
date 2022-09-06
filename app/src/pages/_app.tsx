@@ -2,9 +2,10 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { withTRPC } from '@trpc/next';
 import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import superjson from 'superjson';
-import { AppLayout, AuthLayout, MarketingLayout } from '../components/Layout';
 import { useGlobalStyles } from '../hooks/use-global-styles';
+import { SessionProvider } from '../hooks/use-session';
 import type { AppRouter } from '../server/routers';
 
 interface AppPropsWithComponentLayout extends AppProps {
@@ -16,9 +17,9 @@ interface AppPropsWithComponentLayout extends AppProps {
 const TRPC_API_URL = '/api/trpc';
 
 const layouts = {
-	auth: AuthLayout,
-	app: AppLayout,
-	marketing: MarketingLayout
+	auth: dynamic(() => import('../layouts/AuthLayout')),
+	app: dynamic(() => import('../layouts/AppLayout')),
+	marketing: dynamic(() => import('../layouts/MarketingLayout'))
 };
 
 function App({ Component, pageProps }: AppPropsWithComponentLayout) {
@@ -27,9 +28,11 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 	const Layout = layouts[Component.layout || 'app'];
 
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<SessionProvider>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</SessionProvider>
 	);
 }
 
