@@ -19,7 +19,7 @@ const StyledInput = styled('input', {
 	padding: '0.375rem 0.75rem',
 	background: '$gray3',
 	baseTransition: 'border-color',
-	border: '1px solid $colors$gray6',
+	border: '1px solid $gray6',
 	borderRadius: '0.375rem',
 	'&::placeholder': {
 		color: '$gray9'

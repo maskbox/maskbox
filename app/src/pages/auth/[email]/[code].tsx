@@ -12,7 +12,7 @@ const StyledContent = styled('div', {
 });
 
 const StyledHeading = styled('h1', {
-	fontSize: '$lg',
+	fontSize: '$xl',
 	fontWeight: '$semibold',
 	marginBottom: '1.75rem'
 });
@@ -23,7 +23,7 @@ export default function ExchangeCode() {
 	const code = query.code as string | undefined;
 
 	const { mutate, isError } = trpc.useMutation('auth.exchangeCode', {
-		onSuccess: () => push('/')
+		onSuccess: () => push('/masks')
 	});
 
 	useEffect(() => {

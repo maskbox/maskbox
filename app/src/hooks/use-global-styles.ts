@@ -44,6 +44,10 @@ export const useGlobalStyles = globalCss({
 		backgroundImage: 'none',
 		cursor: 'pointer'
 	},
+	a: {
+		color: 'inherit',
+		textDecoration: 'none'
+	},
 	'input::placeholder': {
 		opacity: 1
 	},

@@ -3,7 +3,7 @@ import { withTRPC } from '@trpc/next';
 import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import superjson from 'superjson';
-import { AppLayout, AuthLayout } from '../components/Layout';
+import { AppLayout, AuthLayout, MarketingLayout } from '../components/Layout';
 import { useGlobalStyles } from '../hooks/use-global-styles';
 import type { AppRouter } from '../server/routers';
 
@@ -17,7 +17,8 @@ const TRPC_API_URL = '/api/trpc';
 
 const layouts = {
 	auth: AuthLayout,
-	app: AppLayout
+	app: AppLayout,
+	marketing: MarketingLayout
 };
 
 function App({ Component, pageProps }: AppPropsWithComponentLayout) {

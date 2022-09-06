@@ -30,7 +30,7 @@ const StyledContent = styled(motion.div, {
 });
 
 const StyledHeading = styled('h1', {
-	fontSize: '$lg',
+	fontSize: '$xl',
 	fontWeight: '$semibold',
 	marginBottom: '1.25rem'
 });

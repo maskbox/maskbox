@@ -23,12 +23,14 @@ export const {
 		fontSizes: {
 			sm: '0.75rem',
 			base: '0.875rem',
-			lg: '1.25rem'
+			lg: '1rem',
+			xl: '1.25rem'
 		},
 		lineHeights: {
 			sm: '1rem',
-			base: '1.5rem',
-			lg: '1.75rem'
+			base: '1.25rem',
+			lg: '1.5rem',
+			xl: '1.75rem'
 		},
 		fontWeights: {
 			normal: 400,
