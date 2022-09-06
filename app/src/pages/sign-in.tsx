@@ -110,3 +110,5 @@ export default function SignIn() {
 		</AnimatePresence>
 	);
 }
+
+SignIn.layout = 'auth';

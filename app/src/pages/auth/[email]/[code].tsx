@@ -50,3 +50,5 @@ export default function ExchangeCode() {
 		</StyledContent>
 	);
 }
+
+ExchangeCode.layout = 'auth';

@@ -1,29 +1,34 @@
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { withTRPC } from '@trpc/next';
+import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import superjson from 'superjson';
+import { AppLayout, AuthLayout } from '../components/Layout';
 import { useGlobalStyles } from '../hooks/use-global-styles';
 import type { AppRouter } from '../server/routers';
-import { styled } from '../utils/stitches';
+
+interface AppPropsWithComponentLayout extends AppProps {
+	Component: NextComponentType & { layout: keyof typeof layouts };
+}
 
 // NOTE: We don't want to use SSR, so relative URL is fine.
 // See: https://trpc.io/docs/ssr
 const TRPC_API_URL = '/api/trpc';
 
-const StyledMain = styled('main', {
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
-	minHeight: '100vh'
-});
+const layouts = {
+	auth: AuthLayout,
+	app: AppLayout
+};
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 	useGlobalStyles();
 
+	const Layout = layouts[Component.layout || 'app'];
+
 	return (
-		<StyledMain>
+		<Layout>
 			<Component {...pageProps} />
-		</StyledMain>
+		</Layout>
 	);
 }
 
@@ -36,7 +41,8 @@ export default withTRPC<AppRouter>({
 			queryClientConfig: {
 				defaultOptions: {
 					queries: {
-						refetchOnWindowFocus: false
+						refetchOnWindowFocus: false,
+						retry: false
 					}
 				}
 			}
