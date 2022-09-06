@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { add, isPast } from 'date-fns';
 import { z } from 'zod';
+import { SESSION_COOKIE_NAME } from '../../constants';
 import { setCookie } from '../../utils/cookie';
 import { prisma } from '../../utils/prisma';
 import { authChallengeSchema } from '../../utils/schema';
@@ -75,9 +76,8 @@ export const authRouter = createRouter()
 			});
 
 			// TODO: Add session expiration:
-			// TODO: Add `__Secure-` when is `secure` set to true:
 			setCookie(ctx.res, {
-				name: 'sid',
+				name: SESSION_COOKIE_NAME,
 				value: session.token,
 				path: '/',
 				sameSite: 'lax',
