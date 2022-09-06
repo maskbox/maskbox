@@ -5,6 +5,9 @@ module.exports = {
 	reactStrictMode: true,
 	swcMinify: true,
 	experimental: {
-		newNextLinkBehavior: true
+		newNextLinkBehavior: true,
+		images: {
+			allowFutureImage: true
+		}
 	}
 };
