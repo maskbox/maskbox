@@ -38,6 +38,10 @@ export const useGlobalStyles = globalCss({
 	'button, select': {
 		textTransform: 'none'
 	},
+	svg: {
+		display: 'block',
+		verticalAlign: 'middle'
+	},
 	button: {
 		WebkitAppearance: 'button',
 		backgroundColor: 'transparent',

@@ -40,6 +40,24 @@ const NavbarLogoText = styled('span', {
 	fontWeight: '$medium'
 });
 
+const NavbarUserAvatar = styled('div', {
+	width: 32,
+	height: 32,
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	verticalAlign: 'middle',
+	overflow: 'hidden',
+	userSelect: 'none',
+	borderRadius: '50%',
+	background: '$gray5'
+});
+
+const NavbarUserAvatarText = styled('span', {
+	fontSize: '$sm',
+	lineHeight: 1
+});
+
 const NavbarTabs = styled('div', {
 	display: 'flex',
 	marginLeft: '-0.75rem',
@@ -81,7 +99,11 @@ export function Navbar() {
 						<NavbarLogoText>Maskbox</NavbarLogoText>
 					</NavbarLogo>
 
-					<p>{session?.email}</p>
+					<NavbarUserAvatar>
+						<NavbarUserAvatarText>
+							{session?.email.slice(0, 2).toUpperCase()}
+						</NavbarUserAvatarText>
+					</NavbarUserAvatar>
 				</NavbarHeader>
 
 				<NavbarTabs>
