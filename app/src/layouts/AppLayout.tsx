@@ -17,7 +17,7 @@ const StyledAppMain = styled('main', {
 });
 
 export default function AppLayout({ children }: { children: ReactNode }) {
-	const { asPath, push } = useRouter();
+	const { push } = useRouter();
 	const { isLoading, isError } = useSession();
 
 	if (isLoading) {
@@ -25,11 +25,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 	}
 
 	if (isError) {
-		push(
-			`/sign-in?${new URLSearchParams({
-				redirect: asPath
-			})}`
-		);
+		push('/sign-in');
 		return null;
 	}
 

@@ -22,8 +22,13 @@ export default function ExchangeCode() {
 	const email = query.email as string | undefined;
 	const code = query.code as string | undefined;
 
+	const { invalidateQueries } = trpc.useContext();
+
 	const { mutate, isError } = trpc.useMutation('auth.exchangeCode', {
-		onSuccess: () => push('/masks')
+		onSuccess: () => {
+			invalidateQueries(['user.getMe']);
+			push('/masks');
+		}
 	});
 
 	useEffect(() => {

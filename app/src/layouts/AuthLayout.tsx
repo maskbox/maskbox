@@ -13,7 +13,7 @@ const StyledAuthLayout = styled('main', {
 });
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-	const { query, push } = useRouter();
+	const { push } = useRouter();
 	const { isLoading, isSuccess } = useSession();
 
 	if (isLoading) {
@@ -25,9 +25,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 	}
 
 	if (isSuccess) {
-		push(
-			query.redirect ? decodeURIComponent(query.redirect as string) : '/masks'
-		);
+		push('/masks');
 		return null;
 	}
 
