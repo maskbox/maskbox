@@ -1,9 +1,12 @@
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { withTRPC } from '@trpc/next';
 import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
+import { ErrorBoundary } from 'react-error-boundary';
 import superjson from 'superjson';
+import { ErrorFallback } from '../components/ErrorFallback';
 import { useGlobalStyles } from '../hooks/use-global-styles';
 import { SessionProvider } from '../hooks/use-session';
 import type { AppRouter } from '../server/routers';
@@ -17,8 +20,8 @@ interface AppPropsWithComponentLayout extends AppProps {
 const TRPC_API_URL = '/api/trpc';
 
 const layouts = {
-	auth: dynamic(() => import('../layouts/AuthLayout')),
-	app: dynamic(() => import('../layouts/AppLayout')),
+	auth: dynamic(() => import('../layouts/AuthLayout'), { ssr: false }),
+	app: dynamic(() => import('../layouts/AppLayout'), { ssr: false }),
 	marketing: dynamic(() => import('../layouts/MarketingLayout'))
 };
 
@@ -28,11 +31,17 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 	const Layout = layouts[Component.layout || 'app'];
 
 	return (
-		<SessionProvider>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
-		</SessionProvider>
+		<QueryErrorResetBoundary>
+			{({ reset }) => (
+				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
+					<SessionProvider>
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</SessionProvider>
+				</ErrorBoundary>
+			)}
+		</QueryErrorResetBoundary>
 	);
 }
 
@@ -45,7 +54,11 @@ export default withTRPC<AppRouter>({
 			queryClientConfig: {
 				defaultOptions: {
 					queries: {
+						useErrorBoundary: true,
 						refetchOnWindowFocus: false,
+						retry: false
+					},
+					mutations: {
 						retry: false
 					}
 				}

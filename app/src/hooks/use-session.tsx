@@ -15,7 +15,12 @@ const SessionContext = createContext<{
 export const useSession = () => useContext(SessionContext);
 
 export function SessionProvider({ children }: { children: ReactNode }) {
-	const { data, isLoading, isSuccess, isError } = trpc.useQuery(['user.getMe']);
+	const { data, isLoading, isSuccess, isError } = trpc.useQuery(
+		['user.getMe'],
+		{
+			useErrorBoundary: false
+		}
+	);
 
 	return (
 		<SessionContext.Provider

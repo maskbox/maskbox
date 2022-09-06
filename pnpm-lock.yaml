@@ -17,6 +17,7 @@ importers:
       '@prisma/client': ^4.3.0
       '@radix-ui/colors': ^0.1.8
       '@stitches/react': ^1.2.8
+      '@tanstack/react-query': ^4.2.3
       '@trpc/client': ^9.27.2
       '@trpc/next': ^9.27.2
       '@trpc/react': ^9.27.2
@@ -32,6 +33,7 @@ importers:
       prisma: ^4.3.0
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-error-boundary: ^3.1.4
       react-hook-form: ^7.34.2
       react-query: ^3.39.2
       superjson: ^1.9.1
@@ -43,6 +45,7 @@ importers:
       '@prisma/client': 4.3.0_prisma@4.3.0
       '@radix-ui/colors': 0.1.8
       '@stitches/react': 1.2.8_react@18.2.0
+      '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 9.27.2_@trpc+server@9.27.2
       '@trpc/next': 9.27.2_kwroqqiq4ao45yqldumyuvlqcu
       '@trpc/react': 9.27.2_e7pohnznr4qdgpqc5x4q3pmfcu
@@ -53,6 +56,7 @@ importers:
       next: 12.2.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-error-boundary: 3.1.4_react@18.2.0
       react-hook-form: 7.34.2_react@18.2.0
       react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
       superjson: 1.9.1
@@ -315,6 +319,29 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /@tanstack/query-core/4.2.3:
+    resolution: {integrity: sha512-zdt5lYWs1dZaA3IxJbCgtAfHZJScRZONpiLL7YkeOkrme5MfjQqTpjq7LYbzpyuwPOh2Jx68le0PLl57JFv5hQ==}
+    dev: false
+
+  /@tanstack/react-query/4.2.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-JLaMOxoJTkiAu7QpevRCt2uI/0vd3E8K/rSlCuRgWlcW5DeJDFpDS5kfzmLO5MOcD97fgsJRrDbxDORxR1FdJA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.2.3
+      '@types/use-sync-external-store': 0.0.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
   /@trpc/client/9.27.2_@trpc+server@9.27.2:
     resolution: {integrity: sha512-rpsgJJMalOtki5VjcyheL0zdft23mDnoBHn5cJMZLf3ssymCZq2crbvCiUmCRU289lYHrqffaaZ+9PqCSsVKfg==}
     peerDependencies:
@@ -396,6 +423,10 @@ packages:
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
+
+  /@types/use-sync-external-store/0.0.3:
+    resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
+    dev: false
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -666,6 +697,16 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-error-boundary/3.1.4_react@18.2.0:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.18.9
+      react: 18.2.0
     dev: false
 
   /react-hook-form/7.34.2_react@18.2.0:

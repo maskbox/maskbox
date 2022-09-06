@@ -22,7 +22,7 @@ export const useGlobalStyles = globalCss({
 		fontSize: 'inherit',
 		fontWeight: 'inherit'
 	},
-	'h1, h2, h3, h4, h5, h6, p': {
+	'h1, h2, h3, h4, h5, h6, p, pre': {
 		margin: 0
 	},
 	'button, input, select': {
@@ -47,6 +47,9 @@ export const useGlobalStyles = globalCss({
 	a: {
 		color: 'inherit',
 		textDecoration: 'none'
+	},
+	pre: {
+		fontFamily: '$mono'
 	},
 	'input::placeholder': {
 		opacity: 1
