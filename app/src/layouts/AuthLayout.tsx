@@ -1,9 +1,8 @@
-import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import { Puff } from 'react-loading-icons';
 import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
-import puff from '../../public/puff.svg';
 
 const StyledAuthLayout = styled('main', {
 	display: 'flex',
@@ -19,7 +18,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 	if (isLoading) {
 		return (
 			<StyledAuthLayout>
-				<Image src={puff} width="80" height="80" />
+				<Puff width="80" height="80" />
 			</StyledAuthLayout>
 		);
 	}
