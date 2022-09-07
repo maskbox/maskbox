@@ -1,9 +1,10 @@
 import { createProtectedRouter } from '../create-router';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
+import { z } from 'zod';
 
 export const emailRouter = createProtectedRouter()
-	.query('getMyEmails', {
+	.query('getEmails', {
 		async resolve({ ctx }) {
 			const emails = await prisma.email.findMany({
 				where: {
@@ -17,7 +18,7 @@ export const emailRouter = createProtectedRouter()
 			return emails;
 		}
 	})
-	.mutation('newEmail', {
+	.mutation('addEmail', {
 		input: emailSchema,
 		async resolve({ ctx, input }) {
 			const email = await prisma.email.create({
@@ -32,6 +33,22 @@ export const emailRouter = createProtectedRouter()
 			});
 
 			// TODO: Send a verification email.
+
+			return email;
+		}
+	})
+	.mutation('deleteEmail', {
+		input: z.object({
+			id: z.string().cuid()
+		}),
+		async resolve({ input }) {
+			// TODO: Check if it is a user owner of the email.
+			// TODO: Disable deleting the last email.
+			const email = await prisma.email.delete({
+				where: {
+					id: input.id
+				}
+			});
 
 			return email;
 		}

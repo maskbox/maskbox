@@ -24,9 +24,9 @@ export function NewEmailDialog() {
 	});
 
 	const { setQueryData } = trpc.useContext();
-	const { mutateAsync } = trpc.useMutation(['email.newEmail'], {
+	const { mutateAsync } = trpc.useMutation(['email.addEmail'], {
 		onSuccess(data) {
-			setQueryData(['email.getMyEmails'], (prev) => [data, ...prev!]);
+			setQueryData(['email.getEmails'], (prev) => [data, ...prev!]);
 			dialog.setOpen(false);
 		}
 	});

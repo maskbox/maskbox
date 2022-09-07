@@ -16,6 +16,7 @@ importers:
       '@hookform/resolvers': ^2.9.7
       '@prisma/client': ^4.3.0
       '@radix-ui/colors': ^0.1.8
+      '@radix-ui/react-alert-dialog': ^1.0.0
       '@radix-ui/react-dialog': ^1.0.0
       '@radix-ui/react-icons': ^1.1.1
       '@stitches/react': ^1.2.8
@@ -47,6 +48,7 @@ importers:
       '@hookform/resolvers': 2.9.7_react-hook-form@7.34.2
       '@prisma/client': 4.3.0_prisma@4.3.0
       '@radix-ui/colors': 0.1.8
+      '@radix-ui/react-alert-dialog': 1.0.0_zxljzmqdrxwnuenbkrz77w74uy
       '@radix-ui/react-dialog': 1.0.0_zxljzmqdrxwnuenbkrz77w74uy
       '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@stitches/react': 1.2.8_react@18.2.0
@@ -315,6 +317,25 @@ packages:
     resolution: {integrity: sha512-3e7rn8FDMin4CgeL7Z/49smCA3rFYY3Ha2rUQ7HRWFadS5iCRw08ZgVT1LaNTCNqgvrUiyczLflrVrF0SRQtNA==}
     dependencies:
       '@babel/runtime': 7.18.9
+    dev: false
+
+  /@radix-ui/react-alert-dialog/1.0.0_zxljzmqdrxwnuenbkrz77w74uy:
+    resolution: {integrity: sha512-E2N5klf4Mi1QjTIPqSfAPXFPeZG5ZnnBZJ80lcTzJ0fSp8dqLG6bcxrkCrSU4Gm+HVZxxuCPkUHBfntd9aZUcw==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.18.9
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-dialog': 1.0.0_zxljzmqdrxwnuenbkrz77w74uy
+      '@radix-ui/react-primitive': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-slot': 1.0.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
     dev: false
 
   /@radix-ui/react-compose-refs/1.0.0_react@18.2.0:

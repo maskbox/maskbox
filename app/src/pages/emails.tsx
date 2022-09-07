@@ -1,5 +1,10 @@
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { TrashIcon } from '@radix-ui/react-icons';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
+import {
+	AlertDialog,
+	AlertDialogContent,
+	AlertDialogTrigger
+} from '../ui/AlertDialog';
 import { styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
 
@@ -53,10 +58,37 @@ const StyledTableBodyColumn = styled('td', {
 	textAlign: 'left'
 });
 
+const StyledActionButton = styled('button', {
+	margin: '-0.25rem',
+	padding: '0.25rem',
+	color: '$red11',
+	borderRadius: '0.25rem',
+	baseTransition: 'background, color',
+	'&:hover': {
+		background: '$gray3',
+		color: '$red12'
+	}
+});
+
+const StyledEmailHighlight = styled('strong', {
+	fontWeight: '$semibold',
+	color: '$gray12'
+});
+
 function EmailRow({
+	id,
 	email,
 	verifiedAt
-}: InferQueryOutput<'email.getMyEmails'>[0]) {
+}: InferQueryOutput<'email.getEmails'>[0]) {
+	const { setQueryData } = trpc.useContext();
+	const { mutate } = trpc.useMutation(['email.deleteEmail'], {
+		onSuccess(data) {
+			setQueryData(['email.getEmails'], (prev) =>
+				prev!.filter(({ id }) => id !== data.id)
+			);
+		}
+	});
+
 	return (
 		<tr>
 			<StyledTableBodyColumn>{email}</StyledTableBodyColumn>
@@ -68,17 +100,35 @@ function EmailRow({
 					? verifiedAt.toLocaleDateString([], { dateStyle: 'medium' })
 					: '-'}
 			</StyledTableBodyColumn>
-			<StyledTableBodyColumn css={{ textAlign: 'right', color: '$gray11' }}>
-				<button>
-					<DotsVerticalIcon />
-				</button>
+
+			<StyledTableBodyColumn css={{ textAlign: 'right' }}>
+				<AlertDialog>
+					<AlertDialogTrigger asChild>
+						<StyledActionButton>
+							<TrashIcon />
+						</StyledActionButton>
+					</AlertDialogTrigger>
+
+					<AlertDialogContent
+						title="Delete email"
+						description={
+							<>
+								This action cannot be undone. This will permanently delete your
+								email <StyledEmailHighlight>{email}</StyledEmailHighlight> and
+								all masks assigned to it.
+							</>
+						}
+						actionLabel="Delete"
+						onAction={() => mutate({ id })}
+					/>
+				</AlertDialog>
 			</StyledTableBodyColumn>
 		</tr>
 	);
 }
 
 export default function Emails() {
-	const { data } = trpc.useQuery(['email.getMyEmails']);
+	const { data } = trpc.useQuery(['email.getEmails']);
 
 	return (
 		<>
