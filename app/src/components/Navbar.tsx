@@ -26,7 +26,7 @@ const NavbarHeader = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	marginBottom: '0.75rem'
+	marginBottom: '1.5rem'
 });
 
 const NavbarLogo = styled(Link, {
@@ -108,6 +108,7 @@ export function Navbar() {
 
 				<NavbarTabs>
 					<NavbarTab href="/masks">Masks</NavbarTab>
+					<NavbarTab href="/emails">Emails</NavbarTab>
 				</NavbarTabs>
 			</NavbarContent>
 		</StyledNavbar>

@@ -13,7 +13,7 @@ const StyledAppLayout = styled('div', {
 const StyledAppMain = styled('main', {
 	width: '100%',
 	maxWidth: '70rem',
-	marginTop: '1.25rem'
+	marginTop: '2rem'
 });
 
 export default function AppLayout({ children }: { children: ReactNode }) {

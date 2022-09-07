@@ -16,6 +16,7 @@ importers:
       '@hookform/resolvers': ^2.9.7
       '@prisma/client': ^4.3.0
       '@radix-ui/colors': ^0.1.8
+      '@radix-ui/react-icons': ^1.1.1
       '@stitches/react': ^1.2.8
       '@tanstack/react-query': ^4.2.3
       '@trpc/client': ^9.27.2
@@ -45,6 +46,7 @@ importers:
       '@hookform/resolvers': 2.9.7_react-hook-form@7.34.2
       '@prisma/client': 4.3.0_prisma@4.3.0
       '@radix-ui/colors': 0.1.8
+      '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@stitches/react': 1.2.8_react@18.2.0
       '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 9.27.2_@trpc+server@9.27.2
@@ -305,6 +307,14 @@ packages:
 
   /@radix-ui/colors/0.1.8:
     resolution: {integrity: sha512-jwRMXYwC0hUo0mv6wGpuw254Pd9p/R6Td5xsRpOmaWkUHlooNWqVcadgyzlRumMq3xfOTXwJReU0Jv+EIy4Jbw==}
+    dev: false
+
+  /@radix-ui/react-icons/1.1.1_react@18.2.0:
+    resolution: {integrity: sha512-xc3wQC59rsFylVbSusQCrrM+6695ppF730Q6yqzhRdqDcRNWIm2R6ngpzBoSOQMcwnq4p805F+Gr7xo4fmtN1A==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@stitches/react/1.2.8_react@18.2.0:

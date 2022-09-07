@@ -63,7 +63,13 @@ export const authRouter = createRouter()
 			if (!user) {
 				user = await prisma.user.create({
 					data: {
-						email: code.email
+						email: code.email,
+						emails: {
+							create: {
+								email: code.email,
+								verifiedAt: new Date()
+							}
+						}
 					}
 				});
 			}
