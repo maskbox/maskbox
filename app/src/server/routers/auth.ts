@@ -4,14 +4,14 @@ import { z } from 'zod';
 import { SESSION_COOKIE_NAME } from '../../constants';
 import { setCookie } from '../../utils/cookie';
 import { prisma } from '../../utils/prisma';
-import { authChallengeSchema } from '../../utils/schema';
+import { emailSchema } from '../../utils/schema';
 import { createRouter } from '../create-router';
 
 const SIGN_IN_CODE_EXPIRATION = 5;
 
 export const authRouter = createRouter()
 	.mutation('challenge', {
-		input: authChallengeSchema,
+		input: emailSchema,
 		async resolve({ input }) {
 			const code = await prisma.authenticationCode.create({
 				data: {

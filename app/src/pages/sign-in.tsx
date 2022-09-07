@@ -3,7 +3,7 @@ import { Button } from '../ui/Button';
 import { Form, useZodForm } from '../ui/Form';
 import { Input } from '../ui/Form/Input';
 import { SubmitButton } from '../ui/Form/SubmitButton';
-import { authChallengeSchema } from '../utils/schema';
+import { emailSchema } from '../utils/schema';
 import { styled } from '../utils/stitches';
 import { trpc } from '../utils/trpc';
 
@@ -47,7 +47,7 @@ const StyledStrong = styled('strong', {
 
 export default function SignIn() {
 	const form = useZodForm({
-		schema: authChallengeSchema,
+		schema: emailSchema,
 		defaultValues: {
 			email: ''
 		}

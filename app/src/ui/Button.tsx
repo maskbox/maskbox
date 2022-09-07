@@ -1,4 +1,7 @@
+import { ComponentProps } from 'react';
 import { styled } from '../utils/stitches';
+
+export type ButtonProps = ComponentProps<typeof Button>;
 
 export const Button = styled('button', {
 	position: 'relative',
@@ -20,6 +23,14 @@ export const Button = styled('button', {
 				color: '$gray5',
 				'&:hover:enabled': {
 					color: '$gray1'
+				}
+			},
+			outline: {
+				background: 'transparent',
+				color: '$gray12',
+				border: '1px solid $gray7',
+				'&:hover:enabled': {
+					background: '$gray3'
 				}
 			},
 			ghost: {

@@ -1,4 +1,4 @@
-import { grayDark, redDark } from '@radix-ui/colors';
+import { blackA, grayDark, redDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import type { PropertyValue, ScaleValue } from '@stitches/react';
 
@@ -18,6 +18,7 @@ export const {
 			mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
 		},
 		colors: {
+			...blackA,
 			...grayDark,
 			...redDark
 		},

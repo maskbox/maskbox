@@ -1,5 +1,5 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
-import { Button } from '../ui/Button';
+import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
 import { styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
 
@@ -90,7 +90,7 @@ export default function Emails() {
 					</StyledDescription>
 				</div>
 
-				<Button>New email</Button>
+				<NewEmailDialog />
 			</StyledHeadingContainer>
 
 			<StyledTable>
