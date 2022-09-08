@@ -56,10 +56,12 @@ export const useGlobalStyles = globalCss({
 		fontFamily: '$mono'
 	},
 	table: {
+		tableLayout: 'fixed',
 		textIndent: 0,
 		borderColor: 'inherit',
 		borderCollapse: 'separate',
-		borderSpacing: 0
+		borderSpacing: 0,
+		wordBreak: 'break-word'
 	},
 	'input::placeholder': {
 		opacity: 1

@@ -146,7 +146,9 @@ export default function Emails() {
 			<StyledTable>
 				<thead>
 					<tr>
-						<StyledTableHeadColumn>Email</StyledTableHeadColumn>
+						<StyledTableHeadColumn css={{ width: '50%' }}>
+							Email
+						</StyledTableHeadColumn>
 						<StyledTableHeadColumn>Status</StyledTableHeadColumn>
 						<StyledTableHeadColumn>Verified at</StyledTableHeadColumn>
 						<StyledTableHeadColumn />

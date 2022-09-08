@@ -18,7 +18,8 @@ const StyledTitle = styled(AlertDialogPrimitive.Title, {
 
 const StyledDescription = styled(AlertDialogPrimitive.Description, {
 	marginTop: '0.5rem',
-	color: '$gray11'
+	color: '$gray11',
+	wordBreak: 'break-word'
 });
 
 const StyledButtonGroup = styled('div', {
