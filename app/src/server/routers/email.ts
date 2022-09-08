@@ -41,15 +41,21 @@ export const emailRouter = createProtectedRouter()
 		input: z.object({
 			id: z.string().cuid()
 		}),
-		async resolve({ input }) {
-			// TODO: Check if it is a user owner of the email.
+		async resolve({ ctx, input }) {
 			// TODO: Disable deleting the last email.
-			const email = await prisma.email.delete({
+			const emailToDelete = await prisma.email.findFirstOrThrow({
 				where: {
-					id: input.id
+					id: input.id,
+					userId: ctx.session.userId
 				}
 			});
 
-			return email;
+			const deletedEmail = await prisma.email.delete({
+				where: {
+					id: emailToDelete.id
+				}
+			});
+
+			return deletedEmail;
 		}
 	});
