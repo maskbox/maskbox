@@ -2,6 +2,13 @@ import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { useSession } from '../hooks/use-session';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger
+} from '../ui/DropdownMenu';
 import { styled } from '../utils/stitches';
 
 const DummyLogoIcon = styled('div', {
@@ -40,7 +47,7 @@ const NavbarLogoText = styled('span', {
 	fontWeight: '$medium'
 });
 
-const NavbarUserAvatar = styled('div', {
+const NavbarUserAvatar = styled(DropdownMenuTrigger, {
 	width: 32,
 	height: 32,
 	display: 'inline-flex',
@@ -99,11 +106,21 @@ export function Navbar() {
 						<NavbarLogoText>Maskbox</NavbarLogoText>
 					</NavbarLogo>
 
-					<NavbarUserAvatar>
-						<NavbarUserAvatarText>
-							{session?.email.slice(0, 2).toUpperCase()}
-						</NavbarUserAvatarText>
-					</NavbarUserAvatar>
+					<DropdownMenu>
+						<NavbarUserAvatar>
+							<NavbarUserAvatarText>
+								{session?.email.slice(0, 2).toUpperCase()}
+							</NavbarUserAvatarText>
+						</NavbarUserAvatar>
+
+						<DropdownMenuContent>
+							<DropdownMenuItem>Settings</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem css={{ color: '$red11' }}>
+								Sign out
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</NavbarHeader>
 
 				<NavbarTabs>
