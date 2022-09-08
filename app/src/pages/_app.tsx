@@ -4,11 +4,12 @@ import { withTRPC } from '@trpc/next';
 import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import superjson from 'superjson';
 import { ErrorFallback } from '../components/ErrorFallback';
+import { Loading } from '../components/Loading';
 import { useGlobalStyles } from '../hooks/use-global-styles';
-import { SessionProvider } from '../hooks/use-session';
 import type { AppRouter } from '../server/routers';
 
 interface AppPropsWithComponentLayout extends AppProps {
@@ -22,8 +23,12 @@ const TRPC_API_URL = '/api/trpc';
 const layouts = {
 	auth: dynamic(() => import('../layouts/AuthLayout'), { ssr: false }),
 	app: dynamic(() => import('../layouts/AppLayout'), { ssr: false }),
-	marketing: dynamic(() => import('../layouts/MarketingLayout'))
+	landing: dynamic(() => import('../layouts/LandingLayout'))
 };
+
+const SessionProvider = dynamic(() => import('../hooks/use-session'), {
+	ssr: false
+});
 
 function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 	useGlobalStyles();
@@ -34,11 +39,19 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 		<QueryErrorResetBoundary>
 			{({ reset }) => (
 				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
-					<SessionProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
-					</SessionProvider>
+					<Suspense fallback={<Loading />}>
+						{Component.layout === 'landing' ? (
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						) : (
+							<SessionProvider>
+								<Layout>
+									<Component {...pageProps} />
+								</Layout>
+							</SessionProvider>
+						)}
+					</Suspense>
 				</ErrorBoundary>
 			)}
 		</QueryErrorResetBoundary>

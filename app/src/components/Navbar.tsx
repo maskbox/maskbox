@@ -88,7 +88,7 @@ function NavbarTab(props: LinkProps & { children: ReactNode }) {
 }
 
 export function Navbar() {
-	const { session } = useSession();
+	const session = useSession();
 
 	return (
 		<StyledNavbar>

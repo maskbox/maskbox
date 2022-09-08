@@ -22,11 +22,10 @@ export default function ExchangeCode() {
 	const email = query.email as string | undefined;
 	const code = query.code as string | undefined;
 
-	const { invalidateQueries } = trpc.useContext();
-
+	const { setQueryData } = trpc.useContext();
 	const { mutate, isError } = trpc.useMutation('auth.exchangeCode', {
-		onSuccess: () => {
-			invalidateQueries(['user.getMe']);
+		onSuccess(data) {
+			setQueryData(['auth.getSession'], data);
 			push('/masks');
 		}
 	});

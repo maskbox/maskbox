@@ -10,6 +10,21 @@ import { createRouter } from '../create-router';
 const SIGN_IN_CODE_EXPIRATION = 5;
 
 export const authRouter = createRouter()
+	.query('getSession', {
+		async resolve({ ctx }) {
+			if (!ctx.session?.userId) {
+				return;
+			}
+
+			const { id, email } = await prisma.user.findUniqueOrThrow({
+				where: {
+					id: ctx.session.userId
+				}
+			});
+
+			return { id, email };
+		}
+	})
 	.mutation('challenge', {
 		input: emailSchema,
 		async resolve({ input }) {
@@ -90,5 +105,7 @@ export const authRouter = createRouter()
 				httpOnly: true,
 				secure: process.env.NODE_ENV === 'production'
 			});
+
+			return { id: user.id, email: user.email };
 		}
 	});

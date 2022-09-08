@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { Puff } from 'react-loading-icons';
 import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
@@ -13,17 +12,9 @@ const StyledAuthLayout = styled('main', {
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	const { push } = useRouter();
-	const { isLoading, isSuccess } = useSession();
+	const session = useSession();
 
-	if (isLoading) {
-		return (
-			<StyledAuthLayout>
-				<Puff width="80" height="80" />
-			</StyledAuthLayout>
-		);
-	}
-
-	if (isSuccess) {
+	if (session) {
 		push('/masks');
 		return null;
 	}

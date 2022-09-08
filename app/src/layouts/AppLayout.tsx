@@ -18,13 +18,9 @@ const StyledAppMain = styled('main', {
 
 export default function AppLayout({ children }: { children: ReactNode }) {
 	const { push } = useRouter();
-	const { isLoading, isError } = useSession();
+	const session = useSession();
 
-	if (isLoading) {
-		return <p>Loading app...</p>;
-	}
-
-	if (isError) {
+	if (!session) {
 		push('/sign-in');
 		return null;
 	}
