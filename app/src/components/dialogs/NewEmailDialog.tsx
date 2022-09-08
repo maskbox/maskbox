@@ -40,7 +40,7 @@ export function NewEmailDialog() {
 			<DialogContent onCloseAutoFocus={() => form.reset()}>
 				<DialogHeader
 					title="New email"
-					description="After adding a new email, we will send you a verification email to verify it."
+					description="After adding a new email address, we will send you a verification email to verify it."
 				/>
 
 				<Form form={form} onSubmit={(data) => mutateAsync(data)} noValidate>

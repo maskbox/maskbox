@@ -41,7 +41,7 @@ export const contentStyles: CSS = {
 	top: '50%',
 	left: '50%',
 	padding: '1rem',
-	width: '30rem',
+	width: '28rem',
 	background: '$gray1',
 	transform: 'translate(-50%, -50%)',
 	border: '1px solid $gray6',
