@@ -7,10 +7,14 @@ import { styled } from '../utils/stitches';
 const StyledAppLayout = styled('div', {
 	display: 'flex',
 	flexDirection: 'column',
-	alignItems: 'center'
+	alignItems: 'center',
+	minHeight: '100vh'
 });
 
 const StyledAppMain = styled('main', {
+	display: 'flex',
+	flexDirection: 'column',
+	flex: '1 1 0%',
 	width: '100%',
 	maxWidth: '70rem',
 	marginTop: '2rem'

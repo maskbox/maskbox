@@ -13,6 +13,7 @@ export const Button = styled('button', {
 	borderRadius: '0.375rem',
 	baseTransition: 'background, color, opacity',
 	overflow: 'hidden',
+	userSelect: 'none',
 	'&:disabled': {
 		opacity: 0.85
 	},
