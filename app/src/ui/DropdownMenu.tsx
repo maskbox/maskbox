@@ -3,13 +3,13 @@ import { ComponentProps } from 'react';
 import { keyframes, styled } from '../utils/stitches';
 
 const menuOpen = keyframes({
-	'0%': { opacity: 0, scale: 0.98 },
+	'0%': { opacity: 0, scale: 0.95 },
 	'100%': { opacity: 1, scale: 1 }
 });
 
 const menuClose = keyframes({
 	'0%': { opacity: 1, scale: 1 },
-	'100%': { opacity: 0, scale: 0.98 }
+	'100%': { opacity: 0, scale: 0.95 }
 });
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {

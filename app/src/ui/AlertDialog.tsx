@@ -45,7 +45,7 @@ export function AlertDialogContent({
 	return (
 		<AlertDialogPrimitive.Portal>
 			<StyledOverlay />
-			<StyledContent>
+			<StyledContent onCloseAutoFocus={(e) => e.preventDefault()}>
 				<StyledTitle>{title}</StyledTitle>
 				<StyledDescription>{description}</StyledDescription>
 				<StyledButtonGroup>

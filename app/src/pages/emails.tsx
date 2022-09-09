@@ -5,6 +5,7 @@ import {
 	AlertDialogContent,
 	AlertDialogTrigger
 } from '../ui/AlertDialog';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/Tooltip';
 import { styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
 
@@ -103,11 +104,17 @@ function EmailRow({
 
 			<StyledTableBodyColumn css={{ textAlign: 'right' }}>
 				<AlertDialog>
-					<AlertDialogTrigger asChild>
-						<StyledActionButton>
-							<TrashIcon />
-						</StyledActionButton>
-					</AlertDialogTrigger>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<AlertDialogTrigger asChild>
+								<StyledActionButton>
+									<TrashIcon />
+								</StyledActionButton>
+							</AlertDialogTrigger>
+						</TooltipTrigger>
+
+						<TooltipContent side="left">Delete</TooltipContent>
+					</Tooltip>
 
 					<AlertDialogContent
 						title="Delete email"
