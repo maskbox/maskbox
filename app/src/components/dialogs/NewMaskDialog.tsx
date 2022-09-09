@@ -3,10 +3,10 @@ import {
 	Dialog,
 	DialogButtonGroup,
 	DialogCloseButton,
-	DialogContent,
 	DialogHeader,
 	DialogTrigger,
-	useDialog
+	useDialog,
+	useDialogContext
 } from '../../ui/Dialog';
 import { Form, useZodForm } from '../../ui/Form';
 import { Input } from '../../ui/Form/Input';
@@ -21,10 +21,17 @@ function capitalize(str: string) {
 
 // TODO: Add help messages:
 function NewMaskDialogForm() {
+	const { setOpen } = useDialogContext();
+
 	const { data } = trpc.useQuery(['email.getEmails', { onlyVerified: true }], {
 		suspense: true
 	});
-	const { mutateAsync } = trpc.useMutation('mask.addMask');
+
+	const { mutateAsync } = trpc.useMutation('mask.addMask', {
+		onSuccess() {
+			setOpen(false);
+		}
+	});
 
 	const form = useZodForm({
 		schema: maskSchema,
@@ -69,14 +76,14 @@ function NewMaskDialogForm() {
 
 function NewMaskDialogContent() {
 	return (
-		<DialogContent>
+		<>
 			<DialogHeader title="New mask" />
 
 			{/* TODO: Suspense design: */}
 			<Suspense fallback={<p>Loading form...</p>}>
 				<NewMaskDialogForm />
 			</Suspense>
-		</DialogContent>
+		</>
 	);
 }
 
@@ -84,10 +91,8 @@ export function NewMaskDialog({ trigger }: { trigger: ReactNode }) {
 	const dialog = useDialog();
 
 	return (
-		<Dialog dialog={dialog}>
+		<Dialog dialog={dialog} content={<NewMaskDialogContent />}>
 			<DialogTrigger asChild>{trigger}</DialogTrigger>
-
-			{dialog.open && <NewMaskDialogContent />}
 		</Dialog>
 	);
 }

@@ -1,39 +1,28 @@
 import type { CSS } from '@stitches/react';
-import { keyframes } from '../utils/stitches';
 
-const overlayOpen = keyframes({
-	'0%': { opacity: 0 },
-	'100%': { opacity: 1 }
-});
+export const overlayOpenAnimationProps = {
+	opacity: 1
+};
 
-const overlayClose = keyframes({
-	'0%': { opacity: 1 },
-	'100%': { opacity: 0 }
-});
+export const overlayCloseAnimationProps = {
+	opacity: 0
+};
 
-const contentOpen = keyframes({
-	'0%': { opacity: 0, transform: 'translate(-50%, -50%) scale(0.85)' },
-	'100%': { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' }
-});
+export const contentOpenAnimationProps = {
+	opacity: 0,
+	transform: 'translate(-50%, -50%) scale(0.85)'
+};
 
-const contentClose = keyframes({
-	'0%': { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-	'100%': { opacity: 0, transform: 'translate(-50%, -50%) scale(0.85)' }
-});
+export const contentCloseAnimationProps = {
+	opacity: 1,
+	transform: 'translate(-50%, -50%) scale(1)'
+};
 
 export const overlayStyles: CSS = {
 	position: 'fixed',
 	inset: 0,
 	background: '$blackA11',
-	backdropFilter: 'blur(2px)',
-	'@media (prefers-reduced-motion: no-preference)': {
-		'&[data-state="open"]': {
-			animation: `${overlayOpen} 150ms ease-in-out`
-		},
-		'&[data-state="closed"]': {
-			animation: `${overlayClose} 150ms ease-in-out`
-		}
-	}
+	backdropFilter: 'blur(2px)'
 };
 
 export const contentStyles: CSS = {
@@ -48,13 +37,5 @@ export const contentStyles: CSS = {
 	borderRadius: '0.375rem',
 	'&:focus': {
 		outline: 'none'
-	},
-	'@media (prefers-reduced-motion: no-preference)': {
-		'&[data-state="open"]': {
-			animation: `${contentOpen} 150ms ease-in-out`
-		},
-		'&[data-state="closed"]': {
-			animation: `${contentClose} 150ms ease-in-out`
-		}
 	}
 };
