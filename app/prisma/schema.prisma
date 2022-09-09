@@ -18,6 +18,7 @@ model User {
   updatedAt DateTime  @updatedAt
   sessions  Session[]
   emails    Email[]
+  masks     Mask[]
 }
 
 model AuthenticationCode {
@@ -44,6 +45,21 @@ model Email {
   email      String    @unique
   verifiedAt DateTime?
   createdAt  DateTime  @default(now())
+  masks      Mask[]
   user       User      @relation(fields: [userId], references: [id])
   userId     String
+}
+
+model Mask {
+  id          String   @id @default(cuid())
+  identifier  String   @unique
+  name        String?
+  createdAt   DateTime @default(now())
+  forwardTo   Email    @relation(fields: [forwardToId], references: [id])
+  forwardToId String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+
+  @@index([forwardToId])
+  @@index([userId])
 }

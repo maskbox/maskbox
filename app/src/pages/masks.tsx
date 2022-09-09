@@ -1,4 +1,5 @@
 import { StackIcon } from '@radix-ui/react-icons';
+import { NewMaskDialog } from '../components/dialogs/NewMaskDialog';
 import { Button } from '../ui/Button';
 import { styled } from '../utils/stitches';
 
@@ -33,7 +34,7 @@ export default function Masks() {
 				There are no masks yet. To start using Maskbox, you need to generate
 				your first mask.
 			</StyledEmptyDescription>
-			<Button>Get started</Button>
+			<NewMaskDialog trigger={<Button>Get started</Button>} />
 		</StyledEmptyContainer>
 	);
 }

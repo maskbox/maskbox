@@ -5,10 +5,20 @@ import { z } from 'zod';
 
 export const emailRouter = createProtectedRouter()
 	.query('getEmails', {
-		async resolve({ ctx }) {
+		input: z
+			.object({
+				onlyVerified: z.boolean()
+			})
+			.default({
+				onlyVerified: false
+			}),
+		async resolve({ ctx, input }) {
 			const emails = await prisma.email.findMany({
 				where: {
-					userId: ctx.session.userId
+					userId: ctx.session.userId,
+					verifiedAt: {
+						not: input.onlyVerified ? null : undefined
+					}
 				},
 				orderBy: {
 					createdAt: 'desc'

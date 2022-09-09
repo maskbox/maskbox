@@ -29,7 +29,7 @@ export const Button = styled('button', {
 			outline: {
 				background: 'transparent',
 				color: '$gray12',
-				border: '1px solid $gray7',
+				boxShadow: '$border1',
 				'&:hover:enabled': {
 					background: '$gray3'
 				}

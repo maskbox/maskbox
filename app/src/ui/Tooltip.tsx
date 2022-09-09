@@ -17,7 +17,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
 	fontSize: '$sm',
 	background: '$gray2',
 	color: '$gray11',
-	border: '1px solid $gray6',
+	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&[data-state="delayed-open"]': {
 		animation: `${tooltipOpen} 150ms ease-in-out`

@@ -18,14 +18,14 @@ const StyledLabel = styled('label', {
 const StyledInput = styled('input', {
 	padding: '0.375rem 0.75rem',
 	background: '$gray3',
-	baseTransition: 'border-color',
-	border: '1px solid $gray6',
+	baseTransition: 'box-shadow',
+	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&::placeholder': {
 		color: '$gray9'
 	},
 	'&:focus': {
-		borderColor: '$gray8'
+		boxShadow: '$border2'
 	}
 });
 
@@ -34,6 +34,7 @@ export function Input({
 	type = 'text',
 	label,
 	placeholder,
+	css,
 	...props
 }: {
 	name: string;
@@ -46,7 +47,7 @@ export function Input({
 	} = useFormContext();
 
 	return (
-		<StyledGroup role="group">
+		<StyledGroup role="group" css={css}>
 			<StyledLabel htmlFor={name}>{label}</StyledLabel>
 
 			<StyledInput

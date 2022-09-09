@@ -32,12 +32,17 @@ const LoadingDots = styled('div', {
 
 export function SubmitButton({
 	children,
+	allowDisable = true,
 	...props
-}: ComponentProps<typeof Button>) {
+}: ComponentProps<typeof Button> & { allowDisable?: boolean }) {
 	const { isDirty, isSubmitting } = useFormState();
 
 	return (
-		<Button {...props} type="submit" disabled={!isDirty || isSubmitting}>
+		<Button
+			{...props}
+			type="submit"
+			disabled={(allowDisable && !isDirty) || isSubmitting}
+		>
 			{isSubmitting && (
 				<LoadingDots>
 					<LoadingDot />

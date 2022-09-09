@@ -16,9 +16,8 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
 	padding: '0.25rem 0',
 	minWidth: '12rem',
 	background: '$gray2',
-	border: '1px solid $gray6',
 	borderRadius: '0.375rem',
-	boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 8px 0px',
+	boxShadow: '$border1, $base',
 	userSelect: 'none',
 	'&[data-state="open"]': {
 		animation: `${menuOpen} 150ms ease-in-out`
@@ -39,7 +38,7 @@ export const DropdownMenuSeparator = styled(DropdownMenuPrimitive.Separator, {
 
 export const DropdownMenuItem = styled(DropdownMenuPrimitive.Item, {
 	padding: '0.375rem 0.75rem',
-	baseTransition: 'color, background',
+	baseTransition: 'background',
 	outline: 'none',
 	'&[data-highlighted]': {
 		cursor: 'pointer',

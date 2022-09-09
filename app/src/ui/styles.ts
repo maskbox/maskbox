@@ -40,11 +40,11 @@ export const contentStyles: CSS = {
 	position: 'fixed',
 	top: '50%',
 	left: '50%',
-	padding: '1rem',
+	padding: '1rem 1.25rem',
 	width: '28rem',
 	background: '$gray1',
 	transform: 'translate(-50%, -50%)',
-	border: '1px solid $gray6',
+	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&:focus': {
 		outline: 'none'

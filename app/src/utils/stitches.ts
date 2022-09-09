@@ -39,6 +39,11 @@ export const {
 			medium: 500,
 			semibold: 600,
 			bold: 700
+		},
+		shadows: {
+			border1: '$colors$gray6 0px 0px 0px 1px',
+			border2: '$colors$gray8 0px 0px 0px 1px',
+			base: 'rgba(0, 0, 0, 0.2) 0px 2px 8px 0px'
 		}
 	},
 	utils: {
