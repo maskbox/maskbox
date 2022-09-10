@@ -59,6 +59,25 @@ const StyledTableBodyColumn = styled('td', {
 	textAlign: 'left'
 });
 
+const StyledStatusTag = styled('span', {
+	fontSize: '$sm',
+	padding: '0.25rem 0.375rem',
+	borderRadius: '0.375rem',
+	userSelect: 'none',
+	variants: {
+		variant: {
+			success: {
+				background: '$green3',
+				color: '$green9'
+			},
+			danger: {
+				background: '$red3',
+				color: '$red10'
+			}
+		}
+	}
+});
+
 const StyledActionButton = styled('button', {
 	margin: '-0.25rem',
 	padding: '0.25rem',
@@ -94,7 +113,11 @@ function EmailRow({
 		<tr>
 			<StyledTableBodyColumn>{email}</StyledTableBodyColumn>
 			<StyledTableBodyColumn>
-				{verifiedAt ? 'Verified' : 'Unverified'}
+				{verifiedAt ? (
+					<StyledStatusTag variant="success">Verified</StyledStatusTag>
+				) : (
+					<StyledStatusTag variant="danger">Unverified</StyledStatusTag>
+				)}
 			</StyledTableBodyColumn>
 			<StyledTableBodyColumn>
 				{verifiedAt
