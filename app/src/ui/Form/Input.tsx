@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { styled } from '../../utils/stitches';
-import { ErrorMessage } from './ErrorMessage';
+import { AdditionalMessage } from './AdditionalMessage';
 
 const StyledGroup = styled('div', {
 	width: '100%',
@@ -34,12 +34,14 @@ export function Input({
 	type = 'text',
 	label,
 	placeholder,
+	message,
 	css,
 	...props
 }: {
 	name: string;
 	label: string;
 	placeholder: string;
+	message?: string;
 } & ComponentProps<typeof StyledInput>) {
 	const {
 		register,
@@ -58,9 +60,9 @@ export function Input({
 				css={
 					errors[name]
 						? {
-								borderColor: '$red9',
+								boxShadow: '$colors$red9 0px 0px 0px 1px',
 								'&:focus': {
-									borderColor: '$red9'
+									boxShadow: '$colors$red9 0px 0px 0px 1px'
 								}
 						  }
 						: undefined
@@ -68,7 +70,7 @@ export function Input({
 				{...register(name)}
 			/>
 
-			<ErrorMessage name={name} errors={errors} />
+			<AdditionalMessage name={name} message={message} />
 		</StyledGroup>
 	);
 }

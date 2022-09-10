@@ -19,7 +19,6 @@ function capitalize(str: string) {
 	return str.charAt(0) + str.slice(1).toLowerCase();
 }
 
-// TODO: Add help messages:
 function NewMaskDialogForm() {
 	const { setOpen } = useDialogContext();
 
@@ -43,7 +42,12 @@ function NewMaskDialogForm() {
 
 	return (
 		<Form form={form} onSubmit={(data) => mutateAsync(data)}>
-			<Select name="forwardTo" label="Forward to" css={{ marginTop: '1rem' }}>
+			<Select
+				name="forwardTo"
+				label="Forward to"
+				message="The email address where we will forward your incoming emails."
+				css={{ marginTop: '1rem' }}
+			>
 				{data?.map(({ id, email }) => (
 					<SelectItem key={id} value={id}>
 						{email}
@@ -63,6 +67,7 @@ function NewMaskDialogForm() {
 				name="name"
 				label="Name (optional)"
 				placeholder="Enter a name for this mask..."
+				message="Naming the mask will help you remember it easier. This does not affect the email address of the mask."
 				css={{ marginTop: '1rem' }}
 			/>
 

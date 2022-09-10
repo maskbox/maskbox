@@ -8,6 +8,7 @@ import { CSS } from '@stitches/react';
 import { ComponentProps, ReactNode } from 'react';
 import { Controller } from 'react-hook-form';
 import { styled } from '../../utils/stitches';
+import { AdditionalMessage } from './AdditionalMessage';
 
 const StyledGroup = styled('div', {
 	width: '100%',
@@ -99,11 +100,13 @@ export function SelectItem({
 export function Select({
 	name,
 	label,
+	message,
 	css,
 	children
 }: {
 	name: string;
 	label: string;
+	message?: string;
 	css: CSS;
 	children: ReactNode;
 }) {
@@ -137,6 +140,8 @@ export function Select({
 							</StyledContent>
 						</SelectPrimitive.Portal>
 					</SelectPrimitive.Root>
+
+					<AdditionalMessage name={name} message={message} />
 				</StyledGroup>
 			)}
 		/>

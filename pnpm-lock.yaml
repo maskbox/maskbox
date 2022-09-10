@@ -12,7 +12,6 @@ importers:
 
   app:
     specifiers:
-      '@hookform/error-message': ^2.0.0
       '@hookform/resolvers': ^2.9.7
       '@ngneat/falso': ^6.1.0
       '@prisma/client': ^4.3.0
@@ -48,7 +47,6 @@ importers:
       typescript: ^4.8.2
       zod: ^3.18.0
     dependencies:
-      '@hookform/error-message': 2.0.0_hphx72akqbietbtf5qajzk3m6q
       '@hookform/resolvers': 2.9.7_react-hook-form@7.34.2
       '@ngneat/falso': 6.1.0
       '@prisma/client': 4.3.0_prisma@4.3.0
@@ -129,18 +127,6 @@ packages:
       use-isomorphic-layout-effect: 1.1.2_ug65io7jkbhmo4fihdmbrh3ina
     transitivePeerDependencies:
       - '@types/react'
-    dev: false
-
-  /@hookform/error-message/2.0.0_hphx72akqbietbtf5qajzk3m6q:
-    resolution: {integrity: sha512-Y90nHzjgL2MP7GFy75kscdvxrCTjtyxGmOLLxX14nd08OXRIh9lMH/y9Kpdo0p1IPowJBiZMHyueg7p+yrqynQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-      react-hook-form: ^7.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.34.2_react@18.2.0
     dev: false
 
   /@hookform/resolvers/2.9.7_react-hook-form@7.34.2:

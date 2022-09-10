@@ -34,16 +34,14 @@ function NewEmailDialogContent() {
 
 	return (
 		<>
-			<DialogHeader
-				title="New email"
-				description="After adding a new email address, we will send you a verification email to verify it."
-			/>
+			<DialogHeader title="New email" />
 
 			<Form form={form} onSubmit={(data) => mutateAsync(data)} noValidate>
 				<Input
 					name="email"
 					label="Email"
 					placeholder="Enter your email address..."
+					message="After adding a new email address, we will send you a verification email to verify it."
 				/>
 
 				<DialogButtonGroup role="group">

@@ -9,7 +9,6 @@
 		"prisma": "prisma"
 	},
 	"dependencies": {
-		"@hookform/error-message": "^2.0.0",
 		"@hookform/resolvers": "^2.9.7",
 		"@ngneat/falso": "^6.1.0",
 		"@prisma/client": "^4.3.0",
