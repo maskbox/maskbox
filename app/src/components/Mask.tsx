@@ -8,8 +8,18 @@ import {
 	AlertDialogTrigger
 } from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
-import { styled } from '../utils/stitches';
+import { keyframes, styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
+
+const contentOpen = keyframes({
+	from: { height: 0, opacity: 0 },
+	to: { height: 'var(--radix-collapsible-content-height)', opacity: 1 }
+});
+
+const contentClose = keyframes({
+	from: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
+	to: { height: 0, opacity: 0 }
+});
 
 const StyledRoot = styled(CollapsiblePrimitive.Root, {
 	padding: '1rem',
@@ -46,7 +56,17 @@ const StyledButtonGroup = styled('div', {
 	}
 });
 
-const StyledContent = styled('div', {
+const StyledContent = styled(CollapsiblePrimitive.Content, {
+	overflow: 'hidden',
+	'&[data-state="open"]': {
+		animation: `${contentOpen} 150ms ease-in-out`
+	},
+	'&[data-state="closed"]': {
+		animation: `${contentClose} 150ms ease-in-out`
+	}
+});
+
+const StyledContentContainer = styled('div', {
 	marginTop: '1.125rem',
 	display: 'flex',
 	alignItems: 'end',
@@ -71,7 +91,6 @@ const StyledMaskHighlight = styled('strong', {
 });
 
 // TODO: Add copy to clipboard action.
-// TODO: Add content show/hide animation.
 export default function Mask({
 	id,
 	identifier,
@@ -140,7 +159,7 @@ export default function Mask({
 						<motion.div
 							initial={{ rotate: 0 }}
 							animate={open ? { rotate: 180 } : { rotate: 0 }}
-							transition={{ duration: 0.2, ease: 'easeInOut' }}
+							transition={{ duration: 0.15, ease: 'easeInOut' }}
 						>
 							<ChevronDownIcon />
 						</motion.div>
@@ -148,8 +167,8 @@ export default function Mask({
 				</StyledButtonGroup>
 			</StyledHeader>
 
-			<CollapsiblePrimitive.Content>
-				<StyledContent>
+			<StyledContent>
+				<StyledContentContainer>
 					<StyledItem>
 						<StyledItemLabel>Mask address</StyledItemLabel>
 						<p>{maskAddress}</p>
@@ -164,8 +183,8 @@ export default function Mask({
 						<StyledItemLabel>Created at</StyledItemLabel>
 						<p>{createdAt.toLocaleDateString([], { dateStyle: 'medium' })}</p>
 					</StyledItem>
-				</StyledContent>
-			</CollapsiblePrimitive.Content>
+				</StyledContentContainer>
+			</StyledContent>
 		</StyledRoot>
 	);
 }
