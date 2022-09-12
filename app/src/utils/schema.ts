@@ -9,5 +9,8 @@ export const emailSchema = z.object({
 export const maskSchema = z.object({
 	forwardTo: z.string().cuid(),
 	algorithm: z.enum(ALGORITHMS),
-	name: z.string().nullable()
+	name: z
+		.string()
+		.max(32, 'Name cannot be longer than 32 characters.')
+		.nullable()
 });
