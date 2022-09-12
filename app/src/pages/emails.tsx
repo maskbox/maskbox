@@ -1,6 +1,7 @@
 import { TrashIcon } from '@radix-ui/react-icons';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
-import { PageHeading } from '../components/PageHeading';
+import { PageHeading, PageHeadingSkeleton } from '../components/PageHeading';
+import { Skeleton } from '../components/Skeleton';
 import { MAX_EMAILS_PER_ACCOUNT } from '../constants';
 import { Alert } from '../ui/Alert';
 import {
@@ -28,6 +29,7 @@ const StyledTableHeadColumn = styled('th', {
 	color: '$gray11',
 	borderTop: '1px solid $gray6',
 	borderBottom: '1px solid $gray6',
+	userSelect: 'none',
 	'&:first-child': {
 		borderLeft: '1px solid $gray6',
 		borderTopLeftRadius: '0.375rem',
@@ -67,6 +69,32 @@ const StyledStatusTag = styled('span', {
 const StyledEmailHighlight = styled('strong', {
 	fontWeight: '$semibold',
 	color: '$gray12'
+});
+
+const StyledSkeletonTableHead = styled('div', {
+	display: 'flex',
+	alignItems: 'center',
+	background: '$gray2',
+	border: '1px solid $gray6',
+	borderRadius: '0.375rem'
+});
+
+const StyledSkeletonTableHeadColumn = styled('div', {
+	padding: '0.5rem 0.875rem',
+	width: '50%'
+});
+
+const StyledSkeletonTableRow = styled('div', {
+	display: 'flex',
+	alignItems: 'center',
+	'&:not(:last-of-type)': {
+		borderBottom: '1px solid $gray6'
+	}
+});
+
+const StyledSkeletonTableBodyColumn = styled('div', {
+	padding: '0.75rem 0.875rem',
+	width: '50%'
 });
 
 function EmailRow({
@@ -131,9 +159,51 @@ function EmailRow({
 export default function Emails() {
 	const { data } = trpc.useQuery(['email.getEmails']);
 
+	if (!data) {
+		return (
+			<>
+				<PageHeadingSkeleton />
+
+				<StyledSkeletonTableHead>
+					<StyledSkeletonTableHeadColumn>
+						<Skeleton css={{ width: '4rem', height: '1rem' }} />
+					</StyledSkeletonTableHeadColumn>
+
+					<StyledSkeletonTableHeadColumn css={{ width: '16.6%' }}>
+						<Skeleton css={{ width: '3rem', height: '1rem' }} />
+					</StyledSkeletonTableHeadColumn>
+
+					<StyledSkeletonTableHeadColumn css={{ width: '16.6%' }}>
+						<Skeleton css={{ width: '5rem', height: '1rem' }} />
+					</StyledSkeletonTableHeadColumn>
+				</StyledSkeletonTableHead>
+
+				{Array.from({ length: 5 }).map((_, i) => (
+					<StyledSkeletonTableRow key={i}>
+						<StyledSkeletonTableBodyColumn>
+							<Skeleton css={{ width: '12rem' }} />
+						</StyledSkeletonTableBodyColumn>
+
+						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+							<Skeleton css={{ width: '4rem' }} />
+						</StyledSkeletonTableBodyColumn>
+
+						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+							<Skeleton css={{ width: '6rem' }} />
+						</StyledSkeletonTableBodyColumn>
+
+						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+							<Skeleton css={{ marginLeft: 'auto', width: '1.25rem' }} />
+						</StyledSkeletonTableBodyColumn>
+					</StyledSkeletonTableRow>
+				))}
+			</>
+		);
+	}
+
 	return (
 		<>
-			{data?.length === MAX_EMAILS_PER_ACCOUNT && (
+			{data.length === MAX_EMAILS_PER_ACCOUNT && (
 				<Alert
 					title="Emails limit reached"
 					description="You reached the limit of maximum emails per account."
@@ -144,7 +214,7 @@ export default function Emails() {
 				title="Emails"
 				description="Email addresses you can generate masks for."
 			>
-				<NewEmailDialog disabled={data?.length === MAX_EMAILS_PER_ACCOUNT} />
+				<NewEmailDialog disabled={data.length === MAX_EMAILS_PER_ACCOUNT} />
 			</PageHeading>
 
 			<StyledTable>
@@ -159,7 +229,7 @@ export default function Emails() {
 					</tr>
 				</thead>
 				<tbody>
-					{data?.map((props) => (
+					{data.map((props) => (
 						<EmailRow key={props.id} {...props} />
 					))}
 				</tbody>

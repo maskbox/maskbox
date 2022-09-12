@@ -9,8 +9,6 @@ import { Button } from '../ui/Button';
 import { styled } from '../utils/stitches';
 import { trpc } from '../utils/trpc';
 
-const MASK_SKELETON_BASE_WIDTH = 18;
-
 const Mask = dynamic(() => import('../components/Mask'));
 
 const StyledEmptyContainer = styled('div', {
@@ -55,12 +53,6 @@ const StyledEmptyMaskGroup = styled('div', {
 	gap: '0.25rem'
 });
 
-function randomWidth(i: number) {
-	return Math.random() > 0.5
-		? MASK_SKELETON_BASE_WIDTH + i
-		: MASK_SKELETON_BASE_WIDTH - i;
-}
-
 export default function Masks() {
 	const { data } = trpc.useQuery(['mask.getMasks']);
 
@@ -71,7 +63,7 @@ export default function Masks() {
 
 				{Array.from({ length: 5 }).map((_, i) => (
 					<StyledEmptyMask key={i}>
-						<Skeleton css={{ width: `${randomWidth(i)}rem` }} />
+						<Skeleton css={{ width: '18rem' }} />
 
 						<StyledEmptyMaskGroup>
 							<Skeleton css={{ width: '1.25rem' }} />
