@@ -1,6 +1,7 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { withTRPC } from '@trpc/next';
+import { MotionConfig } from 'framer-motion';
 import { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
@@ -40,17 +41,19 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 			{({ reset }) => (
 				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
 					<Suspense fallback={<Loading />}>
-						{Component.layout === 'landing' ? (
-							<Layout>
-								<Component {...pageProps} />
-							</Layout>
-						) : (
-							<SessionProvider>
+						<MotionConfig reducedMotion="user">
+							{Component.layout === 'landing' ? (
 								<Layout>
 									<Component {...pageProps} />
 								</Layout>
-							</SessionProvider>
-						)}
+							) : (
+								<SessionProvider>
+									<Layout>
+										<Component {...pageProps} />
+									</Layout>
+								</SessionProvider>
+							)}
+						</MotionConfig>
 					</Suspense>
 				</ErrorBoundary>
 			)}
