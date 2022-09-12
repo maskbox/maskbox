@@ -71,7 +71,7 @@ export const DialogButtonGroup = styled('div', {
 	display: 'flex',
 	justifyContent: 'end',
 	marginTop: '1rem',
-	'&>button:not(:last-of-type)': {
+	'&>*:not(:last-of-type)': {
 		marginRight: '0.5rem'
 	}
 });

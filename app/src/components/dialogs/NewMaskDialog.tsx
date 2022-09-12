@@ -9,11 +9,17 @@ import {
 	useDialogContext
 } from '../../ui/Dialog';
 import { Form, useZodForm } from '../../ui/Form';
-import { Input } from '../../ui/Form/Input';
+import { Input, InputSkeleton } from '../../ui/Form/Input';
 import { Select, SelectItem } from '../../ui/Form/Select';
 import { SubmitButton } from '../../ui/Form/SubmitButton';
 import { ALGORITHMS, maskSchema } from '../../utils/schema';
+import { styled } from '../../utils/stitches';
 import { trpc } from '../../utils/trpc';
+import { Skeleton } from '../Skeleton';
+
+const StyledSuspenseContainer = styled('div', {
+	width: '100%'
+});
 
 function capitalize(str: string) {
 	return str.charAt(0) + str.slice(1).toLowerCase();
@@ -86,8 +92,20 @@ function NewMaskDialogContent() {
 		<>
 			<DialogHeader title="New mask" />
 
-			{/* TODO: Suspense design: */}
-			<Suspense fallback={<p>Loading form...</p>}>
+			<Suspense
+				fallback={
+					<StyledSuspenseContainer>
+						<InputSkeleton />
+						<InputSkeleton css={{ marginTop: '1rem' }} message={false} />
+						<InputSkeleton css={{ marginTop: '1rem' }} />
+
+						<DialogButtonGroup role="group">
+							<Skeleton css={{ width: '4.5rem', height: '2rem' }} />
+							<Skeleton css={{ width: '5.5rem', height: '2rem' }} />
+						</DialogButtonGroup>
+					</StyledSuspenseContainer>
+				}
+			>
 				<NewMaskDialogForm />
 			</Suspense>
 		</>

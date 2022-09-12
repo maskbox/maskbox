@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Skeleton } from '../../components/Skeleton';
 import { styled } from '../../utils/stitches';
 import { AdditionalMessage } from './AdditionalMessage';
 
@@ -71,6 +72,23 @@ export function Input({
 			/>
 
 			<AdditionalMessage name={name} message={message} />
+		</StyledGroup>
+	);
+}
+
+export function InputSkeleton({
+	message = true,
+	...props
+}: ComponentProps<typeof StyledGroup> & { message?: boolean }) {
+	return (
+		<StyledGroup {...props}>
+			<Skeleton css={{ width: '30%', marginBottom: '0.25rem' }} />
+			<Skeleton css={{ height: '2rem' }} />
+			{message && (
+				<Skeleton
+					css={{ width: '50%', height: '1rem', marginTop: '0.375rem' }}
+				/>
+			)}
 		</StyledGroup>
 	);
 }
