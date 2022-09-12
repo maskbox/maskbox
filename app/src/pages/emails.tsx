@@ -1,6 +1,8 @@
 import { TrashIcon } from '@radix-ui/react-icons';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
 import { PageHeading } from '../components/PageHeading';
+import { MAX_EMAILS_PER_ACCOUNT } from '../constants';
+import { Alert } from '../ui/Alert';
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -131,11 +133,18 @@ export default function Emails() {
 
 	return (
 		<>
+			{data?.length === MAX_EMAILS_PER_ACCOUNT && (
+				<Alert
+					title="Emails limit reached"
+					description="You reached the limit of maximum emails per account."
+				/>
+			)}
+
 			<PageHeading
 				title="Emails"
 				description="Email addresses you can generate masks for."
 			>
-				<NewEmailDialog />
+				<NewEmailDialog disabled={data?.length === MAX_EMAILS_PER_ACCOUNT} />
 			</PageHeading>
 
 			<StyledTable>

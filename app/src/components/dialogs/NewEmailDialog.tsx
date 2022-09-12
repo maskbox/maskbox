@@ -53,13 +53,13 @@ function NewEmailDialogContent() {
 	);
 }
 
-export function NewEmailDialog() {
+export function NewEmailDialog({ disabled }: { disabled: boolean }) {
 	const dialog = useDialog();
 
 	return (
 		<Dialog dialog={dialog} content={<NewEmailDialogContent />}>
 			<DialogTrigger asChild>
-				<Button>New email</Button>
+				<Button disabled={disabled}>New email</Button>
 			</DialogTrigger>
 		</Dialog>
 	);

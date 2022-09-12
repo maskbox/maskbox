@@ -1,6 +1,7 @@
 import { randAlphaNumeric, randFirstName, randLastName } from '@ngneat/falso';
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
+import { MAX_MASKS_PER_ACCOUNT } from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { ALGORITHMS, maskSchema } from '../../utils/schema';
 import { createProtectedRouter } from '../create-router';
@@ -46,6 +47,19 @@ export const maskRouter = createProtectedRouter()
 	.mutation('addMask', {
 		input: maskSchema,
 		async resolve({ ctx, input }) {
+			const count = await prisma.mask.count({
+				where: {
+					userId: ctx.session.userId
+				}
+			});
+
+			if (count >= MAX_MASKS_PER_ACCOUNT) {
+				throw new trpc.TRPCError({
+					code: 'CONFLICT',
+					message: 'You reached the limit of maximum masks per account.'
+				});
+			}
+
 			const forwardToEmail = await prisma.email.findFirstOrThrow({
 				where: {
 					id: input.forwardTo,
@@ -60,7 +74,7 @@ export const maskRouter = createProtectedRouter()
 			if (!forwardToEmail.verifiedAt) {
 				throw new trpc.TRPCError({
 					code: 'BAD_REQUEST',
-					message: 'Email is not verified'
+					message: 'Email is not verified.'
 				});
 			}
 

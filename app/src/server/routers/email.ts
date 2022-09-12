@@ -1,7 +1,9 @@
-import { createProtectedRouter } from '../create-router';
+import * as trpc from '@trpc/server';
+import { z } from 'zod';
+import { MAX_EMAILS_PER_ACCOUNT } from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
-import { z } from 'zod';
+import { createProtectedRouter } from '../create-router';
 
 export const emailRouter = createProtectedRouter()
 	.query('getEmails', {
@@ -31,6 +33,19 @@ export const emailRouter = createProtectedRouter()
 	.mutation('addEmail', {
 		input: emailSchema,
 		async resolve({ ctx, input }) {
+			const count = await prisma.email.count({
+				where: {
+					userId: ctx.session.userId
+				}
+			});
+
+			if (count >= MAX_EMAILS_PER_ACCOUNT) {
+				throw new trpc.TRPCError({
+					code: 'CONFLICT',
+					message: 'You reached the limit of maximum emails per account.'
+				});
+			}
+
 			const email = await prisma.email.create({
 				data: {
 					email: input.email,

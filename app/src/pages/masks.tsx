@@ -2,6 +2,8 @@ import { StackIcon } from '@radix-ui/react-icons';
 import dynamic from 'next/dynamic';
 import { NewMaskDialog } from '../components/dialogs/NewMaskDialog';
 import { PageHeading } from '../components/PageHeading';
+import { MAX_MASKS_PER_ACCOUNT } from '../constants';
+import { Alert } from '../ui/Alert';
 import { Button } from '../ui/Button';
 import { styled } from '../utils/stitches';
 import { trpc } from '../utils/trpc';
@@ -49,11 +51,24 @@ export default function Masks() {
 
 	return (
 		<>
+			{data.length === MAX_MASKS_PER_ACCOUNT && (
+				<Alert
+					title="Masks limit reached"
+					description="You reached the limit of maximum masks per account."
+				/>
+			)}
+
 			<PageHeading
 				title="Masks"
 				description="Masks are masked email addresses that forward emails to your real email address."
 			>
-				<NewMaskDialog trigger={<Button>New mask</Button>} />
+				<NewMaskDialog
+					trigger={
+						<Button disabled={data.length === MAX_MASKS_PER_ACCOUNT}>
+							New mask
+						</Button>
+					}
+				/>
 			</PageHeading>
 
 			{data.map((props) => (
