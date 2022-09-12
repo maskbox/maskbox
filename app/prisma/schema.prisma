@@ -55,7 +55,7 @@ model Mask {
   identifier  String   @unique
   name        String?
   createdAt   DateTime @default(now())
-  forwardTo   Email    @relation(fields: [forwardToId], references: [id])
+  forwardTo   Email    @relation(fields: [forwardToId], references: [id], onDelete: Cascade)
   forwardToId String
   user        User     @relation(fields: [userId], references: [id])
   userId      String
