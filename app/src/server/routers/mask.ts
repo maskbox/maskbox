@@ -1,5 +1,6 @@
 import { randAlphaNumeric, randFirstName, randLastName } from '@ngneat/falso';
 import * as trpc from '@trpc/server';
+import { z } from 'zod';
 import { prisma } from '../../utils/prisma';
 import { ALGORITHMS, maskSchema } from '../../utils/schema';
 import { createProtectedRouter } from '../create-router';
@@ -84,5 +85,26 @@ export const maskRouter = createProtectedRouter()
 			});
 
 			return mask;
+		}
+	})
+	.mutation('deleteMask', {
+		input: z.object({
+			id: z.string().cuid()
+		}),
+		async resolve({ ctx, input }) {
+			const maskToDelete = await prisma.mask.findFirstOrThrow({
+				where: {
+					id: input.id,
+					userId: ctx.session.userId
+				}
+			});
+
+			const deletedMask = await prisma.mask.delete({
+				where: {
+					id: maskToDelete.id
+				}
+			});
+
+			return deletedMask;
 		}
 	});

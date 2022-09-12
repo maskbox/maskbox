@@ -2,9 +2,14 @@ import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import { ChevronDownIcon, CopyIcon, TrashIcon } from '@radix-ui/react-icons';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import {
+	AlertDialog,
+	AlertDialogContent,
+	AlertDialogTrigger
+} from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
 import { styled } from '../utils/stitches';
-import { InferQueryOutput } from '../utils/trpc';
+import { InferQueryOutput, trpc } from '../utils/trpc';
 
 const StyledRoot = styled(CollapsiblePrimitive.Root, {
 	padding: '1rem',
@@ -60,16 +65,30 @@ const StyledItemLabel = styled('p', {
 	userSelect: 'none'
 });
 
+const StyledMaskHighlight = styled('strong', {
+	fontWeight: '$semibold',
+	color: '$gray12'
+});
+
 // TODO: Add copy to clipboard action.
 // TODO: Add content show/hide animation.
-// TODO: Add delete action.
 export default function Mask({
+	id,
 	identifier,
 	name,
 	forwardTo,
 	createdAt
 }: InferQueryOutput<'mask.getMasks'>[0]) {
 	const [open, setOpen] = useState(false);
+
+	const { setQueryData } = trpc.useContext();
+	const { mutate } = trpc.useMutation(['mask.deleteMask'], {
+		onSuccess(data) {
+			setQueryData(['mask.getMasks'], (prev) =>
+				prev!.filter(({ id }) => id !== data.id)
+			);
+		}
+	});
 
 	const maskAddress = `${identifier}@relay.maskbox.app`;
 
@@ -82,9 +101,32 @@ export default function Mask({
 				</StyledTrigger>
 
 				<StyledButtonGroup>
-					<IconButton variant="danger" label="Delete" tooltipSide="top">
-						<TrashIcon />
-					</IconButton>
+					<AlertDialog>
+						<IconButton
+							variant="danger"
+							label="Delete"
+							tooltipSide="top"
+							as={AlertDialogTrigger}
+						>
+							<TrashIcon />
+						</IconButton>
+
+						<AlertDialogContent
+							title="Delete mask"
+							description={
+								<>
+									This action cannot be undone. This will permanently delete
+									your mask{' '}
+									<StyledMaskHighlight>
+										{name ? name : identifier}
+									</StyledMaskHighlight>
+									.
+								</>
+							}
+							actionLabel="Delete"
+							onAction={() => mutate({ id })}
+						/>
+					</AlertDialog>
 
 					<IconButton label="Copy mask address" tooltipSide="top">
 						<CopyIcon />
