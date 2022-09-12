@@ -1,4 +1,10 @@
-import { blackA, grayDark, greenDark, redDark } from '@radix-ui/colors';
+import {
+	blackA,
+	grayDark,
+	grayDarkA,
+	greenDark,
+	redDark
+} from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import type { PropertyValue, ScaleValue } from '@stitches/react';
 
@@ -20,6 +26,7 @@ export const {
 		colors: {
 			...blackA,
 			...grayDark,
+			...grayDarkA,
 			...greenDark,
 			...redDark
 		},

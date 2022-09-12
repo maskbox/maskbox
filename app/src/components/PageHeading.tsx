@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
 import { styled } from '../utils/stitches';
+import { Skeleton } from './Skeleton';
 
 const StyledHeadingContainer = styled('div', {
 	display: 'flex',
@@ -35,6 +36,19 @@ export function PageHeading({
 			</div>
 
 			{children}
+		</StyledHeadingContainer>
+	);
+}
+
+export function PageHeadingSkeleton() {
+	return (
+		<StyledHeadingContainer>
+			<div>
+				<Skeleton css={{ width: '6rem', height: '1.75rem' }} />
+				<Skeleton css={{ marginTop: '0.25rem', width: '24rem' }} />
+			</div>
+
+			<Skeleton css={{ width: '6rem', height: '2rem' }} />
 		</StyledHeadingContainer>
 	);
 }
