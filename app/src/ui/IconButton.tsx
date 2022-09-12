@@ -4,7 +4,7 @@ import { styled } from '../utils/stitches';
 import { Tooltip, TooltipContent, TooltipTrigger } from './Tooltip';
 
 interface Props extends ComponentProps<typeof StyledIconButton> {
-	label: string;
+	label?: string;
 	as?: ComponentType<any>;
 	tooltipDelayDuration?: number;
 	tooltipSide?: TooltipContentProps['side'];
@@ -27,6 +27,9 @@ const StyledIconButton = styled('button', {
 					color: '$gray12'
 				}
 			},
+			success: {
+				color: '$green11'
+			},
 			danger: {
 				color: '$red11',
 				'&:hover': {
@@ -46,6 +49,10 @@ export function IconButton({
 	tooltipSide,
 	...props
 }: Props) {
+	if (!label) {
+		return <StyledIconButton {...props} />;
+	}
+
 	return (
 		<Tooltip delayDuration={tooltipDelayDuration}>
 			<TooltipTrigger asChild>

@@ -1,7 +1,13 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
-import { ChevronDownIcon, CopyIcon, TrashIcon } from '@radix-ui/react-icons';
+import {
+	CheckIcon,
+	ChevronDownIcon,
+	CopyIcon,
+	TrashIcon
+} from '@radix-ui/react-icons';
+import copy from 'copy-to-clipboard';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -10,6 +16,8 @@ import {
 import { IconButton } from '../ui/IconButton';
 import { keyframes, styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
+
+const COPY_TIMEOUT = 1000;
 
 const contentOpen = keyframes({
 	from: { height: 0, opacity: 0 },
@@ -90,7 +98,6 @@ const StyledMaskHighlight = styled('strong', {
 	color: '$gray12'
 });
 
-// TODO: Add copy to clipboard action.
 export default function Mask({
 	id,
 	identifier,
@@ -99,6 +106,9 @@ export default function Mask({
 	createdAt
 }: InferQueryOutput<'mask.getMasks'>[0]) {
 	const [open, setOpen] = useState(false);
+	const [copied, setCopied] = useState(false);
+
+	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	const { setQueryData } = trpc.useContext();
 	const { mutate } = trpc.useMutation(['mask.deleteMask'], {
@@ -109,7 +119,20 @@ export default function Mask({
 		}
 	});
 
+	useEffect(() => {
+		return () => {
+			timeoutRef.current && clearTimeout(timeoutRef.current);
+		};
+	}, []);
+
 	const maskAddress = `${identifier}@relay.maskbox.app`;
+
+	function copyMaskAddress() {
+		copy(maskAddress);
+
+		setCopied(true);
+		timeoutRef.current = setTimeout(() => setCopied(false), COPY_TIMEOUT);
+	}
 
 	return (
 		<StyledRoot open={open} onOpenChange={(val) => setOpen(val)}>
@@ -147,8 +170,13 @@ export default function Mask({
 						/>
 					</AlertDialog>
 
-					<IconButton label="Copy mask address" tooltipSide="top">
-						<CopyIcon />
+					<IconButton
+						variant={copied ? 'success' : 'primary'}
+						label={copied ? undefined : 'Copy mask address'}
+						tooltipSide="top"
+						onClick={copyMaskAddress}
+					>
+						{copied ? <CheckIcon /> : <CopyIcon />}
 					</IconButton>
 
 					<IconButton
