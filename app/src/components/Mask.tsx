@@ -98,6 +98,8 @@ const StyledMaskHighlight = styled('strong', {
 	color: '$gray12'
 });
 
+const CollapseIcon = motion(ChevronDownIcon);
+
 export default function Mask({
 	id,
 	identifier,
@@ -184,13 +186,11 @@ export default function Mask({
 						tooltipSide="top"
 						as={CollapsiblePrimitive.Trigger}
 					>
-						<motion.div
+						<CollapseIcon
 							initial={{ rotate: 0 }}
 							animate={open ? { rotate: 180 } : { rotate: 0 }}
 							transition={{ duration: 0.15, ease: 'easeInOut' }}
-						>
-							<ChevronDownIcon />
-						</motion.div>
+						/>
 					</IconButton>
 				</StyledButtonGroup>
 			</StyledHeader>
