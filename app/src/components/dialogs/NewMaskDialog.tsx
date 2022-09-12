@@ -26,8 +26,10 @@ function NewMaskDialogForm() {
 		suspense: true
 	});
 
+	const { setQueryData } = trpc.useContext();
 	const { mutateAsync } = trpc.useMutation('mask.addMask', {
-		onSuccess() {
+		onSuccess(data) {
+			setQueryData(['mask.getMasks'], (prev) => [data, ...prev!]);
 			setOpen(false);
 		}
 	});

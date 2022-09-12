@@ -41,13 +41,10 @@ export function TooltipContent({
 	);
 }
 
-export function Tooltip({
-	delayDuration = 500,
-	...props
-}: TooltipPrimitive.TooltipProps) {
+export function Tooltip({ ...props }: TooltipPrimitive.TooltipProps) {
 	return (
 		<TooltipPrimitive.Provider>
-			<TooltipPrimitive.Root delayDuration={delayDuration} {...props} />
+			<TooltipPrimitive.Root {...props} />
 		</TooltipPrimitive.Provider>
 	);
 }

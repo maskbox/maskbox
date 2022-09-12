@@ -24,44 +24,65 @@ function generateIdentifier(algorithm: typeof ALGORITHMS[number]) {
 	return identifier;
 }
 
-export const maskRouter = createProtectedRouter().mutation('addMask', {
-	input: maskSchema,
-	async resolve({ ctx, input }) {
-		const forwardToEmail = await prisma.email.findFirstOrThrow({
-			where: {
-				id: input.forwardTo,
-				userId: ctx.session.userId
-			},
-			select: {
-				id: true,
-				verifiedAt: true
-			}
-		});
-
-		if (!forwardToEmail.verifiedAt) {
-			throw new trpc.TRPCError({
-				code: 'BAD_REQUEST',
-				message: 'Email is not verified'
+export const maskRouter = createProtectedRouter()
+	.query('getMasks', {
+		async resolve({ ctx }) {
+			const masks = await prisma.mask.findMany({
+				where: {
+					userId: ctx.session.userId
+				},
+				include: {
+					forwardTo: true
+				},
+				orderBy: {
+					createdAt: 'desc'
+				}
 			});
-		}
 
-		const mask = await prisma.mask.create({
-			data: {
-				identifier: generateIdentifier(input.algorithm),
-				forwardTo: {
-					connect: {
-						id: forwardToEmail.id
+			return masks;
+		}
+	})
+	.mutation('addMask', {
+		input: maskSchema,
+		async resolve({ ctx, input }) {
+			const forwardToEmail = await prisma.email.findFirstOrThrow({
+				where: {
+					id: input.forwardTo,
+					userId: ctx.session.userId
+				},
+				select: {
+					id: true,
+					verifiedAt: true
+				}
+			});
+
+			if (!forwardToEmail.verifiedAt) {
+				throw new trpc.TRPCError({
+					code: 'BAD_REQUEST',
+					message: 'Email is not verified'
+				});
+			}
+
+			const mask = await prisma.mask.create({
+				data: {
+					identifier: generateIdentifier(input.algorithm),
+					forwardTo: {
+						connect: {
+							id: forwardToEmail.id
+						}
+					},
+					name: input.name,
+					user: {
+						connect: {
+							id: ctx.session.userId
+						}
 					}
 				},
-				name: input.name,
-				user: {
-					connect: {
-						id: ctx.session.userId
-					}
+				include: {
+					forwardTo: true
 				}
-			}
-		});
+			});
 
-		return mask;
-	}
-});
+			return mask;
+		}
+	});

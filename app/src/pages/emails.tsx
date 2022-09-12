@@ -1,30 +1,14 @@
 import { TrashIcon } from '@radix-ui/react-icons';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
+import { PageHeading } from '../components/PageHeading';
 import {
 	AlertDialog,
 	AlertDialogContent,
 	AlertDialogTrigger
 } from '../ui/AlertDialog';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/Tooltip';
+import { IconButton } from '../ui/IconButton';
 import { styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
-
-const StyledHeadingContainer = styled('div', {
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	marginBottom: '1.25rem'
-});
-
-const StyledHeading = styled('h1', {
-	fontSize: '$xl',
-	fontWeight: '$semibold'
-});
-
-const StyledDescription = styled('p', {
-	marginTop: '0.25rem',
-	color: '$gray11'
-});
 
 const StyledTable = styled('table', {
 	width: '100%',
@@ -78,18 +62,6 @@ const StyledStatusTag = styled('span', {
 	}
 });
 
-const StyledActionButton = styled('button', {
-	margin: '-0.25rem',
-	padding: '0.25rem',
-	color: '$red11',
-	borderRadius: '0.25rem',
-	baseTransition: 'background, color',
-	'&:hover': {
-		background: '$gray3',
-		color: '$red12'
-	}
-});
-
 const StyledEmailHighlight = styled('strong', {
 	fontWeight: '$semibold',
 	color: '$gray12'
@@ -127,17 +99,14 @@ function EmailRow({
 
 			<StyledTableBodyColumn css={{ textAlign: 'right' }}>
 				<AlertDialog>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<AlertDialogTrigger asChild>
-								<StyledActionButton>
-									<TrashIcon />
-								</StyledActionButton>
-							</AlertDialogTrigger>
-						</TooltipTrigger>
-
-						<TooltipContent side="left">Delete</TooltipContent>
-					</Tooltip>
+					<IconButton
+						variant="danger"
+						label="Delete"
+						tooltipSide="left"
+						as={AlertDialogTrigger}
+					>
+						<TrashIcon />
+					</IconButton>
 
 					<AlertDialogContent
 						title="Delete email"
@@ -162,16 +131,12 @@ export default function Emails() {
 
 	return (
 		<>
-			<StyledHeadingContainer>
-				<div>
-					<StyledHeading>Emails</StyledHeading>
-					<StyledDescription>
-						Email addresses you can generate masks for.
-					</StyledDescription>
-				</div>
-
+			<PageHeading
+				title="Emails"
+				description="Email addresses you can generate masks for."
+			>
 				<NewEmailDialog />
-			</StyledHeadingContainer>
+			</PageHeading>
 
 			<StyledTable>
 				<thead>
