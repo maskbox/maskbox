@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { Button } from '../../ui/Button';
 import {
 	Dialog,
@@ -22,6 +23,7 @@ function NewEmailDialogContent() {
 		onSuccess(data) {
 			setQueryData(['email.getEmails'], (prev) => [data, ...prev!]);
 			setOpen(false);
+			toast.success('Email address successfully added.');
 		}
 	});
 

@@ -8,6 +8,7 @@ import {
 import copy from 'copy-to-clipboard';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -118,6 +119,7 @@ export default function Mask({
 			setQueryData(['mask.getMasks'], (prev) =>
 				prev!.filter(({ id }) => id !== data.id)
 			);
+			toast.success('Mask successfully deleted.');
 		}
 	});
 

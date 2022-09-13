@@ -1,4 +1,5 @@
 import { ReactNode, Suspense } from 'react';
+import toast from 'react-hot-toast';
 import {
 	Dialog,
 	DialogButtonGroup,
@@ -37,6 +38,7 @@ function NewMaskDialogForm() {
 		onSuccess(data) {
 			setQueryData(['mask.getMasks'], (prev) => [data, ...prev!]);
 			setOpen(false);
+			toast.success('Mask successfully created.');
 		}
 	});
 
@@ -81,7 +83,7 @@ function NewMaskDialogForm() {
 
 			<DialogButtonGroup role="group">
 				<DialogCloseButton>Cancel</DialogCloseButton>
-				<SubmitButton allowDisable={false}>Add mask</SubmitButton>
+				<SubmitButton allowDisable={false}>Create mask</SubmitButton>
 			</DialogButtonGroup>
 		</Form>
 	);
@@ -101,7 +103,7 @@ function NewMaskDialogContent() {
 
 						<DialogButtonGroup role="group">
 							<Skeleton css={{ width: '4.5rem', height: '2rem' }} />
-							<Skeleton css={{ width: '5.5rem', height: '2rem' }} />
+							<Skeleton css={{ width: '6.5rem', height: '2rem' }} />
 						</DialogButtonGroup>
 					</StyledSuspenseContainer>
 				}

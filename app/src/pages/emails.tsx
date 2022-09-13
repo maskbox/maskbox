@@ -1,4 +1,5 @@
 import { TrashIcon } from '@radix-ui/react-icons';
+import toast from 'react-hot-toast';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
 import { PageHeading, PageHeadingSkeleton } from '../components/PageHeading';
 import { Skeleton } from '../components/Skeleton';
@@ -108,6 +109,7 @@ function EmailRow({
 			setQueryData(['email.getEmails'], (prev) =>
 				prev!.filter(({ id }) => id !== data.id)
 			);
+			toast.success('Email address successfully deleted.');
 		}
 	});
 

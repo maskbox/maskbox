@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { Navbar } from '../components/Navbar';
+import { Toaster } from '../components/Toaster';
 import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
@@ -34,6 +35,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 			<Navbar />
 
 			<StyledAppMain>{children}</StyledAppMain>
+
+			<Toaster />
 		</StyledAppLayout>
 	);
 }
