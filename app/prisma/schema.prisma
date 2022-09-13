@@ -32,7 +32,7 @@ model AuthenticationCode {
 // TODO: Add session expiration:
 model Session {
   id        String   @id @default(cuid())
-  token     String   @unique
+  token     String   @unique @default(uuid())
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    String

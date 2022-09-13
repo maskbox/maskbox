@@ -1,4 +1,3 @@
-import { randomUUID } from 'crypto';
 import { add, isPast } from 'date-fns';
 import { z } from 'zod';
 import { SESSION_COOKIE_NAME } from '../../constants';
@@ -91,7 +90,6 @@ export const authRouter = createRouter()
 
 			const session = await prisma.session.create({
 				data: {
-					token: randomUUID(),
 					userId: user.id
 				}
 			});
