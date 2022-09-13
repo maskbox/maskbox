@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ComponentProps } from 'react';
 import {
+	FieldValues,
 	FormProvider,
 	SubmitHandler,
 	useForm,
@@ -10,9 +11,11 @@ import {
 import { z } from 'zod';
 import { styled } from '../../utils/stitches';
 
-export type InferFormDataType<Form extends UseFormReturn> = Parameters<
-	Parameters<Form['handleSubmit']>[0]
->[0];
+interface Props<T extends FieldValues>
+	extends Omit<ComponentProps<typeof StyledForm>, 'onSubmit'> {
+	form: UseFormReturn<T>;
+	onSubmit: SubmitHandler<T>;
+}
 
 const StyledForm = styled('form', {
 	width: '100%'
@@ -35,14 +38,11 @@ export function useZodForm<
 	return form;
 }
 
-export function Form<Form extends UseFormReturn<any>>({
+export function Form<T extends FieldValues>({
 	form,
 	onSubmit,
 	...props
-}: {
-	form: Form;
-	onSubmit: SubmitHandler<InferFormDataType<Form>>;
-} & Omit<ComponentProps<typeof StyledForm>, 'onSubmit'>) {
+}: Props<T>) {
 	return (
 		<FormProvider {...form}>
 			<StyledForm {...props} onSubmit={form.handleSubmit(onSubmit)} />
