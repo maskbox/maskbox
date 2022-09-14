@@ -13,6 +13,7 @@ const StyledCard = styled('div', {
 });
 
 const StyledIcon = styled(ExclamationTriangleIcon, {
+	flexShrink: 0,
 	color: '$red11'
 });
 
