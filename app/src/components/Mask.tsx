@@ -48,13 +48,17 @@ const StyledHeader = styled('div', {
 });
 
 const StyledTrigger = styled(CollapsiblePrimitive.Trigger, {
-	fontWeight: '$semibold'
+	maxWidth: '75%',
+	color: '$gray11',
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+	whiteSpace: 'nowrap'
 });
 
-const StyledMaskAddress = styled('span', {
-	marginLeft: '0.25rem',
-	fontWeight: '$normal',
-	color: '$gray11'
+const StyledMaskName = styled('span', {
+	marginRight: '0.25rem',
+	fontWeight: '$semibold',
+	color: '$gray12'
 });
 
 const StyledButtonGroup = styled('div', {
@@ -78,12 +82,25 @@ const StyledContent = styled(CollapsiblePrimitive.Content, {
 const StyledContentContainer = styled('div', {
 	marginTop: '1.125rem',
 	display: 'flex',
-	alignItems: 'end',
-	justifyContent: 'space-between'
+	flexDirection: 'column',
+	justifyContent: 'space-between',
+	'@md': {
+		flexDirection: 'row',
+		alignItems: 'end'
+	}
 });
 
 const StyledItem = styled('div', {
-	width: '26rem'
+	width: 'auto',
+	'@lg': {
+		width: '26rem'
+	},
+	'&:not(:last-of-type)': {
+		marginBottom: '0.5rem',
+		'@md': {
+			marginBottom: 0
+		}
+	}
 });
 
 const StyledItemLabel = styled('p', {
@@ -142,8 +159,8 @@ export default function Mask({
 		<StyledRoot open={open} onOpenChange={(val) => setOpen(val)}>
 			<StyledHeader>
 				<StyledTrigger>
-					{name ? name : identifier}
-					<StyledMaskAddress>({maskAddress})</StyledMaskAddress>
+					<StyledMaskName>{name ? name : identifier}</StyledMaskName>
+					<span>({maskAddress})</span>
 				</StyledTrigger>
 
 				<StyledButtonGroup>
