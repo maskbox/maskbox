@@ -4,9 +4,20 @@ import { Skeleton } from './Skeleton';
 
 const StyledHeadingContainer = styled('div', {
 	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	marginBottom: '1.25rem'
+	flexDirection: 'column',
+	marginBottom: '1.25rem',
+	'@md': {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between'
+	}
+});
+
+const StyledTextContainer = styled('div', {
+	marginBottom: '0.75rem',
+	'@md': {
+		marginBottom: 0
+	}
 });
 
 const StyledHeading = styled('h1', {
@@ -30,10 +41,10 @@ export function PageHeading({
 }) {
 	return (
 		<StyledHeadingContainer {...props}>
-			<div>
+			<StyledTextContainer>
 				<StyledHeading>{title}</StyledHeading>
 				<StyledDescription>{description}</StyledDescription>
-			</div>
+			</StyledTextContainer>
 
 			{children}
 		</StyledHeadingContainer>
