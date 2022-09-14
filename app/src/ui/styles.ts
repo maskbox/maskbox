@@ -30,12 +30,16 @@ export const contentStyles: CSS = {
 	top: '50%',
 	left: '50%',
 	padding: '1rem 1.25rem',
-	width: '28rem',
+	width: '90vw',
+	maxWidth: '28rem',
 	background: '$gray1',
 	transform: 'translate(-50%, -50%)',
 	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&:focus': {
 		outline: 'none'
+	},
+	'@sm': {
+		width: '28rem'
 	}
 };
