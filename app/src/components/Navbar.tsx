@@ -20,8 +20,11 @@ const DummyLogoIcon = styled('div', {
 
 const StyledNavbar = styled('nav', {
 	width: '100%',
-	paddingTop: '1.5rem',
-	borderBottom: '1px solid $gray6'
+	padding: '1.5rem 1.5rem 0',
+	borderBottom: '1px solid $gray6',
+	'@xl': {
+		padding: '1.5rem 0 0'
+	}
 });
 
 const NavbarContent = styled('div', {

@@ -17,6 +17,7 @@ const StyledEmptyContainer = styled('div', {
 	alignItems: 'center',
 	justifyContent: 'center',
 	flexDirection: 'column',
+	height: '100%',
 	maxWidth: '24rem',
 	textAlign: 'center'
 });

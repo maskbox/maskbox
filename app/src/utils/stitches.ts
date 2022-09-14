@@ -51,8 +51,15 @@ export const {
 		shadows: {
 			border1: '$colors$gray6 0px 0px 0px 1px',
 			border2: '$colors$gray8 0px 0px 0px 1px',
-			base: 'rgba(0, 0, 0, 0.2) 0px 2px 8px 0px'
+			base: '$colors$blackA9 0px 2px 8px 0px'
 		}
+	},
+	media: {
+		sm: '(min-width: 640px)',
+		md: '(min-width: 768px)',
+		lg: '(min-width: 1024px)',
+		xl: '(min-width: 1280px)',
+		'2xl': '(min-width: 1536px)'
 	},
 	utils: {
 		fontSize: (value: ScaleValue<'fontSize'>) => ({

@@ -6,19 +6,26 @@ import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
 const StyledAppLayout = styled('div', {
+	height: '100vh',
 	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
-	minHeight: '100vh'
+	flexDirection: 'column'
 });
 
 const StyledAppMain = styled('main', {
-	display: 'flex',
-	flexDirection: 'column',
-	flex: '1 1 0%',
+	margin: '0 auto',
+	padding: '0 1.5rem',
 	width: '100%',
-	maxWidth: '70rem',
-	marginTop: '2rem'
+	flex: '1 1 0%',
+	'@xl': {
+		padding: 0
+	}
+});
+
+const StyledAppContainer = styled('div', {
+	margin: '0 auto',
+	padding: '1.5rem 0',
+	height: '100%',
+	maxWidth: '70rem'
 });
 
 export default function AppLayout({ children }: { children: ReactNode }) {
@@ -34,7 +41,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 		<StyledAppLayout>
 			<Navbar />
 
-			<StyledAppMain>{children}</StyledAppMain>
+			<StyledAppMain>
+				<StyledAppContainer>{children}</StyledAppContainer>
+			</StyledAppMain>
 
 			<Toaster />
 		</StyledAppLayout>

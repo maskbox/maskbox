@@ -7,7 +7,11 @@ const StyledAuthLayout = styled('main', {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
-	minHeight: '100vh'
+	minHeight: '100vh',
+	padding: '0 1.5rem',
+	'@sm': {
+		padding: 0
+	}
 });
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
