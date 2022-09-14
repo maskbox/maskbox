@@ -19,18 +19,30 @@ function NewEmailDialogContent() {
 	const { setOpen } = useDialogContext();
 
 	const { setQueryData } = trpc.useContext();
-	const { mutateAsync } = trpc.useMutation(['email.addEmail'], {
-		onSuccess(data) {
-			setQueryData(['email.getEmails'], (prev) => [data, ...prev!]);
-			setOpen(false);
-			toast.success('Email address successfully added.');
-		}
-	});
 
 	const form = useZodForm({
 		schema: emailSchema,
 		defaultValues: {
 			email: ''
+		}
+	});
+
+	const { mutateAsync } = trpc.useMutation(['email.addEmail'], {
+		onSuccess(data) {
+			setQueryData(['email.getEmails'], (prev) => {
+				if (data) {
+					return [data, ...prev!];
+				}
+
+				return prev || [];
+			});
+			setOpen(false);
+			toast.success('Email address successfully added.');
+		},
+		onError({ message, data }) {
+			if (data?.code === 'CONFLICT') {
+				form.setError('email', { message });
+			}
 		}
 	});
 

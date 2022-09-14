@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 import { MAX_EMAILS_PER_ACCOUNT } from '../../constants';
@@ -46,20 +47,31 @@ export const emailRouter = createProtectedRouter()
 				});
 			}
 
-			const email = await prisma.email.create({
-				data: {
-					email: input.email,
-					user: {
-						connect: {
-							id: ctx.session.userId
+			try {
+				const email = await prisma.email.create({
+					data: {
+						email: input.email,
+						user: {
+							connect: {
+								id: ctx.session.userId
+							}
 						}
 					}
+				});
+
+				// TODO: Send a verification email.
+
+				return email;
+			} catch (e) {
+				if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
+					throw new trpc.TRPCError({
+						code: 'CONFLICT',
+						message: 'Email address is already in use.'
+					});
 				}
-			});
 
-			// TODO: Send a verification email.
-
-			return email;
+				throw e;
+			}
 		}
 	})
 	.mutation('deleteEmail', {
