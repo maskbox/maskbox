@@ -64,7 +64,14 @@ export default function Masks() {
 
 				{Array.from({ length: 5 }).map((_, i) => (
 					<StyledEmptyMask key={i}>
-						<Skeleton css={{ width: '18rem' }} />
+						<Skeleton
+							css={{
+								width: '60%',
+								'@md': {
+									width: '18rem'
+								}
+							}}
+						/>
 
 						<StyledEmptyMaskGroup>
 							<Skeleton css={{ width: '1.25rem' }} />

@@ -101,7 +101,10 @@ const StyledSkeletonTableRow = styled('div', {
 
 const StyledSkeletonTableBodyColumn = styled('div', {
 	padding: '0.75rem 0.875rem',
-	width: '50%'
+	width: '100%',
+	'@sm': {
+		width: '50%'
+	}
 });
 
 function EmailRow({
@@ -177,11 +180,27 @@ export default function Emails() {
 						<Skeleton css={{ width: '4rem', height: '1rem' }} />
 					</StyledSkeletonTableHeadColumn>
 
-					<StyledSkeletonTableHeadColumn css={{ width: '16.6%' }}>
+					<StyledSkeletonTableHeadColumn
+						css={{
+							display: 'none',
+							'@sm': {
+								width: '16.6%',
+								display: 'block'
+							}
+						}}
+					>
 						<Skeleton css={{ width: '3rem', height: '1rem' }} />
 					</StyledSkeletonTableHeadColumn>
 
-					<StyledSkeletonTableHeadColumn css={{ width: '16.6%' }}>
+					<StyledSkeletonTableHeadColumn
+						css={{
+							display: 'none',
+							'@sm': {
+								width: '16.6%',
+								display: 'block'
+							}
+						}}
+					>
 						<Skeleton css={{ width: '5rem', height: '1rem' }} />
 					</StyledSkeletonTableHeadColumn>
 				</StyledSkeletonTableHead>
@@ -189,18 +208,49 @@ export default function Emails() {
 				{Array.from({ length: 5 }).map((_, i) => (
 					<StyledSkeletonTableRow key={i}>
 						<StyledSkeletonTableBodyColumn>
-							<Skeleton css={{ width: '12rem' }} />
+							<Skeleton
+								css={{
+									width: '100%',
+									'@sm': {
+										width: '12rem'
+									}
+								}}
+							/>
 						</StyledSkeletonTableBodyColumn>
 
-						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+						<StyledSkeletonTableBodyColumn
+							css={{
+								display: 'none',
+								'@sm': {
+									width: '16.6%',
+									display: 'block'
+								}
+							}}
+						>
 							<Skeleton css={{ width: '4rem' }} />
 						</StyledSkeletonTableBodyColumn>
 
-						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+						<StyledSkeletonTableBodyColumn
+							css={{
+								display: 'none',
+								'@sm': {
+									width: '16.6%',
+									display: 'block'
+								}
+							}}
+						>
 							<Skeleton css={{ width: '6rem' }} />
 						</StyledSkeletonTableBodyColumn>
 
-						<StyledSkeletonTableBodyColumn css={{ width: '16.6%' }}>
+						<StyledSkeletonTableBodyColumn
+							css={{
+								display: 'none',
+								'@sm': {
+									width: '16.6%',
+									display: 'block'
+								}
+							}}
+						>
 							<Skeleton css={{ marginLeft: 'auto', width: '1.25rem' }} />
 						</StyledSkeletonTableBodyColumn>
 					</StyledSkeletonTableRow>

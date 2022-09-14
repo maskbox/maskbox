@@ -54,12 +54,28 @@ export function PageHeading({
 export function PageHeadingSkeleton() {
 	return (
 		<StyledHeadingContainer>
-			<div>
+			<StyledTextContainer>
 				<Skeleton css={{ width: '6rem', height: '1.75rem' }} />
-				<Skeleton css={{ marginTop: '0.25rem', width: '24rem' }} />
-			</div>
+				<Skeleton
+					css={{
+						marginTop: '0.25rem',
+						width: '100%',
+						'@md': {
+							width: '24rem'
+						}
+					}}
+				/>
+			</StyledTextContainer>
 
-			<Skeleton css={{ width: '6rem', height: '2rem' }} />
+			<Skeleton
+				css={{
+					width: '100%',
+					height: '2rem',
+					'@md': {
+						width: '6rem'
+					}
+				}}
+			/>
 		</StyledHeadingContainer>
 	);
 }
