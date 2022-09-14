@@ -14,6 +14,10 @@ import { IconButton } from '../ui/IconButton';
 import { styled } from '../utils/stitches';
 import { InferQueryOutput, trpc } from '../utils/trpc';
 
+const StyledTableContainer = styled('div', {
+	overflowX: 'auto'
+});
+
 const StyledTable = styled('table', {
 	width: '100%',
 	'&>tbody>tr:not(:last-of-type) td': {
@@ -31,6 +35,7 @@ const StyledTableHeadColumn = styled('th', {
 	borderTop: '1px solid $gray6',
 	borderBottom: '1px solid $gray6',
 	userSelect: 'none',
+	whiteSpace: 'nowrap',
 	'&:first-child': {
 		borderLeft: '1px solid $gray6',
 		borderTopLeftRadius: '0.375rem',
@@ -45,7 +50,8 @@ const StyledTableHeadColumn = styled('th', {
 
 const StyledTableBodyColumn = styled('td', {
 	padding: '0.75rem 0.875rem',
-	textAlign: 'left'
+	textAlign: 'left',
+	whiteSpace: 'nowrap'
 });
 
 const StyledStatusTag = styled('span', {
@@ -219,23 +225,25 @@ export default function Emails() {
 				<NewEmailDialog disabled={data.length === MAX_EMAILS_PER_ACCOUNT} />
 			</PageHeading>
 
-			<StyledTable>
-				<thead>
-					<tr>
-						<StyledTableHeadColumn css={{ width: '50%' }}>
-							Email
-						</StyledTableHeadColumn>
-						<StyledTableHeadColumn>Status</StyledTableHeadColumn>
-						<StyledTableHeadColumn>Verified at</StyledTableHeadColumn>
-						<StyledTableHeadColumn />
-					</tr>
-				</thead>
-				<tbody>
-					{data.map((props) => (
-						<EmailRow key={props.id} {...props} />
-					))}
-				</tbody>
-			</StyledTable>
+			<StyledTableContainer>
+				<StyledTable>
+					<thead>
+						<tr>
+							<StyledTableHeadColumn css={{ width: '50%' }}>
+								Email
+							</StyledTableHeadColumn>
+							<StyledTableHeadColumn>Status</StyledTableHeadColumn>
+							<StyledTableHeadColumn>Verified at</StyledTableHeadColumn>
+							<StyledTableHeadColumn />
+						</tr>
+					</thead>
+					<tbody>
+						{data.map((props) => (
+							<EmailRow key={props.id} {...props} />
+						))}
+					</tbody>
+				</StyledTable>
+			</StyledTableContainer>
 		</>
 	);
 }
