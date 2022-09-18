@@ -1,5 +1,5 @@
 import { styled } from '../utils/stitches';
 
-const MarketingLayout = styled('main');
+const MarketingLayout = styled('div');
 
 export default MarketingLayout;
