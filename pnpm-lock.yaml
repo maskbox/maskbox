@@ -24,26 +24,26 @@ importers:
       '@radix-ui/react-select': ^1.0.0
       '@radix-ui/react-tooltip': ^1.0.0
       '@stitches/react': ^1.2.8
-      '@tanstack/react-query': ^4.10.1
+      '@tanstack/react-query': ^4.10.3
       '@trpc/client': ^9.27.4
       '@trpc/next': ^9.27.4
       '@trpc/react': ^9.27.4
       '@trpc/server': ^9.27.4
       '@types/cookie': ^0.5.1
-      '@types/node': ^18.8.2
+      '@types/node': ^18.8.3
       '@types/react': ^18.0.21
       '@types/react-dom': ^18.0.6
       cookie: ^0.5.0
       copy-to-clipboard: ^3.3.2
       csstype: ^3.1.1
       date-fns: ^2.29.3
-      framer-motion: ^7.5.2
+      framer-motion: ^7.5.3
       next: ^12.3.1
       prisma: ^4.4.0
       react: ^18.2.0
       react-dom: ^18.2.0
       react-error-boundary: ^3.1.4
-      react-hook-form: ^7.36.1
+      react-hook-form: ^7.37.0
       react-hot-toast: ^2.4.0
       react-loading-icons: ^1.1.0
       react-query: ^3.39.2
@@ -51,7 +51,7 @@ importers:
       typescript: ^4.8.4
       zod: ^3.19.1
     dependencies:
-      '@hookform/resolvers': 2.9.8_react-hook-form@7.36.1
+      '@hookform/resolvers': 2.9.8_react-hook-form@7.37.0
       '@ngneat/falso': 6.1.0
       '@prisma/client': 4.4.0_prisma@4.4.0
       '@radix-ui/colors': 0.1.8
@@ -63,7 +63,7 @@ importers:
       '@radix-ui/react-select': 1.0.0_rj7ozvcq3uehdlnj3cbwzbi5ce
       '@radix-ui/react-tooltip': 1.0.0_rj7ozvcq3uehdlnj3cbwzbi5ce
       '@stitches/react': 1.2.8_react@18.2.0
-      '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 9.27.4_@trpc+server@9.27.4
       '@trpc/next': 9.27.4_l2t6vv6lmp6aralgreey6zoq4a
       '@trpc/react': 9.27.4_2g6rn7sj2da6xgohvi4oglgmnq
@@ -71,12 +71,12 @@ importers:
       cookie: 0.5.0
       copy-to-clipboard: 3.3.2
       date-fns: 2.29.3
-      framer-motion: 7.5.2_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 7.5.3_biqbaboplfbrettd7655fr4n2y
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
-      react-hook-form: 7.36.1_react@18.2.0
+      react-hook-form: 7.37.0_react@18.2.0
       react-hot-toast: 2.4.0_owo25xnefcwdq3zjgtohz6dbju
       react-loading-icons: 1.1.0
       react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
@@ -84,7 +84,7 @@ importers:
       zod: 3.19.1
     devDependencies:
       '@types/cookie': 0.5.1
-      '@types/node': 18.8.2
+      '@types/node': 18.8.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
       csstype: 3.1.1
@@ -144,12 +144,12 @@ packages:
       - '@types/react'
     dev: false
 
-  /@hookform/resolvers/2.9.8_react-hook-form@7.36.1:
+  /@hookform/resolvers/2.9.8_react-hook-form@7.37.0:
     resolution: {integrity: sha512-iVVjH0USq+1TqDdGkWe2M1x7Wn5OFPgVRo7CbWFsXTqqXqCaZtZcnzJu+UhljCWbthFWxWGXKLGYUDPZ04oVvQ==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.36.1_react@18.2.0
+      react-hook-form: 7.37.0_react@18.2.0
     dev: false
 
   /@motionone/animation/10.14.0:
@@ -854,12 +854,12 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@tanstack/query-core/4.10.1:
-    resolution: {integrity: sha512-UZRYzjgQSfYhQ+cJX0CspAbzutf8p93gR1xFjQuH3OYcb/7t3WnHkdb/qC9mbqrfWXN/JAbBTJlTU/XQHc5HbA==}
+  /@tanstack/query-core/4.10.3:
+    resolution: {integrity: sha512-+ME02sUmBfx3Pjd+0XtEthK8/4rVMD2jcxvnW9DSgFONpKtpjzfRzjY4ykzpDw1QEo2eoPvl7NS8J5mNI199aA==}
     dev: false
 
-  /@tanstack/react-query/4.10.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-6GaLYAsAu/4aX6HR4krpOej9qbKWXe0X0eccikpv5hAw4CoAAPG29Pydql1nTl9cYF2zd21unVm4yApklFY0AA==}
+  /@tanstack/react-query/4.10.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-4OEJjkcsCTmG3ui7RjsVzsXerWQvInTe95CBKFyOV/GchMUlNztoFnnYmlMhX7hLUqJMhbG9l7M507V7+xU8Hw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -870,7 +870,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.10.1
+      '@tanstack/query-core': 4.10.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -932,8 +932,8 @@ packages:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: true
 
-  /@types/node/18.8.2:
-    resolution: {integrity: sha512-cRMwIgdDN43GO4xMWAfJAecYn8wV4JbsOGHNfNUIDiuYkUYAR5ec4Rj7IO2SAhFPEfpPtLtUTbbny/TCT7aDwA==}
+  /@types/node/18.8.3:
+    resolution: {integrity: sha512-0os9vz6BpGwxGe9LOhgP/ncvYN5Tx1fNcd2TM3rD/aCGBkysb+ZWpXEocG24h6ZzOi13+VB8HndAQFezsSOw1w==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -1041,8 +1041,8 @@ packages:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
     dev: false
 
-  /framer-motion/7.5.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-HKQetVN92thmbl5ALDkmdr0xcTP6JD80l6rASs2g5e92zFkWYBE7rZLy++sbCq0L6JSviusb5t0txt19K8xSwg==}
+  /framer-motion/7.5.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-VvANga9Z7bYtKMAsM/je81FwJDHfThOYywN04xVQ4OGdMVY09Bowx/q7nZd6XtytLuv6byc6GT1mYwag+SQ/nw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -1279,8 +1279,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-hook-form/7.36.1_react@18.2.0:
-    resolution: {integrity: sha512-EbYYkCG2p8ywe7ikOH2l02lAFMrrrslZi1I8fqd8ifDGNAkhomHZQzQsP6ksvzrWBKntRe8b5L5L7Zsd+Gm02Q==}
+  /react-hook-form/7.37.0_react@18.2.0:
+    resolution: {integrity: sha512-6NFTxsnw+EXSpNNvLr5nFMjPdYKRryQcelTHg7zwBB6vAzfPIcZq4AExP4heVlwdzntepQgwiOQW4z7Mr99Lsg==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
