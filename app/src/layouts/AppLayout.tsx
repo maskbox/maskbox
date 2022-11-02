@@ -6,6 +6,7 @@ import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
 const StyledAppLayout = styled('div', {
+	background: '$gray1',
 	height: '100vh',
 	display: 'flex',
 	flexDirection: 'column'

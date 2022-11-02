@@ -14,7 +14,6 @@ export const useGlobalStyles = globalCss({
 	},
 	body: {
 		fontSize: '$base',
-		background: '$gray1',
 		color: '$gray12',
 		margin: 0
 	},
@@ -22,7 +21,7 @@ export const useGlobalStyles = globalCss({
 		fontSize: 'inherit',
 		fontWeight: 'inherit'
 	},
-	'h1, h2, h3, h4, h5, h6, p, pre': {
+	'h1, h2, h3, h4, h5, h6, p, pre, hr': {
 		margin: 0
 	},
 	'button, input, select': {

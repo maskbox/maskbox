@@ -4,6 +4,7 @@ import { useSession } from '../hooks/use-session';
 import { styled } from '../utils/stitches';
 
 const StyledAuthLayout = styled('main', {
+	background: '$gray1',
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',

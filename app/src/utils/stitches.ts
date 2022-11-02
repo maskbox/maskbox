@@ -28,7 +28,8 @@ export const {
 			...grayDark,
 			...grayDarkA,
 			...greenDark,
-			...redDark
+			...redDark,
+			landing: 'hsla(0, 0%, 2%, 1)'
 		},
 		fontSizes: {
 			sm: '0.75rem',
