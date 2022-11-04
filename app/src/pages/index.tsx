@@ -61,7 +61,7 @@ const StyledHeaderTextContainer = styled('div', {
 const StyledTitle = styled('h1', {
 	maxWidth: '48rem',
 	fontSize: '3.75rem',
-	fontWeight: '$bold',
+	fontWeight: '$semibold',
 	lineHeight: '4.5rem',
 	textAlign: 'center',
 	background:

@@ -71,7 +71,7 @@ const StyledFooter = styled('footer', {
 	alignItems: 'center',
 	justifyContent: 'space-between',
 	// TODO: Remove 8rem?
-	padding: '1rem 8rem',
+	padding: '1.5rem 8rem',
 	'&::before': {
 		position: 'absolute',
 		content: '',
