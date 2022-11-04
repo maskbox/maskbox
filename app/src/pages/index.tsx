@@ -136,7 +136,8 @@ export default function Home() {
 						css={{
 							width: 156,
 							height: 156,
-							filter: 'blur(60px)'
+							filter: 'blur(60px)',
+							opacity: 0.8
 						}}
 					/>
 
