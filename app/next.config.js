@@ -3,8 +3,5 @@
  **/
 module.exports = {
 	reactStrictMode: true,
-	swcMinify: true,
-	experimental: {
-		newNextLinkBehavior: true
-	}
+	swcMinify: true
 };
