@@ -13,6 +13,7 @@ importers:
   app:
     specifiers:
       '@hookform/resolvers': ^2.9.10
+      '@next/font': ^13.0.3
       '@ngneat/falso': ^6.1.0
       '@prisma/client': ^4.6.1
       '@radix-ui/colors': ^0.1.8
@@ -52,6 +53,7 @@ importers:
       zod: ^3.19.1
     dependencies:
       '@hookform/resolvers': 2.9.10_react-hook-form@7.39.3
+      '@next/font': 13.0.3
       '@ngneat/falso': 6.1.0
       '@prisma/client': 4.6.1_prisma@4.6.1
       '@radix-ui/colors': 0.1.8
@@ -208,6 +210,10 @@ packages:
 
   /@next/env/13.0.3:
     resolution: {integrity: sha512-/4WzeG61Ot/PxsghXkSqQJ6UohFfwXoZ3dtsypmR9EBP+OIax9JRq0trq8Z/LCT9Aq4JbihVkaazRWguORjTAw==}
+    dev: false
+
+  /@next/font/13.0.3:
+    resolution: {integrity: sha512-J3bZooNyhzhRshEJZlc4Kagfx6f8LQkPdCsP0nZm63dAUaoeMaQRidFFhbL68WZ3S5XleVfpGYypZuBSyJqYtw==}
     dev: false
 
   /@next/swc-android-arm-eabi/13.0.3:

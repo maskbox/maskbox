@@ -1,3 +1,4 @@
+import { Inter } from '@next/font/google';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { withTRPC } from '@trpc/next';
@@ -21,6 +22,8 @@ interface AppPropsWithComponentLayout extends AppProps {
 // See: https://trpc.io/docs/ssr
 const TRPC_API_URL = '/api/trpc';
 
+const inter = Inter();
+
 const layouts = {
 	auth: dynamic(() => import('../layouts/AuthLayout'), { ssr: false }),
 	app: dynamic(() => import('../layouts/AppLayout'), { ssr: false }),
@@ -42,17 +45,19 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
 					<Suspense fallback={<Loading />}>
 						<MotionConfig reducedMotion="user">
-							{Component.layout === 'landing' ? (
-								<Layout>
-									<Component {...pageProps} />
-								</Layout>
-							) : (
-								<SessionProvider>
+							<div className={inter.className}>
+								{Component.layout === 'landing' ? (
 									<Layout>
 										<Component {...pageProps} />
 									</Layout>
-								</SessionProvider>
-							)}
+								) : (
+									<SessionProvider>
+										<Layout>
+											<Component {...pageProps} />
+										</Layout>
+									</SessionProvider>
+								)}
+							</div>
 						</MotionConfig>
 					</Suspense>
 				</ErrorBoundary>

@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^2.9.10",
+		"@next/font": "^13.0.3",
 		"@ngneat/falso": "^6.1.0",
 		"@prisma/client": "^4.6.1",
 		"@radix-ui/colors": "^0.1.8",
