@@ -18,7 +18,7 @@ export const emailRouter = createProtectedRouter()
 		async resolve({ ctx, input }) {
 			const emails = await prisma.email.findMany({
 				where: {
-					userId: ctx.session.userId,
+					userId: ctx.session.user.id,
 					verifiedAt: {
 						not: input.onlyVerified ? null : undefined
 					}
@@ -36,7 +36,7 @@ export const emailRouter = createProtectedRouter()
 		async resolve({ ctx, input }) {
 			const count = await prisma.email.count({
 				where: {
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 
@@ -53,7 +53,7 @@ export const emailRouter = createProtectedRouter()
 						email: input.email,
 						user: {
 							connect: {
-								id: ctx.session.userId
+								id: ctx.session.user.id
 							}
 						}
 					}
@@ -83,7 +83,7 @@ export const emailRouter = createProtectedRouter()
 			const emailToDelete = await prisma.email.findFirstOrThrow({
 				where: {
 					id: input.id,
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 

@@ -5,7 +5,7 @@ export const createRouter = () => trpc.router<Context>();
 
 export const createProtectedRouter = () =>
 	createRouter().middleware(({ ctx, next }) => {
-		if (!ctx.session || !ctx.session.userId) {
+		if (!ctx.session || !ctx.session.user?.id) {
 			throw new trpc.TRPCError({ code: 'UNAUTHORIZED' });
 		}
 
@@ -13,7 +13,7 @@ export const createProtectedRouter = () =>
 			ctx: {
 				...ctx,
 				// NOTE: Infers that `session` is non-nullable:
-				session: { userId: ctx.session.userId }
+				session: { ...ctx.session, user: ctx.session.user }
 			}
 		});
 	});
