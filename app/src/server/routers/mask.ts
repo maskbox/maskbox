@@ -31,7 +31,7 @@ export const maskRouter = createProtectedRouter()
 		async resolve({ ctx }) {
 			const masks = await prisma.mask.findMany({
 				where: {
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				},
 				include: {
 					forwardTo: true
@@ -49,7 +49,7 @@ export const maskRouter = createProtectedRouter()
 		async resolve({ ctx, input }) {
 			const count = await prisma.mask.count({
 				where: {
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 
@@ -63,7 +63,7 @@ export const maskRouter = createProtectedRouter()
 			const forwardToEmail = await prisma.email.findFirstOrThrow({
 				where: {
 					id: input.forwardTo,
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				},
 				select: {
 					id: true,
@@ -89,7 +89,7 @@ export const maskRouter = createProtectedRouter()
 					name: input.name,
 					user: {
 						connect: {
-							id: ctx.session.userId
+							id: ctx.session.user.id
 						}
 					}
 				},
@@ -109,7 +109,7 @@ export const maskRouter = createProtectedRouter()
 			const maskToDelete = await prisma.mask.findFirstOrThrow({
 				where: {
 					id: input.id,
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 

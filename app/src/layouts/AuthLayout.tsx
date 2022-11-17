@@ -1,6 +1,7 @@
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { useSession } from '../hooks/use-session';
+import { Loading } from '../components/Loading';
 import { styled } from '../utils/stitches';
 
 const StyledAuthLayout = styled('main', {
@@ -16,9 +17,13 @@ const StyledAuthLayout = styled('main', {
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	const { push } = useRouter();
-	const session = useSession();
+	const { status } = useSession();
 
-	if (session) {
+	if (status === 'loading') {
+		return <Loading />;
+	}
+
+	if (status === 'authenticated') {
 		push('/masks');
 		return null;
 	}

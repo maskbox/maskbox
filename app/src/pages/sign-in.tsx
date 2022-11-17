@@ -1,11 +1,12 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 import { Button } from '../ui/Button';
 import { Form, useZodForm } from '../ui/Form';
 import { Input } from '../ui/Form/Input';
 import { SubmitButton } from '../ui/Form/SubmitButton';
 import { emailSchema } from '../utils/schema';
 import { styled } from '../utils/stitches';
-import { trpc } from '../utils/trpc';
 
 const variants: Variants = {
 	initial: {
@@ -46,6 +47,8 @@ const StyledStrong = styled('strong', {
 });
 
 export default function SignIn() {
+	const [email, setEmail] = useState<string | undefined>(undefined);
+
 	const form = useZodForm({
 		schema: emailSchema,
 		defaultValues: {
@@ -53,18 +56,16 @@ export default function SignIn() {
 		}
 	});
 
-	const { mutateAsync, data, reset } = trpc.useMutation(['auth.challenge']);
-
 	return (
 		<AnimatePresence mode="wait" initial={false}>
 			<StyledContent
-				key={data ? 'signInSuccess' : 'signInForm'}
+				key={email ? 'signInSuccess' : 'signInForm'}
 				variants={variants}
 				initial="initial"
 				animate="animate"
 				exit="initial"
 			>
-				{data ? (
+				{email ? (
 					<>
 						<StyledHeading>Check your email</StyledHeading>
 
@@ -72,8 +73,7 @@ export default function SignIn() {
 							We've sent you a temporary sign-in link.
 						</StyledParagraph>
 						<StyledParagraph>
-							Please check your inbox at{' '}
-							<StyledStrong>{data.email}</StyledStrong>.
+							Please check your inbox at <StyledStrong>{email}</StyledStrong>.
 						</StyledParagraph>
 
 						<Button
@@ -81,7 +81,7 @@ export default function SignIn() {
 							css={{ marginTop: '1.75rem' }}
 							onClick={() => {
 								form.reset();
-								reset();
+								setEmail(undefined);
 							}}
 						>
 							Back to sign in
@@ -91,7 +91,21 @@ export default function SignIn() {
 					<>
 						<StyledHeading>Sign in to Maskbox</StyledHeading>
 
-						<Form form={form} onSubmit={(data) => mutateAsync(data)} noValidate>
+						<Form
+							form={form}
+							onSubmit={async (data) => {
+								const result = await signIn('email', {
+									email: data.email,
+									redirect: false,
+									callbackUrl: '/masks'
+								});
+
+								if (result?.ok) {
+									setEmail(data.email);
+								}
+							}}
+							noValidate
+						>
 							<Input
 								type="email"
 								name="email"
