@@ -1,11 +1,35 @@
-import { createReactQueryHooks } from '@trpc/react';
-import type { inferProcedureOutput } from '@trpc/server';
-import { AppRouter } from '../server/routers';
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
+import superjson from 'superjson';
+import type { AppRouter } from '../server/routers';
 
-type TQuery = keyof AppRouter['_def']['queries'];
+// NOTE: We don't want to use SSR, so relative URL is fine.
+// See: https://trpc.io/docs/ssr
+const TRPC_API_URL = '/api/trpc';
 
-export type InferQueryOutput<TRouteKey extends TQuery> = inferProcedureOutput<
-	AppRouter['_def']['queries'][TRouteKey]
->;
+export const trpc = createTRPCNext<AppRouter>({
+	config() {
+		return {
+			url: TRPC_API_URL,
+			transformer: superjson,
+			links: [httpBatchLink({ url: TRPC_API_URL })],
+			queryClientConfig: {
+				defaultOptions: {
+					queries: {
+						useErrorBoundary: true,
+						refetchOnWindowFocus: false,
+						retry: false
+					},
+					mutations: {
+						retry: false
+					}
+				}
+			}
+		};
+	},
+	ssr: false
+});
 
-export const trpc = createReactQueryHooks<AppRouter>();
+export type RouterInputs = inferRouterInputs<AppRouter>;
+export type RouterOutputs = inferRouterOutputs<AppRouter>;

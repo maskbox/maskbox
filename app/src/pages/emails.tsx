@@ -12,7 +12,7 @@ import {
 } from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
 import { styled } from '../utils/stitches';
-import { InferQueryOutput, trpc } from '../utils/trpc';
+import { trpc, type RouterOutputs } from '../utils/trpc';
 
 const StyledTableContainer = styled('div', {
 	overflowX: 'auto'
@@ -111,11 +111,11 @@ function EmailRow({
 	id,
 	email,
 	verifiedAt
-}: InferQueryOutput<'email.getEmails'>[0]) {
-	const { setQueryData } = trpc.useContext();
-	const { mutate } = trpc.useMutation(['email.deleteEmail'], {
+}: RouterOutputs['email']['getEmails'][0]) {
+	const context = trpc.useContext();
+	const { mutate } = trpc.email.deleteEmail.useMutation({
 		onSuccess(data) {
-			setQueryData(['email.getEmails'], (prev) =>
+			context.email.getEmails.setData(undefined, (prev) =>
 				prev!.filter(({ id }) => id !== data.id)
 			);
 			toast.success('Email address successfully deleted.');
@@ -168,7 +168,7 @@ function EmailRow({
 }
 
 export default function Emails() {
-	const { data } = trpc.useQuery(['email.getEmails']);
+	const { data } = trpc.email.getEmails.useQuery();
 
 	if (!data) {
 		return (
