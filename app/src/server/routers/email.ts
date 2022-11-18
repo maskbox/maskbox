@@ -1,21 +1,23 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { MAX_EMAILS_PER_ACCOUNT } from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
-import { createProtectedRouter } from '../create-router';
+import { protectedProcedure, router } from '../trpc';
 
-export const emailRouter = createProtectedRouter()
-	.query('getEmails', {
-		input: z
-			.object({
-				onlyVerified: z.boolean()
-			})
-			.default({
-				onlyVerified: false
-			}),
-		async resolve({ ctx, input }) {
+export const emailRouter = router({
+	getEmails: protectedProcedure
+		.input(
+			z
+				.object({
+					onlyVerified: z.boolean()
+				})
+				.default({
+					onlyVerified: false
+				})
+		)
+		.query(async ({ ctx, input }) => {
 			const emails = await prisma.email.findMany({
 				where: {
 					userId: ctx.session.user.id,
@@ -29,11 +31,10 @@ export const emailRouter = createProtectedRouter()
 			});
 
 			return emails;
-		}
-	})
-	.mutation('addEmail', {
-		input: emailSchema,
-		async resolve({ ctx, input }) {
+		}),
+	addEmail: protectedProcedure
+		.input(emailSchema)
+		.mutation(async ({ ctx, input }) => {
 			const count = await prisma.email.count({
 				where: {
 					userId: ctx.session.user.id
@@ -41,7 +42,7 @@ export const emailRouter = createProtectedRouter()
 			});
 
 			if (count >= MAX_EMAILS_PER_ACCOUNT) {
-				throw new trpc.TRPCError({
+				throw new TRPCError({
 					code: 'CONFLICT',
 					message: 'You reached the limit of maximum emails per account.'
 				});
@@ -64,7 +65,7 @@ export const emailRouter = createProtectedRouter()
 				return email;
 			} catch (e) {
 				if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
-					throw new trpc.TRPCError({
+					throw new TRPCError({
 						code: 'CONFLICT',
 						message: 'Email address is already in use.'
 					});
@@ -72,13 +73,14 @@ export const emailRouter = createProtectedRouter()
 
 				throw e;
 			}
-		}
-	})
-	.mutation('deleteEmail', {
-		input: z.object({
-			id: z.string().cuid()
 		}),
-		async resolve({ ctx, input }) {
+	deleteEmail: protectedProcedure
+		.input(
+			z.object({
+				id: z.string().cuid()
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
 			// TODO: Disable deleting the last email.
 			const emailToDelete = await prisma.email.findFirstOrThrow({
 				where: {
@@ -94,5 +96,5 @@ export const emailRouter = createProtectedRouter()
 			});
 
 			return deletedEmail;
-		}
-	});
+		})
+});

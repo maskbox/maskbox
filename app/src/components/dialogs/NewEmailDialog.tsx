@@ -18,7 +18,7 @@ import { trpc } from '../../utils/trpc';
 function NewEmailDialogContent() {
 	const { setOpen } = useDialogContext();
 
-	const { setQueryData } = trpc.useContext();
+	const context = trpc.useContext();
 
 	const form = useZodForm({
 		schema: emailSchema,
@@ -27,9 +27,9 @@ function NewEmailDialogContent() {
 		}
 	});
 
-	const { mutateAsync } = trpc.useMutation(['email.addEmail'], {
+	const { mutateAsync } = trpc.email.addEmail.useMutation({
 		onSuccess(data) {
-			setQueryData(['email.getEmails'], (prev) => {
+			context.email.getEmails.setData(undefined, (prev) => {
 				if (data) {
 					return [data, ...prev!];
 				}

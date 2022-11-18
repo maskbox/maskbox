@@ -55,7 +55,7 @@ const StyledEmptyMaskGroup = styled('div', {
 });
 
 export default function Masks() {
-	const { data } = trpc.useQuery(['mask.getMasks']);
+	const { data } = trpc.mask.getMasks.useQuery();
 
 	if (!data) {
 		return (

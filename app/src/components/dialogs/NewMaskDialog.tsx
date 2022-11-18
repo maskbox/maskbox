@@ -29,14 +29,18 @@ function capitalize(str: string) {
 function NewMaskDialogForm() {
 	const { setOpen } = useDialogContext();
 
-	const { data } = trpc.useQuery(['email.getEmails', { onlyVerified: true }], {
-		suspense: true
-	});
+	const { data } = trpc.email.getEmails.useQuery(
+		{ onlyVerified: true },
+		{
+			suspense: true,
+			trpc: {}
+		}
+	);
 
-	const { setQueryData } = trpc.useContext();
-	const { mutateAsync } = trpc.useMutation('mask.addMask', {
+	const context = trpc.useContext();
+	const { mutateAsync } = trpc.mask.addMask.useMutation({
 		onSuccess(data) {
-			setQueryData(['mask.getMasks'], (prev) => [data, ...prev!]);
+			context.mask.getMasks.setData(undefined, (prev) => [data, ...prev!]);
 			setOpen(false);
 			toast.success('Mask successfully created.');
 		}
