@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { SIGNATURE_TIMEOUT } from '../constants';
+import { SIGNATURE_TTL } from '../constants';
 
 export function verify(
 	message: string,
@@ -10,7 +10,7 @@ export function verify(
 	const signatureTimestamp = Number(timestamp);
 	const difference = Math.abs(Date.now() - signatureTimestamp);
 
-	if (difference > SIGNATURE_TIMEOUT) {
+	if (difference > SIGNATURE_TTL) {
 		return false;
 	}
 

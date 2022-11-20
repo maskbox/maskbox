@@ -35,7 +35,6 @@ importers:
       '@types/react-dom': ^18.0.8
       copy-to-clipboard: ^3.3.2
       csstype: ^3.1.1
-      date-fns: ^2.29.3
       framer-motion: ^7.6.6
       next: ^13.0.3
       next-auth: ^4.16.4
@@ -71,7 +70,6 @@ importers:
       '@trpc/react-query': 10.0.0-rc.8_sw4dc6wiwp3kn62lgqoi2gfpoq
       '@trpc/server': 10.0.0-rc.8
       copy-to-clipboard: 3.3.2
-      date-fns: 2.29.3
       framer-motion: 7.6.6_biqbaboplfbrettd7655fr4n2y
       next: 13.0.3_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.16.4_5nc2srutphl3qcpcgvoruejrga
@@ -1024,11 +1022,6 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-
-  /date-fns/2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
-    dev: false
 
   /detect-node-es/1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}

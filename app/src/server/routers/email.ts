@@ -1,7 +1,11 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { TRPCError } from '@trpc/server';
+import crypto from 'crypto';
 import { z } from 'zod';
-import { MAX_EMAILS_PER_ACCOUNT } from '../../constants';
+import {
+	EMAIL_VERIFICATION_TOKEN_TTL,
+	MAX_EMAILS_PER_ACCOUNT
+} from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
 import { protectedProcedure, router } from '../trpc';
@@ -48,6 +52,8 @@ export const emailRouter = router({
 				});
 			}
 
+			const token = crypto.randomBytes(32).toString('hex');
+
 			try {
 				const email = await prisma.email.create({
 					data: {
@@ -56,11 +62,18 @@ export const emailRouter = router({
 							connect: {
 								id: ctx.session.user.id
 							}
+						},
+						emailVerificationToken: {
+							create: {
+								token,
+								expires: new Date(Date.now() + EMAIL_VERIFICATION_TOKEN_TTL)
+							}
 						}
 					}
 				});
 
 				// TODO: Send a verification email.
+				console.log(`http://localhost:3000/api/verify/${token}`);
 
 				return email;
 			} catch (e) {

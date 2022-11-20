@@ -28,7 +28,6 @@
 		"@trpc/react-query": "^v10.0.0-rc.8",
 		"@trpc/server": "^v10.0.0-rc.8",
 		"copy-to-clipboard": "^3.3.2",
-		"date-fns": "^2.29.3",
 		"framer-motion": "^7.6.6",
 		"next": "^13.0.3",
 		"next-auth": "^4.16.4",

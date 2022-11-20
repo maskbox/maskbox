@@ -59,14 +59,24 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model EmailVerificationToken {
+  token   String   @unique
+  expires DateTime
+  email   Email    @relation(fields: [emailId], references: [id], onDelete: Cascade)
+  emailId String
+
+  @@index([emailId])
+}
+
 model Email {
-  id         String    @id @default(cuid())
-  email      String    @unique
-  verifiedAt DateTime?
-  createdAt  DateTime  @default(now())
-  masks      Mask[]
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
+  id                     String                   @id @default(cuid())
+  email                  String                   @unique
+  verifiedAt             DateTime?
+  createdAt              DateTime                 @default(now())
+  masks                  Mask[]
+  user                   User                     @relation(fields: [userId], references: [id])
+  userId                 String
+  emailVerificationToken EmailVerificationToken[]
 }
 
 model Mask {
