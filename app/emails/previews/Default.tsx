@@ -16,3 +16,19 @@ export function MagicLink() {
 		/>
 	);
 }
+
+export function EmailVerification() {
+	return (
+		<Default
+			title="Email address verification"
+			body={
+				<>
+					Please click the button below to verify your newly added email address{' '}
+					<strong>john.doe@domain.com</strong>.
+				</>
+			}
+			buttonText="Verify email address"
+			buttonHref="#"
+		/>
+	);
+}
