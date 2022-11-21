@@ -5,6 +5,7 @@ bin
 .mailing
 .DS_Store
 
+.env
 .env*.local
 .pnpm-debug.log*
 *.tsbuildinfo
