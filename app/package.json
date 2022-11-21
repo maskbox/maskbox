@@ -10,6 +10,7 @@
 		"mailing": "mailing"
 	},
 	"dependencies": {
+		"@aws-sdk/client-ses": "^3.215.0",
 		"@hookform/resolvers": "^2.9.10",
 		"@next-auth/prisma-adapter": "^1.0.5",
 		"@ngneat/falso": "^6.1.0",
@@ -28,6 +29,8 @@
 		"@trpc/next": "^v10.0.0-rc.8",
 		"@trpc/react-query": "^v10.0.0-rc.8",
 		"@trpc/server": "^v10.0.0-rc.8",
+		"aws-crt": "^1.14.7",
+		"aws-sdk": "^2.1259.0",
 		"copy-to-clipboard": "^3.3.2",
 		"framer-motion": "^7.6.6",
 		"mailing-core": "^0.8.19",

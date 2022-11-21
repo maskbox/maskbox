@@ -1,21 +1,22 @@
 import nodemailer from 'nodemailer';
+import * as aws from '@aws-sdk/client-ses';
 import { buildSendMail } from 'mailing-core';
 
-// TODO: SES transporter
+const ses = new aws.SES({
+	credentials: {
+		accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string
+	},
+	region: 'us-east-1'
+});
+
 const transport = nodemailer.createTransport({
-	pool: true,
-	host: 'smtp.example.com',
-	port: 465,
-	secure: true, // use TLS
-	auth: {
-		user: 'username',
-		pass: 'password'
-	}
+	SES: { ses, aws }
 });
 
 const sendMail = buildSendMail({
 	transport,
-	defaultFrom: 'replace@me.with.your.com',
+	defaultFrom: 'verification@relay.laniakea.host',
 	configPath: './mailing.config.json'
 });
 
