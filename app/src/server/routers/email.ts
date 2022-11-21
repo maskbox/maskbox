@@ -3,7 +3,7 @@ import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
 import { z } from 'zod';
 import {
-	EMAIL_VERIFICATION_TOKEN_TTL,
+	EMAIL_VERIFICATION_MAX_AGE,
 	MAX_EMAILS_PER_ACCOUNT
 } from '../../constants';
 import { prisma } from '../../utils/prisma';
@@ -66,7 +66,7 @@ export const emailRouter = router({
 						emailVerificationToken: {
 							create: {
 								token,
-								expires: new Date(Date.now() + EMAIL_VERIFICATION_TOKEN_TTL)
+								expires: new Date(Date.now() + EMAIL_VERIFICATION_MAX_AGE)
 							}
 						}
 					}

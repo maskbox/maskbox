@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { SIGNATURE_TTL } from '../constants';
+import { SIGNATURE_MAX_AGE } from '../constants';
 
 export function verify(
 	message: string,
@@ -10,7 +10,7 @@ export function verify(
 	const signatureTimestamp = Number(timestamp);
 	const difference = Math.abs(Date.now() - signatureTimestamp);
 
-	if (difference > SIGNATURE_TTL) {
+	if (difference > SIGNATURE_MAX_AGE) {
 		return false;
 	}
 

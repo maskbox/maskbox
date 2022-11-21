@@ -1,11 +1,13 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
+import { SIGN_IN_CODE_MAX_AGE } from '../../../constants';
 import { prisma } from '../../../utils/prisma';
 
 export const authOptions: NextAuthOptions = {
 	providers: [
 		EmailProvider({
+			maxAge: SIGN_IN_CODE_MAX_AGE,
 			// TODO:
 			sendVerificationRequest({ url }) {
 				console.log(url);
