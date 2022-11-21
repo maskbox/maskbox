@@ -1,0 +1,31 @@
+service: mailer
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: go1.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 's3:GetObject'
+            - 's3:PutObject'
+            - 's3:DeleteObject'
+          Resource:
+            - '*'
+        - Effect: Allow
+          Action:
+            - 'ses:SendRawEmail'
+          Resource:
+            - '*'
+
+package:
+  patterns:
+    - '!./**'
+    - ./bin/**
+
+functions:
+  receive:
+    handler: bin/receive
