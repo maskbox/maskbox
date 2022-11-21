@@ -2,6 +2,7 @@ node_modules
 dist
 bin
 .next
+.mailing
 .DS_Store
 
 .env*.local
