@@ -2,6 +2,8 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
 import { z } from 'zod';
+import sendMail from '../../../emails';
+import Default from '../../../emails/Default';
 import {
 	EMAIL_VERIFICATION_MAX_AGE,
 	MAX_EMAILS_PER_ACCOUNT
@@ -72,8 +74,23 @@ export const emailRouter = router({
 					}
 				});
 
-				// TODO: Send a verification email.
-				console.log(`http://localhost:3000/api/verify/${token}`);
+				sendMail({
+					to: email.email,
+					subject: 'Email address verification',
+					component: (
+						<Default
+							title="Email address verification"
+							body={
+								<>
+									Please click the button below to verify your newly added email
+									address <strong>{email.email}</strong>.
+								</>
+							}
+							buttonText="Verify email address"
+							buttonHref={`${process.env.NEXTAUTH_URL}/api/verify/${token}`}
+						/>
+					)
+				});
 
 				return email;
 			} catch (e) {
