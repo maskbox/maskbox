@@ -1,7 +1,13 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { TRPCError } from '@trpc/server';
+import crypto from 'crypto';
 import { z } from 'zod';
-import { MAX_EMAILS_PER_ACCOUNT } from '../../constants';
+import sendMail from '../../../emails';
+import Default from '../../../emails/Default';
+import {
+	EMAIL_VERIFICATION_MAX_AGE,
+	MAX_EMAILS_PER_ACCOUNT
+} from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
 import { protectedProcedure, router } from '../trpc';
@@ -48,6 +54,8 @@ export const emailRouter = router({
 				});
 			}
 
+			const token = crypto.randomBytes(32).toString('hex');
+
 			try {
 				const email = await prisma.email.create({
 					data: {
@@ -56,11 +64,33 @@ export const emailRouter = router({
 							connect: {
 								id: ctx.session.user.id
 							}
+						},
+						emailVerificationToken: {
+							create: {
+								token,
+								expires: new Date(Date.now() + EMAIL_VERIFICATION_MAX_AGE)
+							}
 						}
 					}
 				});
 
-				// TODO: Send a verification email.
+				sendMail({
+					to: email.email,
+					subject: 'Email address verification',
+					component: (
+						<Default
+							title="Email address verification"
+							body={
+								<>
+									Please click the button below to verify your newly added email
+									address <strong>{email.email}</strong>.
+								</>
+							}
+							buttonText="Verify email address"
+							buttonHref={`${process.env.NEXTAUTH_URL}/api/verify/${token}`}
+						/>
+					)
+				});
 
 				return email;
 			} catch (e) {
