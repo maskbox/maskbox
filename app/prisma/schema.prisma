@@ -1,14 +1,13 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   // NOTE: We need to emulate referential integrity in the Prisma client because
   // PlanetScale does not allow the use of foreign key constraints.
-  referentialIntegrity = "prisma"
+  relationMode = "prisma"
 }
 
 model Account {
@@ -27,6 +26,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -77,6 +77,8 @@ model Email {
   user                   User                     @relation(fields: [userId], references: [id])
   userId                 String
   emailVerificationToken EmailVerificationToken[]
+
+  @@index([userId])
 }
 
 model Mask {
