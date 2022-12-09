@@ -29,3 +29,6 @@ package:
 functions:
   receive:
     handler: bin/receive
+    environment:
+      API_URL: https://tunnel.laniakea.host/api/internal/exchange
+      SIGNATURE_SECRET_KEY: secret@key123
