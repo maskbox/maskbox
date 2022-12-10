@@ -1,4 +1,5 @@
 import { TrashIcon } from '@radix-ui/react-icons';
+import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
 import { PageHeading, PageHeadingSkeleton } from '../components/PageHeading';
@@ -110,8 +111,9 @@ const StyledSkeletonTableBodyColumn = styled('div', {
 function EmailRow({
 	id,
 	email,
-	verifiedAt
-}: RouterOutputs['email']['getEmails'][0]) {
+	verifiedAt,
+	primary
+}: RouterOutputs['email']['getEmails'][0] & { primary: boolean }) {
 	const context = trpc.useContext();
 	const { mutate } = trpc.email.deleteEmail.useMutation({
 		onSuccess(data) {
@@ -139,35 +141,40 @@ function EmailRow({
 			</StyledTableBodyColumn>
 
 			<StyledTableBodyColumn css={{ textAlign: 'right' }}>
-				<AlertDialog>
-					<IconButton
-						variant="danger"
-						label="Delete"
-						tooltipSide="left"
-						as={AlertDialogTrigger}
-					>
-						<TrashIcon />
-					</IconButton>
+				{!primary && (
+					<AlertDialog>
+						<IconButton
+							variant="danger"
+							label="Delete"
+							tooltipSide="left"
+							as={AlertDialogTrigger}
+							disabled={primary}
+						>
+							<TrashIcon />
+						</IconButton>
 
-					<AlertDialogContent
-						title="Delete email"
-						description={
-							<>
-								This action cannot be undone. This will permanently delete your
-								email <StyledEmailHighlight>{email}</StyledEmailHighlight> and
-								all masks assigned to it.
-							</>
-						}
-						actionLabel="Delete"
-						onAction={() => mutate({ id })}
-					/>
-				</AlertDialog>
+						<AlertDialogContent
+							title="Delete email"
+							description={
+								<>
+									This action cannot be undone. This will permanently delete
+									your email{' '}
+									<StyledEmailHighlight>{email}</StyledEmailHighlight> and all
+									masks assigned to it.
+								</>
+							}
+							actionLabel="Delete"
+							onAction={() => mutate({ id })}
+						/>
+					</AlertDialog>
+				)}
 			</StyledTableBodyColumn>
 		</tr>
 	);
 }
 
 export default function Emails() {
+	const { data: session } = useSession();
 	const { data } = trpc.email.getEmails.useQuery();
 
 	if (!data) {
@@ -289,7 +296,11 @@ export default function Emails() {
 					</thead>
 					<tbody>
 						{data.map((props) => (
-							<EmailRow key={props.id} {...props} />
+							<EmailRow
+								key={props.id}
+								primary={props.email === session?.user?.email}
+								{...props}
+							/>
 						))}
 					</tbody>
 				</StyledTable>

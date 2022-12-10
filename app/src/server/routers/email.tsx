@@ -111,13 +111,24 @@ export const emailRouter = router({
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
-			// TODO: Disable deleting the last email.
-			const emailToDelete = await prisma.email.findFirstOrThrow({
+			const emailToDelete = await prisma.email.findFirst({
 				where: {
 					id: input.id,
-					userId: ctx.session.user.id
+					userId: ctx.session.user.id,
+					NOT: {
+						email: {
+							equals: ctx.session.user.email
+						}
+					}
 				}
 			});
+
+			if (!emailToDelete) {
+				throw new TRPCError({
+					code: 'CONFLICT',
+					message: 'Primary email cannot be removed.'
+				});
+			}
 
 			const deletedEmail = await prisma.email.delete({
 				where: {
