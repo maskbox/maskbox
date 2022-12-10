@@ -1,8 +1,21 @@
 node_modules
 dist
+bin
 .next
+.mailing
 .DS_Store
 
 .env
+.env*.local
 .pnpm-debug.log*
 *.tsbuildinfo
+
+.serverless
+
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.out

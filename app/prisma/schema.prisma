@@ -1,53 +1,84 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   // NOTE: We need to emulate referential integrity in the Prisma client because
   // PlanetScale does not allow the use of foreign key constraints.
-  referentialIntegrity = "prisma"
+  relationMode = "prisma"
 }
 
-model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  sessions  Session[]
-  emails    Email[]
-  masks     Mask[]
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? // @db.Text
+  access_token      String? // @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? // @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
-model AuthenticationCode {
-  code      String   @default(cuid())
-  email     String
-  expiresAt DateTime
-
-  @@unique([code, email])
-}
-
-// TODO: Add session expiration:
 model Session {
-  id        String   @id @default(cuid())
-  token     String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  emails        Email[]
+  masks         Mask[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model EmailVerificationToken {
+  token   String   @unique
+  expires DateTime
+  email   Email    @relation(fields: [emailId], references: [id], onDelete: Cascade)
+  emailId String
+
+  @@index([emailId])
+}
+
 model Email {
-  id         String    @id @default(cuid())
-  email      String    @unique
-  verifiedAt DateTime?
-  createdAt  DateTime  @default(now())
-  masks      Mask[]
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
+  id                     String                   @id @default(cuid())
+  email                  String                   @unique
+  verifiedAt             DateTime?
+  createdAt              DateTime                 @default(now())
+  masks                  Mask[]
+  user                   User                     @relation(fields: [userId], references: [id])
+  userId                 String
+  emailVerificationToken EmailVerificationToken[]
+
+  @@index([userId])
 }
 
 model Mask {

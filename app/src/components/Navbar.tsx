@@ -1,12 +1,11 @@
+import { signOut, useSession } from 'next-auth/react';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { useSession } from '../hooks/use-session';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '../ui/DropdownMenu';
 import { styled } from '../utils/stitches';
@@ -98,7 +97,7 @@ function NavbarTab(props: LinkProps & { children: ReactNode }) {
 }
 
 export function Navbar() {
-	const session = useSession();
+	const { data } = useSession();
 
 	return (
 		<StyledNavbar>
@@ -112,14 +111,15 @@ export function Navbar() {
 					<DropdownMenu>
 						<NavbarUserAvatar>
 							<NavbarUserAvatarText>
-								{session?.email.slice(0, 2).toUpperCase()}
+								{data?.user?.email.slice(0, 2).toUpperCase()}
 							</NavbarUserAvatarText>
 						</NavbarUserAvatar>
 
 						<DropdownMenuContent>
-							<DropdownMenuItem>Settings</DropdownMenuItem>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem css={{ color: '$red11' }}>
+							<DropdownMenuItem
+								css={{ color: '$red11' }}
+								onClick={() => signOut()}
+							>
 								Sign out
 							</DropdownMenuItem>
 						</DropdownMenuContent>

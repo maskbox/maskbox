@@ -1,26 +1,18 @@
 import { Inter } from '@next/font/google';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
-import { withTRPC } from '@trpc/next';
 import { MotionConfig } from 'framer-motion';
 import { NextComponentType } from 'next';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import superjson from 'superjson';
 import { ErrorFallback } from '../components/ErrorFallback';
-import { Loading } from '../components/Loading';
 import { useGlobalStyles } from '../hooks/use-global-styles';
-import type { AppRouter } from '../server/routers';
+import { trpc } from '../utils/trpc';
 
 interface AppPropsWithComponentLayout extends AppProps {
 	Component: NextComponentType & { layout: keyof typeof layouts };
 }
-
-// NOTE: We don't want to use SSR, so relative URL is fine.
-// See: https://trpc.io/docs/ssr
-const TRPC_API_URL = '/api/trpc';
 
 const inter = Inter();
 
@@ -30,11 +22,10 @@ const layouts = {
 	landing: dynamic(() => import('../layouts/LandingLayout'))
 };
 
-const SessionProvider = dynamic(() => import('../hooks/use-session'), {
-	ssr: false
-});
-
-function App({ Component, pageProps }: AppPropsWithComponentLayout) {
+function App({
+	Component,
+	pageProps: { session, ...pageProps }
+}: AppPropsWithComponentLayout) {
 	useGlobalStyles();
 
 	const Layout = layouts[Component.layout || 'app'];
@@ -43,48 +34,19 @@ function App({ Component, pageProps }: AppPropsWithComponentLayout) {
 		<QueryErrorResetBoundary>
 			{({ reset }) => (
 				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
-					<Suspense fallback={<Loading />}>
-						<MotionConfig reducedMotion="user">
+					<MotionConfig reducedMotion="user">
+						<SessionProvider session={session}>
 							<div className={inter.className}>
-								{Component.layout === 'landing' ? (
-									<Layout>
-										<Component {...pageProps} />
-									</Layout>
-								) : (
-									<SessionProvider>
-										<Layout>
-											<Component {...pageProps} />
-										</Layout>
-									</SessionProvider>
-								)}
+								<Layout>
+									<Component {...pageProps} />
+								</Layout>
 							</div>
-						</MotionConfig>
-					</Suspense>
+						</SessionProvider>
+					</MotionConfig>
 				</ErrorBoundary>
 			)}
 		</QueryErrorResetBoundary>
 	);
 }
 
-export default withTRPC<AppRouter>({
-	config() {
-		return {
-			url: TRPC_API_URL,
-			transformer: superjson,
-			links: [httpBatchLink({ url: TRPC_API_URL })],
-			queryClientConfig: {
-				defaultOptions: {
-					queries: {
-						useErrorBoundary: true,
-						refetchOnWindowFocus: false,
-						retry: false
-					},
-					mutations: {
-						retry: false
-					}
-				}
-			}
-		};
-	},
-	ssr: false
-})(App);
+export default trpc.withTRPC(App);

@@ -1,10 +1,10 @@
 import { randAlphaNumeric, randFirstName, randLastName } from '@ngneat/falso';
-import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { MAX_MASKS_PER_ACCOUNT } from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { ALGORITHMS, maskSchema } from '../../utils/schema';
-import { createProtectedRouter } from '../create-router';
+import { protectedProcedure, router } from '../trpc';
 
 function generateIdentifier(algorithm: typeof ALGORITHMS[number]) {
 	let identifier;
@@ -26,35 +26,33 @@ function generateIdentifier(algorithm: typeof ALGORITHMS[number]) {
 	return identifier;
 }
 
-export const maskRouter = createProtectedRouter()
-	.query('getMasks', {
-		async resolve({ ctx }) {
-			const masks = await prisma.mask.findMany({
-				where: {
-					userId: ctx.session.userId
-				},
-				include: {
-					forwardTo: true
-				},
-				orderBy: {
-					createdAt: 'desc'
-				}
-			});
+export const maskRouter = router({
+	getMasks: protectedProcedure.query(async ({ ctx }) => {
+		const masks = await prisma.mask.findMany({
+			where: {
+				userId: ctx.session.user.id
+			},
+			include: {
+				forwardTo: true
+			},
+			orderBy: {
+				createdAt: 'desc'
+			}
+		});
 
-			return masks;
-		}
-	})
-	.mutation('addMask', {
-		input: maskSchema,
-		async resolve({ ctx, input }) {
+		return masks;
+	}),
+	addMask: protectedProcedure
+		.input(maskSchema)
+		.mutation(async ({ ctx, input }) => {
 			const count = await prisma.mask.count({
 				where: {
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 
 			if (count >= MAX_MASKS_PER_ACCOUNT) {
-				throw new trpc.TRPCError({
+				throw new TRPCError({
 					code: 'CONFLICT',
 					message: 'You reached the limit of maximum masks per account.'
 				});
@@ -63,7 +61,7 @@ export const maskRouter = createProtectedRouter()
 			const forwardToEmail = await prisma.email.findFirstOrThrow({
 				where: {
 					id: input.forwardTo,
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				},
 				select: {
 					id: true,
@@ -72,7 +70,7 @@ export const maskRouter = createProtectedRouter()
 			});
 
 			if (!forwardToEmail.verifiedAt) {
-				throw new trpc.TRPCError({
+				throw new TRPCError({
 					code: 'BAD_REQUEST',
 					message: 'Email is not verified.'
 				});
@@ -89,7 +87,7 @@ export const maskRouter = createProtectedRouter()
 					name: input.name,
 					user: {
 						connect: {
-							id: ctx.session.userId
+							id: ctx.session.user.id
 						}
 					}
 				},
@@ -99,17 +97,18 @@ export const maskRouter = createProtectedRouter()
 			});
 
 			return mask;
-		}
-	})
-	.mutation('deleteMask', {
-		input: z.object({
-			id: z.string().cuid()
 		}),
-		async resolve({ ctx, input }) {
+	deleteMask: protectedProcedure
+		.input(
+			z.object({
+				id: z.string().cuid()
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
 			const maskToDelete = await prisma.mask.findFirstOrThrow({
 				where: {
 					id: input.id,
-					userId: ctx.session.userId
+					userId: ctx.session.user.id
 				}
 			});
 
@@ -120,5 +119,5 @@ export const maskRouter = createProtectedRouter()
 			});
 
 			return deletedMask;
-		}
-	});
+		})
+});

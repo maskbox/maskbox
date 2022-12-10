@@ -16,7 +16,7 @@ import {
 } from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
 import { keyframes, styled } from '../utils/stitches';
-import { InferQueryOutput, trpc } from '../utils/trpc';
+import { trpc, type RouterOutputs } from '../utils/trpc';
 
 const COPY_TIMEOUT = 1000;
 
@@ -124,16 +124,16 @@ export default function Mask({
 	name,
 	forwardTo,
 	createdAt
-}: InferQueryOutput<'mask.getMasks'>[0]) {
+}: RouterOutputs['mask']['getMasks'][0]) {
 	const [open, setOpen] = useState(false);
 	const [copied, setCopied] = useState(false);
 
 	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	const { setQueryData } = trpc.useContext();
-	const { mutate } = trpc.useMutation(['mask.deleteMask'], {
+	const context = trpc.useContext();
+	const { mutate } = trpc.mask.deleteMask.useMutation({
 		onSuccess(data) {
-			setQueryData(['mask.getMasks'], (prev) =>
+			context.mask.getMasks.setData(undefined, (prev) =>
 				prev!.filter(({ id }) => id !== data.id)
 			);
 			toast.success('Mask successfully deleted.');

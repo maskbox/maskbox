@@ -19,6 +19,6 @@
 		"allowJs": false,
 		"composite": false
 	},
-	"include": ["src", "next-env.d.ts"],
+	"include": ["src", "emails", "next-env.d.ts"],
 	"exclude": ["node_modules"]
 }
