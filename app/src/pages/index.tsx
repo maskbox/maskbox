@@ -1,5 +1,13 @@
+import { StackIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 import { styled } from '../utils/stitches';
+
+interface FeatureCardProps {
+	title: string;
+	description: string;
+	icon: ReactNode;
+}
 
 const StyledTopShadow = styled('div', {
 	position: 'absolute',
@@ -93,6 +101,125 @@ const StyledStartNowButton = styled(Link, {
 		'inset 0 1px 0 0 $colors$grayA6, inset 0px 0px 0px 1px $colors$grayA2, 0 5px 30px -5px $colors$blackA7'
 });
 
+const StyledFeaturesSection = styled('div', {
+	position: 'relative',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	justifyContent: 'center',
+	overflow: 'hidden',
+	'&::before': {
+		content: '',
+		position: 'absolute',
+		top: 0,
+		left: 'calc(50% - 1100px/2)',
+		width: 1100,
+		height: 1,
+		background:
+			'linear-gradient(90deg, rgba(234, 234, 234, 0) 0.01%, rgba(234, 234, 234, 0.3) 48.44%, rgba(234, 234, 234, 0) 99.99%)',
+		opacity: 0.6
+	},
+	zIndex: 40
+});
+
+const StyledFeaturesGradient = styled('div', {
+	position: 'absolute',
+	top: -35,
+	width: 800,
+	height: 280,
+	borderRadius: 9999,
+	background:
+		'linear-gradient(88.93deg, #EAEAEA 0.76%, #FF27DD 14.6%, #1C94FF 87.89%, #0A0A0A 99.17%)',
+	opacity: 0.3,
+	filter: 'blur(150px)',
+	zIndex: -1
+});
+
+const StyledFeaturesTitle = styled('h2', {
+	marginTop: '5rem',
+	maxWidth: '26rem',
+	fontSize: '2.25rem',
+	fontWeight: '$semibold',
+	lineHeight: '3rem',
+	textAlign: 'center'
+});
+
+const StyledFeaturesDescription = styled('p', {
+	maxWidth: '24rem',
+	marginTop: '1.125rem',
+	fontSize: '1.125rem',
+	lineHeight: '1.5rem',
+	textAlign: 'center',
+	color: '$gray11'
+});
+
+const StyledFeaturesGrid = styled('div', {
+	margin: '6rem 0',
+	display: 'flex',
+	alignItems: 'center',
+	gap: '0.625rem'
+});
+
+const StyledFeatureCard = styled('div', {
+	position: 'relative',
+	maxWidth: '18.75rem',
+	padding: '1.5rem',
+	background:
+		'linear-gradient(180deg, rgba(234, 234, 234, 0.024) 0%, rgba(234, 234, 234, 0) 73.44%), rgba(11, 11, 11, 0.4)',
+	borderRadius: '0.75rem',
+	boxShadow: '0px 8px 12px rgba(0, 0, 0, 0.3), 0px 2px 16px rgba(0, 0, 0, 0.5)',
+	overflow: 'hidden',
+	'&::before': {
+		content: '',
+		position: 'absolute',
+		width: '100%',
+		height: 1,
+		inset: 0,
+		background:
+			'linear-gradient(90deg, rgba(188, 146, 238, 0) 7.81%, rgba(188, 146, 238, 0.3) 25.52%, #BC92EE 57.81%, #BC92EE 70.31%, rgba(188, 146, 238, 0) 100%)',
+		opacity: 0.15
+	}
+});
+
+const StyledFeatureIcon = styled('div', {
+	width: 48,
+	height: 48,
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	background: 'rgba(23, 23, 23, 0.5)',
+	borderRadius: '50%'
+});
+
+const StyledFeatureTitle = styled('p', {
+	marginTop: '1.25rem',
+	fontSize: '$lg',
+	fontWeight: '$semibold'
+});
+
+const StyledFeatureDescription = styled('p', {
+	marginTop: '0.75rem',
+	fontSize: '$lg',
+	color: '$gray11'
+});
+
+const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
+	title: 'Lorem ipsum dolor',
+	description:
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sunt eius, quas asperiores nihil magnam molestiae autem.',
+	icon: <StackIcon width="30" height="30" />
+}));
+
+function FeatureCard({ title, description, icon }: FeatureCardProps) {
+	return (
+		<StyledFeatureCard>
+			<StyledFeatureIcon>{icon}</StyledFeatureIcon>
+			<StyledFeatureTitle>{title}</StyledFeatureTitle>
+			<StyledFeatureDescription>{description}</StyledFeatureDescription>
+		</StyledFeatureCard>
+	);
+}
+
 export default function Home() {
 	return (
 		<>
@@ -156,6 +283,23 @@ export default function Home() {
 					</StyledStartNowButton>
 				</StyledHeaderTextContainer>
 			</StyledHeader>
+
+			<StyledFeaturesSection>
+				<StyledFeaturesGradient />
+
+				<StyledFeaturesTitle>
+					Privacy-first and features you'll love
+				</StyledFeaturesTitle>
+				<StyledFeaturesDescription>
+					Sign up now and start enjoying the benefits.
+				</StyledFeaturesDescription>
+
+				<StyledFeaturesGrid>
+					{features.map((props, i) => (
+						<FeatureCard {...props} key={i} />
+					))}
+				</StyledFeaturesGrid>
+			</StyledFeaturesSection>
 		</>
 	);
 }
