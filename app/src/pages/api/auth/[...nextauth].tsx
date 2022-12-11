@@ -28,13 +28,13 @@ export const authOptions: NextAuthOptions = {
 							buttonText="Sign in to Maskbox"
 							buttonHref={url}
 						/>
-					)
+					),
 				});
-			}
-		})
+			},
+		}),
 	],
 	pages: {
-		signIn: '/sign-in'
+		signIn: '/sign-in',
 	},
 	adapter: PrismaAdapter(prisma),
 	callbacks: {
@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
 			}
 
 			return session;
-		}
+		},
 	},
 	events: {
 		async createUser({ user }) {
@@ -57,11 +57,11 @@ export const authOptions: NextAuthOptions = {
 				data: {
 					email: user.email,
 					verifiedAt: new Date(),
-					userId: user.id
-				}
+					userId: user.id,
+				},
 			});
-		}
-	}
+		},
+	},
 };
 
 export default NextAuth(authOptions);

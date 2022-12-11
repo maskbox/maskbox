@@ -16,7 +16,7 @@ const StyledTopShadow = styled('div', {
 	background:
 		'linear-gradient(180deg, $colors$landing 0%, hsla(0, 0%, 2%, 0) 100%)',
 	zIndex: 50,
-	top: 0
+	top: 0,
 });
 
 const StyledHeader = styled('div', {
@@ -26,7 +26,7 @@ const StyledHeader = styled('div', {
 	flexDirection: 'column',
 	alignItems: 'center',
 	gap: '8rem',
-	zIndex: 40
+	zIndex: 40,
 });
 
 const StyledHeaderLogoContainer = styled('div', {
@@ -34,7 +34,7 @@ const StyledHeaderLogoContainer = styled('div', {
 	flexDirection: 'column',
 	alignItems: 'center',
 	justifyContent: 'center',
-	zIndex: -1
+	zIndex: -1,
 });
 
 const StyledHeaderLogo = styled('div', {
@@ -44,26 +44,26 @@ const StyledHeaderLogo = styled('div', {
 	borderRadius: '50%',
 	zIndex: 40,
 	boxShadow:
-		'inset 0 1px 0 0 $colors$grayA8, inset 0px 0px 0px 1px $colors$grayA3'
+		'inset 0 1px 0 0 $colors$grayA8, inset 0px 0px 0px 1px $colors$grayA3',
 });
 
 const StyledBackgroundCircle = styled('div', {
 	position: 'absolute',
 	borderRadius: '50%',
-	opacity: 0.3
+	opacity: 0.3,
 });
 
 const StyledBackgroundGradient = styled('div', {
 	position: 'absolute',
 	background:
 		'conic-gradient(from 180deg at 50% 50%, #FF1DDB 0deg, #0087FF 360deg)',
-	borderRadius: '50%'
+	borderRadius: '50%',
 });
 
 const StyledHeaderTextContainer = styled('div', {
 	display: 'flex',
 	flexDirection: 'column',
-	alignItems: 'center'
+	alignItems: 'center',
 });
 
 const StyledTitle = styled('h1', {
@@ -78,7 +78,7 @@ const StyledTitle = styled('h1', {
 	backgroundClip: 'text',
 	textFillColor: 'transparent',
 	WebkitBackgroundClip: 'text',
-	WebkitTextFillColor: 'transparent'
+	WebkitTextFillColor: 'transparent',
 });
 
 const StyledDescription = styled('p', {
@@ -86,7 +86,7 @@ const StyledDescription = styled('p', {
 	marginTop: '1.5rem',
 	fontSize: '$xl',
 	textAlign: 'center',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 const StyledStartNowButton = styled(Link, {
@@ -98,7 +98,7 @@ const StyledStartNowButton = styled(Link, {
 		'linear-gradient(180deg, $grayA2 0%, hsla(0, 0%, 93%, 0) 50%), $grayA2',
 	borderRadius: '0.75rem',
 	boxShadow:
-		'inset 0 1px 0 0 $colors$grayA6, inset 0px 0px 0px 1px $colors$grayA2, 0 5px 30px -5px $colors$blackA7'
+		'inset 0 1px 0 0 $colors$grayA6, inset 0px 0px 0px 1px $colors$grayA2, 0 5px 30px -5px $colors$blackA7',
 });
 
 const StyledFeaturesSection = styled('div', {
@@ -117,9 +117,9 @@ const StyledFeaturesSection = styled('div', {
 		height: 1,
 		background:
 			'linear-gradient(90deg, rgba(234, 234, 234, 0) 0.01%, rgba(234, 234, 234, 0.3) 48.44%, rgba(234, 234, 234, 0) 99.99%)',
-		opacity: 0.6
+		opacity: 0.6,
 	},
-	zIndex: 40
+	zIndex: 40,
 });
 
 const StyledFeaturesGradient = styled('div', {
@@ -132,7 +132,7 @@ const StyledFeaturesGradient = styled('div', {
 		'linear-gradient(88.93deg, #EAEAEA 0.76%, #FF27DD 14.6%, #1C94FF 87.89%, #0A0A0A 99.17%)',
 	opacity: 0.3,
 	filter: 'blur(150px)',
-	zIndex: -1
+	zIndex: -1,
 });
 
 const StyledFeaturesTitle = styled('h2', {
@@ -141,7 +141,7 @@ const StyledFeaturesTitle = styled('h2', {
 	fontSize: '2.25rem',
 	fontWeight: '$semibold',
 	lineHeight: '3rem',
-	textAlign: 'center'
+	textAlign: 'center',
 });
 
 const StyledFeaturesDescription = styled('p', {
@@ -150,14 +150,14 @@ const StyledFeaturesDescription = styled('p', {
 	fontSize: '1.125rem',
 	lineHeight: '1.5rem',
 	textAlign: 'center',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 const StyledFeaturesGrid = styled('div', {
 	margin: '6rem 0',
 	display: 'flex',
 	alignItems: 'center',
-	gap: '0.625rem'
+	gap: '0.625rem',
 });
 
 const StyledFeatureCard = styled('div', {
@@ -177,8 +177,8 @@ const StyledFeatureCard = styled('div', {
 		inset: 0,
 		background:
 			'linear-gradient(90deg, rgba(188, 146, 238, 0) 7.81%, rgba(188, 146, 238, 0.3) 25.52%, #BC92EE 57.81%, #BC92EE 70.31%, rgba(188, 146, 238, 0) 100%)',
-		opacity: 0.15
-	}
+		opacity: 0.15,
+	},
 });
 
 const StyledFeatureIcon = styled('div', {
@@ -188,26 +188,26 @@ const StyledFeatureIcon = styled('div', {
 	alignItems: 'center',
 	justifyContent: 'center',
 	background: 'rgba(23, 23, 23, 0.5)',
-	borderRadius: '50%'
+	borderRadius: '50%',
 });
 
 const StyledFeatureTitle = styled('p', {
 	marginTop: '1.25rem',
 	fontSize: '$lg',
-	fontWeight: '$semibold'
+	fontWeight: '$semibold',
 });
 
 const StyledFeatureDescription = styled('p', {
 	marginTop: '0.75rem',
 	fontSize: '$lg',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
 	title: 'Lorem ipsum dolor',
 	description:
 		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sunt eius, quas asperiores nihil magnam molestiae autem.',
-	icon: <StackIcon width="30" height="30" />
+	icon: <StackIcon width="30" height="30" />,
 }));
 
 function FeatureCard({ title, description, icon }: FeatureCardProps) {
@@ -232,7 +232,7 @@ export default function Home() {
 							width: 568,
 							height: 568,
 							background: '$grayA2',
-							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA3'
+							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA3',
 						}}
 					/>
 					<StyledBackgroundCircle
@@ -240,7 +240,7 @@ export default function Home() {
 							width: 360,
 							height: 360,
 							background: '$grayA3',
-							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA4'
+							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA4',
 						}}
 					/>
 					<StyledBackgroundCircle
@@ -248,7 +248,7 @@ export default function Home() {
 							width: 218,
 							height: 218,
 							background: '$grayA4',
-							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA5'
+							boxShadow: 'inset 0px 0px 0px 1px $colors$grayA5',
 						}}
 					/>
 
@@ -256,7 +256,7 @@ export default function Home() {
 						css={{
 							width: 380,
 							height: 380,
-							filter: 'blur(300px)'
+							filter: 'blur(300px)',
 						}}
 					/>
 					<StyledBackgroundGradient
@@ -264,7 +264,7 @@ export default function Home() {
 							width: 156,
 							height: 156,
 							filter: 'blur(60px)',
-							opacity: 0.8
+							opacity: 0.8,
 						}}
 					/>
 

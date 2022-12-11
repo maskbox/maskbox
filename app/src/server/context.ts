@@ -7,7 +7,7 @@ export type Context = trpc.inferAsyncReturnType<typeof createContext>;
 
 export async function createContext({
 	req,
-	res
+	res,
 }: trpcNext.CreateNextContextOptions) {
 	const session = await unstable_getServerSession(req, res, authOptions);
 

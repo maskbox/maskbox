@@ -19,12 +19,12 @@ const inter = Inter();
 const layouts = {
 	auth: dynamic(() => import('../layouts/AuthLayout'), { ssr: false }),
 	app: dynamic(() => import('../layouts/AppLayout'), { ssr: false }),
-	landing: dynamic(() => import('../layouts/LandingLayout'))
+	landing: dynamic(() => import('../layouts/LandingLayout')),
 };
 
 function App({
 	Component,
-	pageProps: { session, ...pageProps }
+	pageProps: { session, ...pageProps },
 }: AppPropsWithComponentLayout) {
 	useGlobalStyles();
 

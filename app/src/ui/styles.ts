@@ -1,28 +1,28 @@
 import type { CSS } from '@stitches/react';
 
 export const overlayOpenAnimationProps = {
-	opacity: 1
+	opacity: 1,
 };
 
 export const overlayCloseAnimationProps = {
-	opacity: 0
+	opacity: 0,
 };
 
 export const contentOpenAnimationProps = {
 	opacity: 0,
-	transform: 'translate(-50%, -50%) scale(0.85)'
+	transform: 'translate(-50%, -50%) scale(0.85)',
 };
 
 export const contentCloseAnimationProps = {
 	opacity: 1,
-	transform: 'translate(-50%, -50%) scale(1)'
+	transform: 'translate(-50%, -50%) scale(1)',
 };
 
 export const overlayStyles: CSS = {
 	position: 'fixed',
 	inset: 0,
 	background: '$blackA11',
-	backdropFilter: 'blur(2px)'
+	backdropFilter: 'blur(2px)',
 };
 
 export const contentStyles: CSS = {
@@ -37,9 +37,9 @@ export const contentStyles: CSS = {
 	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&:focus': {
-		outline: 'none'
+		outline: 'none',
 	},
 	'@sm': {
-		width: '28rem'
-	}
+		width: '28rem',
+	},
 };

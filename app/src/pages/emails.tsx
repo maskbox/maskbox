@@ -9,21 +9,21 @@ import { Alert } from '../ui/Alert';
 import {
 	AlertDialog,
 	AlertDialogContent,
-	AlertDialogTrigger
+	AlertDialogTrigger,
 } from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
 import { styled } from '../utils/stitches';
 import { trpc, type RouterOutputs } from '../utils/trpc';
 
 const StyledTableContainer = styled('div', {
-	overflowX: 'auto'
+	overflowX: 'auto',
 });
 
 const StyledTable = styled('table', {
 	width: '100%',
 	'&>tbody>tr:not(:last-of-type) td': {
-		borderBottom: '1px solid $gray6'
-	}
+		borderBottom: '1px solid $gray6',
+	},
 });
 
 const StyledTableHeadColumn = styled('th', {
@@ -40,19 +40,19 @@ const StyledTableHeadColumn = styled('th', {
 	'&:first-child': {
 		borderLeft: '1px solid $gray6',
 		borderTopLeftRadius: '0.375rem',
-		borderBottomLeftRadius: '0.375rem'
+		borderBottomLeftRadius: '0.375rem',
 	},
 	'&:last-child': {
 		borderRight: '1px solid $gray6',
 		borderTopRightRadius: '0.375rem',
-		borderBottomRightRadius: '0.375rem'
-	}
+		borderBottomRightRadius: '0.375rem',
+	},
 });
 
 const StyledTableBodyColumn = styled('td', {
 	padding: '0.75rem 0.875rem',
 	textAlign: 'left',
-	whiteSpace: 'nowrap'
+	whiteSpace: 'nowrap',
 });
 
 const StyledStatusTag = styled('span', {
@@ -64,19 +64,19 @@ const StyledStatusTag = styled('span', {
 		variant: {
 			success: {
 				background: '$green3',
-				color: '$green9'
+				color: '$green9',
 			},
 			danger: {
 				background: '$red3',
-				color: '$red10'
-			}
-		}
-	}
+				color: '$red10',
+			},
+		},
+	},
 });
 
 const StyledEmailHighlight = styled('strong', {
 	fontWeight: '$semibold',
-	color: '$gray12'
+	color: '$gray12',
 });
 
 const StyledSkeletonTableHead = styled('div', {
@@ -84,35 +84,35 @@ const StyledSkeletonTableHead = styled('div', {
 	alignItems: 'center',
 	background: '$gray2',
 	border: '1px solid $gray6',
-	borderRadius: '0.375rem'
+	borderRadius: '0.375rem',
 });
 
 const StyledSkeletonTableHeadColumn = styled('div', {
 	padding: '0.5rem 0.875rem',
-	width: '50%'
+	width: '50%',
 });
 
 const StyledSkeletonTableRow = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
 	'&:not(:last-of-type)': {
-		borderBottom: '1px solid $gray6'
-	}
+		borderBottom: '1px solid $gray6',
+	},
 });
 
 const StyledSkeletonTableBodyColumn = styled('div', {
 	padding: '0.75rem 0.875rem',
 	width: '100%',
 	'@sm': {
-		width: '50%'
-	}
+		width: '50%',
+	},
 });
 
 function EmailRow({
 	id,
 	email,
 	verifiedAt,
-	primary
+	primary,
 }: RouterOutputs['email']['getEmails'][0] & { primary: boolean }) {
 	const context = trpc.useContext();
 	const { mutate } = trpc.email.deleteEmail.useMutation({
@@ -121,7 +121,7 @@ function EmailRow({
 				prev!.filter(({ id }) => id !== data.id)
 			);
 			toast.success('Email address successfully deleted.');
-		}
+		},
 	});
 
 	return (
@@ -192,8 +192,8 @@ export default function Emails() {
 							display: 'none',
 							'@sm': {
 								width: '16.6%',
-								display: 'block'
-							}
+								display: 'block',
+							},
 						}}
 					>
 						<Skeleton css={{ width: '3rem', height: '1rem' }} />
@@ -204,8 +204,8 @@ export default function Emails() {
 							display: 'none',
 							'@sm': {
 								width: '16.6%',
-								display: 'block'
-							}
+								display: 'block',
+							},
 						}}
 					>
 						<Skeleton css={{ width: '5rem', height: '1rem' }} />
@@ -219,8 +219,8 @@ export default function Emails() {
 								css={{
 									width: '100%',
 									'@sm': {
-										width: '12rem'
-									}
+										width: '12rem',
+									},
 								}}
 							/>
 						</StyledSkeletonTableBodyColumn>
@@ -230,8 +230,8 @@ export default function Emails() {
 								display: 'none',
 								'@sm': {
 									width: '16.6%',
-									display: 'block'
-								}
+									display: 'block',
+								},
 							}}
 						>
 							<Skeleton css={{ width: '4rem' }} />
@@ -242,8 +242,8 @@ export default function Emails() {
 								display: 'none',
 								'@sm': {
 									width: '16.6%',
-									display: 'block'
-								}
+									display: 'block',
+								},
 							}}
 						>
 							<Skeleton css={{ width: '6rem' }} />
@@ -254,8 +254,8 @@ export default function Emails() {
 								display: 'none',
 								'@sm': {
 									width: '16.6%',
-									display: 'block'
-								}
+									display: 'block',
+								},
 							}}
 						>
 							<Skeleton css={{ marginLeft: 'auto', width: '1.25rem' }} />

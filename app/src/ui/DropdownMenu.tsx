@@ -4,12 +4,12 @@ import { keyframes, styled } from '../utils/stitches';
 
 const menuOpen = keyframes({
 	'0%': { opacity: 0, scale: 0.95 },
-	'100%': { opacity: 1, scale: 1 }
+	'100%': { opacity: 1, scale: 1 },
 });
 
 const menuClose = keyframes({
 	'0%': { opacity: 1, scale: 1 },
-	'100%': { opacity: 0, scale: 0.95 }
+	'100%': { opacity: 0, scale: 0.95 },
 });
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
@@ -20,11 +20,11 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
 	boxShadow: '$border1, $base',
 	userSelect: 'none',
 	'&[data-state="open"]': {
-		animation: `${menuOpen} 150ms ease-in-out`
+		animation: `${menuOpen} 150ms ease-in-out`,
 	},
 	'&[data-state="closed"]': {
-		animation: `${menuClose} 150ms ease-in-out`
-	}
+		animation: `${menuClose} 150ms ease-in-out`,
+	},
 });
 
 export const DropdownMenu = DropdownMenuPrimitive.DropdownMenu;
@@ -33,7 +33,7 @@ export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuSeparator = styled(DropdownMenuPrimitive.Separator, {
 	margin: '0.25rem 0',
 	height: 1,
-	background: '$gray6'
+	background: '$gray6',
 });
 
 export const DropdownMenuItem = styled(DropdownMenuPrimitive.Item, {
@@ -42,8 +42,8 @@ export const DropdownMenuItem = styled(DropdownMenuPrimitive.Item, {
 	outline: 'none',
 	'&[data-highlighted]': {
 		cursor: 'pointer',
-		background: '$gray4'
-	}
+		background: '$gray4',
+	},
 });
 
 export function DropdownMenuContent({

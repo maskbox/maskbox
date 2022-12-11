@@ -3,7 +3,7 @@ import {
 	CheckIcon,
 	ChevronDownIcon,
 	CopyIcon,
-	TrashIcon
+	TrashIcon,
 } from '@radix-ui/react-icons';
 import copy from 'copy-to-clipboard';
 import { motion } from 'framer-motion';
@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 import {
 	AlertDialog,
 	AlertDialogContent,
-	AlertDialogTrigger
+	AlertDialogTrigger,
 } from '../ui/AlertDialog';
 import { IconButton } from '../ui/IconButton';
 import { keyframes, styled } from '../utils/stitches';
@@ -22,12 +22,12 @@ const COPY_TIMEOUT = 1000;
 
 const contentOpen = keyframes({
 	from: { height: 0, opacity: 0 },
-	to: { height: 'var(--radix-collapsible-content-height)', opacity: 1 }
+	to: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
 });
 
 const contentClose = keyframes({
 	from: { height: 'var(--radix-collapsible-content-height)', opacity: 1 },
-	to: { height: 0, opacity: 0 }
+	to: { height: 0, opacity: 0 },
 });
 
 const StyledRoot = styled(CollapsiblePrimitive.Root, {
@@ -37,14 +37,14 @@ const StyledRoot = styled(CollapsiblePrimitive.Root, {
 	borderRadius: '0.375rem',
 	boxShadow: '$border1',
 	'&:not(:last-of-type)': {
-		marginBottom: '0.75rem'
-	}
+		marginBottom: '0.75rem',
+	},
 });
 
 const StyledHeader = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
-	justifyContent: 'space-between'
+	justifyContent: 'space-between',
 });
 
 const StyledTrigger = styled(CollapsiblePrimitive.Trigger, {
@@ -52,31 +52,31 @@ const StyledTrigger = styled(CollapsiblePrimitive.Trigger, {
 	color: '$gray11',
 	overflow: 'hidden',
 	textOverflow: 'ellipsis',
-	whiteSpace: 'nowrap'
+	whiteSpace: 'nowrap',
 });
 
 const StyledMaskName = styled('span', {
 	marginRight: '0.25rem',
 	fontWeight: '$semibold',
-	color: '$gray12'
+	color: '$gray12',
 });
 
 const StyledButtonGroup = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
 	'&>button:not(:last-of-type)': {
-		marginRight: '0.375rem'
-	}
+		marginRight: '0.375rem',
+	},
 });
 
 const StyledContent = styled(CollapsiblePrimitive.Content, {
 	overflow: 'hidden',
 	'&[data-state="open"]': {
-		animation: `${contentOpen} 150ms ease-in-out`
+		animation: `${contentOpen} 150ms ease-in-out`,
 	},
 	'&[data-state="closed"]': {
-		animation: `${contentClose} 150ms ease-in-out`
-	}
+		animation: `${contentClose} 150ms ease-in-out`,
+	},
 });
 
 const StyledContentContainer = styled('div', {
@@ -86,21 +86,21 @@ const StyledContentContainer = styled('div', {
 	justifyContent: 'space-between',
 	'@md': {
 		flexDirection: 'row',
-		alignItems: 'end'
-	}
+		alignItems: 'end',
+	},
 });
 
 const StyledItem = styled('div', {
 	width: 'auto',
 	'@lg': {
-		width: '26rem'
+		width: '26rem',
 	},
 	'&:not(:last-of-type)': {
 		marginBottom: '0.5rem',
 		'@md': {
-			marginBottom: 0
-		}
-	}
+			marginBottom: 0,
+		},
+	},
 });
 
 const StyledItemLabel = styled('p', {
@@ -108,12 +108,12 @@ const StyledItemLabel = styled('p', {
 	fontSize: '$sm',
 	fontWeight: '$medium',
 	color: '$gray11',
-	userSelect: 'none'
+	userSelect: 'none',
 });
 
 const StyledMaskHighlight = styled('strong', {
 	fontWeight: '$semibold',
-	color: '$gray12'
+	color: '$gray12',
 });
 
 const CollapseIcon = motion(ChevronDownIcon);
@@ -123,7 +123,7 @@ export default function Mask({
 	identifier,
 	name,
 	forwardTo,
-	createdAt
+	createdAt,
 }: RouterOutputs['mask']['getMasks'][0]) {
 	const [open, setOpen] = useState(false);
 	const [copied, setCopied] = useState(false);
@@ -137,7 +137,7 @@ export default function Mask({
 				prev!.filter(({ id }) => id !== data.id)
 			);
 			toast.success('Mask successfully deleted.');
-		}
+		},
 	});
 
 	useEffect(() => {

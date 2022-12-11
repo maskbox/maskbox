@@ -12,7 +12,7 @@ import {
 	MjmlSection,
 	MjmlSpacer,
 	MjmlStyle,
-	MjmlText
+	MjmlText,
 } from 'mjml-react';
 import { ReactNode } from 'react';
 
@@ -38,7 +38,7 @@ export default function Default({
 	title,
 	body,
 	buttonText,
-	buttonHref
+	buttonHref,
 }: {
 	title: string;
 	body: ReactNode;

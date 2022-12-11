@@ -14,19 +14,19 @@ export default async function handle(
 	const emailVerificationToken =
 		await prisma.emailVerificationToken.findUniqueOrThrow({
 			where: {
-				token: token as string
+				token: token as string,
 			},
 			select: {
 				token: true,
 				expires: true,
-				emailId: true
-			}
+				emailId: true,
+			},
 		});
 
 	await prisma.emailVerificationToken.delete({
 		where: {
-			token: emailVerificationToken.token
-		}
+			token: emailVerificationToken.token,
+		},
 	});
 
 	if (emailVerificationToken.expires.getTime() < Date.now()) {
@@ -35,11 +35,11 @@ export default async function handle(
 
 	await prisma.email.update({
 		where: {
-			id: emailVerificationToken.emailId
+			id: emailVerificationToken.emailId,
 		},
 		data: {
-			verifiedAt: new Date()
-		}
+			verifiedAt: new Date(),
+		},
 	});
 
 	return res.redirect('/emails');

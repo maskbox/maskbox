@@ -4,12 +4,12 @@ import { keyframes, styled } from '../utils/stitches';
 
 const tooltipOpen = keyframes({
 	'0%': { opacity: 0, scale: 0.95 },
-	'100%': { opacity: 1, scale: 1 }
+	'100%': { opacity: 1, scale: 1 },
 });
 
 const tooltipClose = keyframes({
 	'0%': { opacity: 1, scale: 1 },
-	'100%': { opacity: 0, scale: 0.95 }
+	'100%': { opacity: 0, scale: 0.95 },
 });
 
 const StyledContent = styled(TooltipPrimitive.Content, {
@@ -20,11 +20,11 @@ const StyledContent = styled(TooltipPrimitive.Content, {
 	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&[data-state="delayed-open"]': {
-		animation: `${tooltipOpen} 150ms ease-in-out`
+		animation: `${tooltipOpen} 150ms ease-in-out`,
 	},
 	'&[data-state="closed"]': {
-		animation: `${tooltipClose} 150ms ease-in-out`
-	}
+		animation: `${tooltipClose} 150ms ease-in-out`,
+	},
 });
 
 export const TooltipTrigger = TooltipPrimitive.Trigger;

@@ -7,7 +7,7 @@ import {
 	ReactNode,
 	SetStateAction,
 	useContext,
-	useState
+	useState,
 } from 'react';
 import { styled } from '../utils/stitches';
 import { Button, ButtonProps } from './Button';
@@ -17,7 +17,7 @@ import {
 	contentStyles,
 	overlayCloseAnimationProps,
 	overlayOpenAnimationProps,
-	overlayStyles
+	overlayStyles,
 } from './styles';
 
 interface DialogContext {
@@ -27,7 +27,7 @@ interface DialogContext {
 
 const DialogContext = createContext<DialogContext>({
 	open: false,
-	setOpen: () => {}
+	setOpen: () => {},
 });
 
 const StyledOverlay = styled(motion.div, overlayStyles);
@@ -35,13 +35,13 @@ const StyledOverlay = styled(motion.div, overlayStyles);
 const StyledContent = styled(motion.div, contentStyles);
 
 const StyledHeader = styled('div', {
-	marginBottom: '1.5rem'
+	marginBottom: '1.5rem',
 });
 
 const StyledHeaderRow = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
-	justifyContent: 'space-between'
+	justifyContent: 'space-between',
 });
 
 const StyledCrossButton = styled(DialogPrimitive.Close, {
@@ -52,19 +52,19 @@ const StyledCrossButton = styled(DialogPrimitive.Close, {
 	baseTransition: 'background, color',
 	'&:hover': {
 		background: '$gray3',
-		color: '$gray12'
-	}
+		color: '$gray12',
+	},
 });
 
 const StyledTitle = styled(DialogPrimitive.Title, {
 	fontSize: '$xl',
-	fontWeight: '$semibold'
+	fontWeight: '$semibold',
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
 	marginTop: '0.25rem',
 	fontSize: '$sm',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 export const DialogButtonGroup = styled('div', {
@@ -72,8 +72,8 @@ export const DialogButtonGroup = styled('div', {
 	justifyContent: 'end',
 	marginTop: '1rem',
 	'&>*:not(:last-of-type)': {
-		marginRight: '0.5rem'
-	}
+		marginRight: '0.5rem',
+	},
 });
 
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -88,7 +88,7 @@ export const useDialogContext = () => useContext(DialogContext);
 
 export function DialogHeader({
 	title,
-	description
+	description,
 }: {
 	title: string;
 	description?: string;
@@ -118,7 +118,7 @@ export function DialogCloseButton(props: Omit<ButtonProps, 'variant'>) {
 export function Dialog({
 	dialog,
 	content,
-	children
+	children,
 }: {
 	dialog: DialogContext;
 	content: ReactNode;

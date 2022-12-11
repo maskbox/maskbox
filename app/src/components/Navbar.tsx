@@ -6,7 +6,7 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuTrigger
+	DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import { styled } from '../utils/stitches';
 
@@ -14,7 +14,7 @@ const DummyLogoIcon = styled('div', {
 	width: 32,
 	height: 32,
 	background: '$gray12',
-	borderRadius: '50%'
+	borderRadius: '50%',
 });
 
 const StyledNavbar = styled('nav', {
@@ -22,31 +22,31 @@ const StyledNavbar = styled('nav', {
 	padding: '1.5rem 1.5rem 0',
 	borderBottom: '1px solid $gray6',
 	'@xl': {
-		padding: '1.5rem 0 0'
-	}
+		padding: '1.5rem 0 0',
+	},
 });
 
 const NavbarContent = styled('div', {
 	maxWidth: '70rem',
-	margin: '0 auto'
+	margin: '0 auto',
 });
 
 const NavbarHeader = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	marginBottom: '1.5rem'
+	marginBottom: '1.5rem',
 });
 
 const NavbarLogo = styled(Link, {
 	display: 'flex',
-	alignItems: 'center'
+	alignItems: 'center',
 });
 
 const NavbarLogoText = styled('span', {
 	marginLeft: '0.75rem',
 	fontSize: '$lg',
-	fontWeight: '$medium'
+	fontWeight: '$medium',
 });
 
 const NavbarUserAvatar = styled(DropdownMenuTrigger, {
@@ -59,23 +59,23 @@ const NavbarUserAvatar = styled(DropdownMenuTrigger, {
 	overflow: 'hidden',
 	userSelect: 'none',
 	borderRadius: '50%',
-	background: '$gray5'
+	background: '$gray5',
 });
 
 const NavbarUserAvatarText = styled('span', {
 	fontSize: '$sm',
-	lineHeight: 1
+	lineHeight: 1,
 });
 
 const NavbarTabs = styled('div', {
 	display: 'flex',
 	marginLeft: '-0.75rem',
-	marginBottom: -1
+	marginBottom: -1,
 });
 
 const StyledNavbarTab = styled(Link, {
 	padding: '0.5rem 0.75rem',
-	color: '$gray12'
+	color: '$gray12',
 });
 
 function NavbarTab(props: LinkProps & { children: ReactNode }) {
@@ -88,7 +88,7 @@ function NavbarTab(props: LinkProps & { children: ReactNode }) {
 				asPath === props.href
 					? {
 							fontWeight: '$semibold',
-							borderBottom: '1px solid $gray12'
+							borderBottom: '1px solid $gray12',
 					  }
 					: undefined
 			}

@@ -19,19 +19,19 @@ const StyledEmptyContainer = styled('div', {
 	flexDirection: 'column',
 	height: '100%',
 	maxWidth: '24rem',
-	textAlign: 'center'
+	textAlign: 'center',
 });
 
 const StyledEmptyHeader = styled('h1', {
 	marginTop: '1rem',
 	fontSize: '$xl',
-	fontWeight: '$semibold'
+	fontWeight: '$semibold',
 });
 
 const StyledEmptyDescription = styled('p', {
 	marginTop: '0.375rem',
 	marginBottom: '1.5rem',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 const StyledEmptyMask = styled('div', {
@@ -44,14 +44,14 @@ const StyledEmptyMask = styled('div', {
 	borderRadius: '0.375rem',
 	boxShadow: '$border1',
 	'&:not(:last-of-type)': {
-		marginBottom: '0.75rem'
-	}
+		marginBottom: '0.75rem',
+	},
 });
 
 const StyledEmptyMaskGroup = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
-	gap: '0.25rem'
+	gap: '0.25rem',
 });
 
 export default function Masks() {
@@ -68,8 +68,8 @@ export default function Masks() {
 							css={{
 								width: '60%',
 								'@md': {
-									width: '18rem'
-								}
+									width: '18rem',
+								},
 							}}
 						/>
 

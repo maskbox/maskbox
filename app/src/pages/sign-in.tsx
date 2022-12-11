@@ -14,36 +14,36 @@ const variants: Variants = {
 		scale: 0.96,
 		transition: {
 			duration: 0.25,
-			ease: 'easeInOut'
-		}
+			ease: 'easeInOut',
+		},
 	},
 	animate: {
 		opacity: 1,
-		scale: 1
-	}
+		scale: 1,
+	},
 };
 
 const StyledContent = styled(motion.div, {
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
-	width: '21rem'
+	width: '21rem',
 });
 
 const StyledHeading = styled('h1', {
 	fontSize: '$xl',
 	fontWeight: '$semibold',
-	marginBottom: '1.25rem'
+	marginBottom: '1.25rem',
 });
 
 const StyledParagraph = styled('p', {
 	color: '$gray11',
-	wordBreak: 'break-all'
+	wordBreak: 'break-all',
 });
 
 const StyledStrong = styled('strong', {
 	fontWeight: '$semibold',
-	color: '$gray12'
+	color: '$gray12',
 });
 
 export default function SignIn() {
@@ -52,8 +52,8 @@ export default function SignIn() {
 	const form = useZodForm({
 		schema: emailSchema,
 		defaultValues: {
-			email: ''
-		}
+			email: '',
+		},
 	});
 
 	return (
@@ -97,7 +97,7 @@ export default function SignIn() {
 								const result = await signIn('email', {
 									email: data.email,
 									redirect: false,
-									callbackUrl: '/masks'
+									callbackUrl: '/masks',
 								});
 
 								if (result?.ok) {

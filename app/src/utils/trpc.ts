@@ -19,16 +19,16 @@ export const trpc = createTRPCNext<AppRouter>({
 					queries: {
 						useErrorBoundary: true,
 						refetchOnWindowFocus: false,
-						retry: false
+						retry: false,
 					},
 					mutations: {
-						retry: false
-					}
-				}
-			}
+						retry: false,
+					},
+				},
+			},
 		};
 	},
-	ssr: false
+	ssr: false,
 });
 
 export type RouterInputs = inferRouterInputs<AppRouter>;

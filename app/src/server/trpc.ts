@@ -6,7 +6,7 @@ const t = initTRPC.context<Context>().create({
 	transformer: superjson,
 	errorFormatter({ shape }) {
 		return shape;
-	}
+	},
 });
 
 const isAuthorized = t.middleware(({ ctx, next }) => {
@@ -18,8 +18,8 @@ const isAuthorized = t.middleware(({ ctx, next }) => {
 		ctx: {
 			...ctx,
 			// NOTE: Infers that `session` is non-nullable:
-			session: { ...ctx.session, user: ctx.session.user }
-		}
+			session: { ...ctx.session, user: ctx.session.user },
+		},
 	});
 });
 

@@ -10,7 +10,7 @@ const StyledAppLayout = styled('div', {
 	background: '$gray1',
 	height: '100vh',
 	display: 'flex',
-	flexDirection: 'column'
+	flexDirection: 'column',
 });
 
 const StyledAppMain = styled('main', {
@@ -19,15 +19,15 @@ const StyledAppMain = styled('main', {
 	width: '100%',
 	flex: '1 1 0%',
 	'@xl': {
-		padding: 0
-	}
+		padding: 0,
+	},
 });
 
 const StyledAppContainer = styled('div', {
 	margin: '0 auto',
 	padding: '1.5rem 0',
 	height: '100%',
-	maxWidth: '70rem'
+	maxWidth: '70rem',
 });
 
 export default function AppLayout({ children }: { children: ReactNode }) {
@@ -36,7 +36,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 		required: true,
 		onUnauthenticated() {
 			push('/sign-in');
-		}
+		},
 	});
 
 	if (status === 'loading') {

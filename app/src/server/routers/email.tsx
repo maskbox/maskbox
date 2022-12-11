@@ -6,7 +6,7 @@ import sendMail from '../../../emails';
 import Default from '../../../emails/Default';
 import {
 	EMAIL_VERIFICATION_MAX_AGE,
-	MAX_EMAILS_PER_ACCOUNT
+	MAX_EMAILS_PER_ACCOUNT,
 } from '../../constants';
 import { prisma } from '../../utils/prisma';
 import { emailSchema } from '../../utils/schema';
@@ -17,10 +17,10 @@ export const emailRouter = router({
 		.input(
 			z
 				.object({
-					onlyVerified: z.boolean()
+					onlyVerified: z.boolean(),
 				})
 				.default({
-					onlyVerified: false
+					onlyVerified: false,
 				})
 		)
 		.query(async ({ ctx, input }) => {
@@ -28,12 +28,12 @@ export const emailRouter = router({
 				where: {
 					userId: ctx.session.user.id,
 					verifiedAt: {
-						not: input.onlyVerified ? null : undefined
-					}
+						not: input.onlyVerified ? null : undefined,
+					},
 				},
 				orderBy: {
-					createdAt: 'desc'
-				}
+					createdAt: 'desc',
+				},
 			});
 
 			return emails;
@@ -43,14 +43,14 @@ export const emailRouter = router({
 		.mutation(async ({ ctx, input }) => {
 			const count = await prisma.email.count({
 				where: {
-					userId: ctx.session.user.id
-				}
+					userId: ctx.session.user.id,
+				},
 			});
 
 			if (count >= MAX_EMAILS_PER_ACCOUNT) {
 				throw new TRPCError({
 					code: 'CONFLICT',
-					message: 'You reached the limit of maximum emails per account.'
+					message: 'You reached the limit of maximum emails per account.',
 				});
 			}
 
@@ -62,16 +62,16 @@ export const emailRouter = router({
 						email: input.email,
 						user: {
 							connect: {
-								id: ctx.session.user.id
-							}
+								id: ctx.session.user.id,
+							},
 						},
 						emailVerificationToken: {
 							create: {
 								token,
-								expires: new Date(Date.now() + EMAIL_VERIFICATION_MAX_AGE)
-							}
-						}
-					}
+								expires: new Date(Date.now() + EMAIL_VERIFICATION_MAX_AGE),
+							},
+						},
+					},
 				});
 
 				sendMail({
@@ -89,7 +89,7 @@ export const emailRouter = router({
 							buttonText="Verify email address"
 							buttonHref={`${process.env.NEXTAUTH_URL}/api/verify/${token}`}
 						/>
-					)
+					),
 				});
 
 				return email;
@@ -97,7 +97,7 @@ export const emailRouter = router({
 				if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
 					throw new TRPCError({
 						code: 'CONFLICT',
-						message: 'Email address is already in use.'
+						message: 'Email address is already in use.',
 					});
 				}
 
@@ -107,7 +107,7 @@ export const emailRouter = router({
 	deleteEmail: protectedProcedure
 		.input(
 			z.object({
-				id: z.string().cuid()
+				id: z.string().cuid(),
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
@@ -117,25 +117,25 @@ export const emailRouter = router({
 					userId: ctx.session.user.id,
 					NOT: {
 						email: {
-							equals: ctx.session.user.email
-						}
-					}
-				}
+							equals: ctx.session.user.email,
+						},
+					},
+				},
 			});
 
 			if (!emailToDelete) {
 				throw new TRPCError({
 					code: 'CONFLICT',
-					message: 'Primary email cannot be removed.'
+					message: 'Primary email cannot be removed.',
 				});
 			}
 
 			const deletedEmail = await prisma.email.delete({
 				where: {
-					id: emailToDelete.id
-				}
+					id: emailToDelete.id,
+				},
 			});
 
 			return deletedEmail;
-		})
+		}),
 });

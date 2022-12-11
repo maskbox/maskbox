@@ -7,7 +7,7 @@ import {
 	DialogHeader,
 	DialogTrigger,
 	useDialog,
-	useDialogContext
+	useDialogContext,
 } from '../../ui/Dialog';
 import { Form, useZodForm } from '../../ui/Form';
 import { Input, InputSkeleton } from '../../ui/Form/Input';
@@ -19,7 +19,7 @@ import { trpc } from '../../utils/trpc';
 import { Skeleton } from '../Skeleton';
 
 const StyledSuspenseContainer = styled('div', {
-	width: '100%'
+	width: '100%',
 });
 
 function capitalize(str: string) {
@@ -33,7 +33,7 @@ function NewMaskDialogForm() {
 		{ onlyVerified: true },
 		{
 			suspense: true,
-			trpc: {}
+			trpc: {},
 		}
 	);
 
@@ -43,15 +43,15 @@ function NewMaskDialogForm() {
 			context.mask.getMasks.setData(undefined, (prev) => [data, ...prev!]);
 			setOpen(false);
 			toast.success('Mask successfully created.');
-		}
+		},
 	});
 
 	const form = useZodForm({
 		schema: maskSchema,
 		defaultValues: {
 			forwardTo: data && data[0].id,
-			algorithm: 'PERSON'
-		}
+			algorithm: 'PERSON',
+		},
 	});
 
 	return (

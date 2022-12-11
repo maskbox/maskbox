@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { styled } from '../utils/stitches';
 
 const StyledWrapper = styled('div', {
-	background: '$landing'
+	background: '$landing',
 });
 
 const StyledNavbar = styled('nav', {
@@ -15,39 +15,39 @@ const StyledNavbar = styled('nav', {
 	justifyContent: 'space-between',
 	// TODO: Remove 8rem?
 	padding: '1rem 8rem',
-	zIndex: 100
+	zIndex: 100,
 });
 
 const StyledLogo = styled(Link, {
 	display: 'flex',
-	alignItems: 'center'
+	alignItems: 'center',
 });
 
 const StyledLogoIcon = styled('div', {
 	width: 18,
 	height: 18,
 	background: '$gray12',
-	borderRadius: '50%'
+	borderRadius: '50%',
 });
 
 const StyledLogoText = styled('span', {
 	marginLeft: '0.75rem',
 	fontSize: '$lg',
-	fontWeight: '$medium'
+	fontWeight: '$medium',
 });
 
 const StyledNavbarGroup = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
-	gap: '1.5rem'
+	gap: '1.5rem',
 });
 
 const StyledSocialLink = styled(Link, {
 	color: '$grayA11',
 	baseTransition: 'color',
 	'&:hover': {
-		color: '$gray12'
-	}
+		color: '$gray12',
+	},
 });
 
 const StyledSignInButton = styled(Link, {
@@ -59,8 +59,8 @@ const StyledSignInButton = styled(Link, {
 	baseTransition: 'background, color',
 	'&:hover': {
 		background: '$grayA3',
-		color: '$gray12'
-	}
+		color: '$gray12',
+	},
 });
 
 const StyledFooter = styled('footer', {
@@ -78,18 +78,18 @@ const StyledFooter = styled('footer', {
 		inset: 0,
 		width: '100%',
 		height: 1,
-		background: 'linear-gradient(90deg, $grayA1 0%, $gray1 50%, $grayA1 100%)'
-	}
+		background: 'linear-gradient(90deg, $grayA1 0%, $gray1 50%, $grayA1 100%)',
+	},
 });
 
 const StyledCopyright = styled('p', {
-	color: '$gray11'
+	color: '$gray11',
 });
 
 const StyledFooterLinks = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
-	gap: '1rem'
+	gap: '1rem',
 });
 
 export default function LandingLayout({ children }: { children: ReactNode }) {

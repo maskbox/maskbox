@@ -1,7 +1,7 @@
 import {
 	CheckIcon,
 	ChevronDownIcon,
-	ChevronUpIcon
+	ChevronUpIcon,
 } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { CSS } from '@stitches/react';
@@ -13,13 +13,13 @@ import { AdditionalMessage } from './AdditionalMessage';
 const StyledGroup = styled('div', {
 	width: '100%',
 	display: 'flex',
-	flexDirection: 'column'
+	flexDirection: 'column',
 });
 
 const StyledLabel = styled('label', {
 	width: 'fit-content',
 	fontWeight: '$semibold',
-	marginBottom: '0.25rem'
+	marginBottom: '0.25rem',
 });
 
 const StyledTrigger = styled(SelectPrimitive.Trigger, {
@@ -30,7 +30,7 @@ const StyledTrigger = styled(SelectPrimitive.Trigger, {
 	background: '$gray3',
 	boxShadow: '$border1',
 	borderRadius: '0.375rem',
-	userSelect: 'none'
+	userSelect: 'none',
 });
 
 const StyledContent = styled(SelectPrimitive.Content, {
@@ -39,7 +39,7 @@ const StyledContent = styled(SelectPrimitive.Content, {
 	borderRadius: '0.375rem',
 	overflow: 'hidden',
 	userSelect: 'none',
-	boxShadow: '$border1, $base'
+	boxShadow: '$border1, $base',
 });
 
 const StyledItem = styled(SelectPrimitive.Item, {
@@ -51,8 +51,8 @@ const StyledItem = styled(SelectPrimitive.Item, {
 	outline: 'none',
 	'&[data-highlighted]': {
 		cursor: 'pointer',
-		background: '$gray5'
-	}
+		background: '$gray5',
+	},
 });
 
 const StyledItemIndicator = styled(SelectPrimitive.ItemIndicator, {
@@ -61,7 +61,7 @@ const StyledItemIndicator = styled(SelectPrimitive.ItemIndicator, {
 	width: '1rem',
 	display: 'inline-flex',
 	alignItems: 'center',
-	justifyContent: 'center'
+	justifyContent: 'center',
 });
 
 const scrollButtonStyles: CSS = {
@@ -70,7 +70,7 @@ const scrollButtonStyles: CSS = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	color: '$gray11',
-	cursor: 'default'
+	cursor: 'default',
 };
 
 const StyledScrollUpButton = styled(
@@ -102,7 +102,7 @@ export function Select({
 	label,
 	message,
 	css,
-	children
+	children,
 }: {
 	name: string;
 	label: string;
