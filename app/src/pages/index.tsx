@@ -176,6 +176,7 @@ const StyledTabsTrigger = styled(Tabs.Trigger, {
 	padding: '1.125rem 1.5rem',
 	borderRadius: '0.75rem',
 	textAlign: 'left',
+	baseTransition: 'background',
 	'&[data-state="active"]': {
 		background: 'hsla(0, 0%, 6%, 1)',
 	},
