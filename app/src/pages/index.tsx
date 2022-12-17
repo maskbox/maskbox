@@ -1,7 +1,12 @@
 import { StackIcon } from '@radix-ui/react-icons';
+import * as Tabs from '@radix-ui/react-tabs';
+import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { styled } from '../utils/stitches';
+import email from '../../public/email.png';
+import masks from '../../public/masks.png';
+import usage from '../../public/usage.png';
 
 interface FeatureCardProps {
 	title: string;
@@ -20,6 +25,7 @@ const StyledTopShadow = styled('div', {
 });
 
 const StyledHeader = styled('div', {
+	minHeight: '100vh',
 	position: 'relative',
 	padding: '7rem 0',
 	display: 'flex',
@@ -101,7 +107,76 @@ const StyledStartNowButton = styled(Link, {
 		'inset 0 1px 0 0 $colors$grayA6, inset 0px 0px 0px 1px $colors$grayA2, 0 5px 30px -5px $colors$blackA7',
 });
 
+const StyledHowItWorksSection = styled('div', {
+	marginBottom: '15rem',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	justifyContent: 'center',
+});
+
+const StyledTabsRoot = styled(Tabs.Root, {
+	maxWidth: '82.5rem',
+	marginTop: '6rem',
+	display: 'grid',
+	gridTemplateColumns: '1fr 1.5fr',
+	alignItems: 'center',
+	gap: '5rem',
+	zIndex: 40,
+});
+
+const StyledTabsList = styled(Tabs.List, {
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'start',
+	gap: '2.5rem',
+});
+
+const StyledTabsTrigger = styled(Tabs.Trigger, {
+	padding: '1.125rem 1.5rem',
+	borderRadius: '0.75rem',
+	textAlign: 'left',
+	'&[data-state="active"]': {
+		background: 'hsla(0, 0%, 6%, 1)',
+	},
+});
+
+const StyledTabsContent = styled(Tabs.Content, {
+	position: 'relative',
+	aspectRatio: '1210/840',
+	'&:focus': {
+		outline: 'none',
+	},
+	'&::before': {
+		content: '',
+		position: 'absolute',
+		top: '25%',
+		left: '5%',
+		width: '90%',
+		height: '50%',
+		background:
+			'linear-gradient(1.07deg, #EAEAEA 0.92%, #FF27DD 14.72%, #1C94FF 87.83%, #0A0A0A 99.08%)',
+		aspectRatio: '1210/840',
+		opacity: 0.4,
+		filter: 'blur(150px)',
+		borderRadius: 9999,
+		zIndex: -1,
+	},
+});
+
+const StyledTabTitle = styled('p', {
+	fontSize: '$xl',
+	fontWeight: '$semibold',
+});
+
+const StyledTabDescription = styled('p', {
+	marginTop: '0.75rem',
+	fontSize: '$lg',
+	color: '$gray11',
+});
+
 const StyledFeaturesSection = styled('div', {
+	marginBottom: '15rem',
 	position: 'relative',
 	display: 'flex',
 	flexDirection: 'column',
@@ -136,7 +211,6 @@ const StyledFeaturesGradient = styled('div', {
 });
 
 const StyledFeaturesTitle = styled('h2', {
-	marginTop: '5rem',
 	maxWidth: '26rem',
 	fontSize: '2.25rem',
 	fontWeight: '$semibold',
@@ -154,7 +228,7 @@ const StyledFeaturesDescription = styled('p', {
 });
 
 const StyledFeaturesGrid = styled('div', {
-	margin: '6rem 0',
+	marginTop: '6rem',
 	display: 'flex',
 	alignItems: 'center',
 	gap: '0.625rem',
@@ -209,6 +283,39 @@ const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
 		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sunt eius, quas asperiores nihil magnam molestiae autem.',
 	icon: <StackIcon width="30" height="30" />,
 }));
+
+function TabTrigger({
+	title,
+	description,
+	value,
+}: {
+	title: string;
+	description: string;
+	value: string;
+}) {
+	return (
+		<StyledTabsTrigger value={value}>
+			<StyledTabTitle>{title}</StyledTabTitle>
+			<StyledTabDescription>{description}</StyledTabDescription>
+		</StyledTabsTrigger>
+	);
+}
+
+function TabContent({
+	value,
+	src,
+	alt,
+}: {
+	value: string;
+	src: StaticImageData;
+	alt: string;
+}) {
+	return (
+		<StyledTabsContent value={value}>
+			<Image src={src} alt={alt} quality="95" fill />
+		</StyledTabsContent>
+	);
+}
 
 function FeatureCard({ title, description, icon }: FeatureCardProps) {
 	return (
@@ -284,10 +391,50 @@ export default function Home() {
 				</StyledHeaderTextContainer>
 			</StyledHeader>
 
+			<StyledHowItWorksSection>
+				<StyledFeaturesTitle>How it works</StyledFeaturesTitle>
+				<StyledFeaturesDescription>
+					Share mask addresses instead of your real email address to protect
+					your inbox.
+				</StyledFeaturesDescription>
+
+				<StyledTabsRoot defaultValue="email">
+					<StyledTabsList>
+						<TabTrigger
+							title="Add your real email address"
+							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ultricies tristique nulla aliquet enim tortor at auctor urna."
+							value="email"
+						/>
+
+						<TabTrigger
+							title="Generate your unique mask"
+							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ultricies tristique nulla aliquet enim tortor at auctor urna."
+							value="masks"
+						/>
+
+						<TabTrigger
+							title="Use your mask everywhere"
+							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ultricies tristique nulla aliquet enim tortor at auctor urna."
+							value="usage"
+						/>
+					</StyledTabsList>
+
+					<TabContent value="email" src={email} alt="" />
+					<TabContent value="masks" src={masks} alt="" />
+					<TabContent value="usage" src={usage} alt="" />
+				</StyledTabsRoot>
+			</StyledHowItWorksSection>
+
 			<StyledFeaturesSection>
 				<StyledFeaturesGradient />
 
-				<StyledFeaturesTitle>
+				<StyledFeaturesTitle css={{ marginTop: '5rem' }}>
 					Privacy-first and features you'll love
 				</StyledFeaturesTitle>
 				<StyledFeaturesDescription>
