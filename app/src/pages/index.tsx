@@ -522,9 +522,21 @@ export default function Home() {
 							/>
 						</StyledTabsList>
 
-						<TabContent value="email" src={email} alt="" />
-						<TabContent value="masks" src={masks} alt="" />
-						<TabContent value="usage" src={usage} alt="" />
+						<TabContent
+							value="email"
+							src={email}
+							alt="Image of how to add your real email address"
+						/>
+						<TabContent
+							value="masks"
+							src={masks}
+							alt="Image of the list of generated masks"
+						/>
+						<TabContent
+							value="usage"
+							src={usage}
+							alt="Image of the mask used in an application"
+						/>
 					</StyledTabsRoot>
 				</Tabs.Root>
 			</StyledHowItWorksSection>
