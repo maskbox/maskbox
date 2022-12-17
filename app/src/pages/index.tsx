@@ -1,5 +1,6 @@
 import { StackIcon } from '@radix-ui/react-icons';
 import * as Tabs from '@radix-ui/react-tabs';
+import { motion } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -13,6 +14,19 @@ interface FeatureCardProps {
 	description: string;
 	icon: ReactNode;
 }
+
+const DEFAULT_EASE = [0.21, 0.47, 0.32, 0.98];
+
+const fadeInVariants = {
+	hidden: {
+		opacity: 0,
+		y: '-10px',
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+	},
+};
 
 const StyledTopShadow = styled('div', {
 	position: 'absolute',
@@ -35,7 +49,7 @@ const StyledHeader = styled('div', {
 	zIndex: 40,
 });
 
-const StyledHeaderLogoContainer = styled('div', {
+const StyledHeaderLogoContainer = styled(motion.div, {
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
@@ -72,7 +86,7 @@ const StyledHeaderTextContainer = styled('div', {
 	alignItems: 'center',
 });
 
-const StyledTitle = styled('h1', {
+const StyledTitle = styled(motion.h1, {
 	maxWidth: '48rem',
 	fontSize: '3.75rem',
 	fontWeight: '$semibold',
@@ -87,7 +101,7 @@ const StyledTitle = styled('h1', {
 	WebkitTextFillColor: 'transparent',
 });
 
-const StyledDescription = styled('p', {
+const StyledDescription = styled(motion.p, {
 	maxWidth: '48rem',
 	marginTop: '1.5rem',
 	fontSize: '$xl',
@@ -95,7 +109,7 @@ const StyledDescription = styled('p', {
 	color: '$gray11',
 });
 
-const StyledStartNowButton = styled(Link, {
+const StyledStartNowButton = styled(motion.a, {
 	marginTop: '4rem',
 	padding: '0.75rem 1rem',
 	fontSize: '$lg',
@@ -333,7 +347,14 @@ export default function Home() {
 			<StyledTopShadow />
 
 			<StyledHeader>
-				<StyledHeaderLogoContainer>
+				<StyledHeaderLogoContainer
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{
+						duration: 1.8,
+						ease: DEFAULT_EASE,
+					}}
+				>
 					<StyledBackgroundCircle
 						css={{
 							width: 568,
@@ -379,15 +400,45 @@ export default function Home() {
 				</StyledHeaderLogoContainer>
 
 				<StyledHeaderTextContainer>
-					<StyledTitle>Keep your online identity hidden and secure</StyledTitle>
-					<StyledDescription>
+					<StyledTitle
+						variants={fadeInVariants}
+						initial="hidden"
+						animate="visible"
+						transition={{
+							duration: 1,
+							ease: DEFAULT_EASE,
+						}}
+					>
+						Keep your online identity hidden and secure
+					</StyledTitle>
+					<StyledDescription
+						variants={fadeInVariants}
+						initial="hidden"
+						animate="visible"
+						transition={{
+							duration: 1.2,
+							delay: 0.4,
+							ease: DEFAULT_EASE,
+						}}
+					>
 						Maskbox protects your real email addresses from internet strangers
 						and automatically forwards messages to your inbox.
 					</StyledDescription>
 
-					<StyledStartNowButton href="/sign-in">
-						Start now for free
-					</StyledStartNowButton>
+					<Link href="/sign-in" passHref legacyBehavior>
+						<StyledStartNowButton
+							variants={fadeInVariants}
+							initial="hidden"
+							animate="visible"
+							transition={{
+								duration: 1.4,
+								delay: 0.8,
+								ease: DEFAULT_EASE,
+							}}
+						>
+							Start now for free
+						</StyledStartNowButton>
+					</Link>
 				</StyledHeaderTextContainer>
 			</StyledHeader>
 
