@@ -485,7 +485,7 @@ export default function Home() {
 					your inbox.
 				</StyledSectionDescription>
 
-				<Tabs.Root defaultValue="email" asChild>
+				<Tabs.Root defaultValue="email" orientation="vertical" asChild>
 					<StyledTabsRoot
 						variants={fadeInVariants}
 						initial="hidden"
