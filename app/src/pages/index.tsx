@@ -217,28 +217,27 @@ const StyledTabDescription = styled('p', {
 });
 
 const StyledFeaturesSection = styled('div', {
-	marginBottom: '15rem',
+	marginBottom: '9rem',
 	position: 'relative',
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
 	justifyContent: 'center',
 	overflow: 'hidden',
-	'&::before': {
-		content: '',
-		position: 'absolute',
-		top: 0,
-		left: 'calc(50% - 1100px/2)',
-		width: 1100,
-		height: 1,
-		background:
-			'linear-gradient(90deg, rgba(234, 234, 234, 0) 0.01%, rgba(234, 234, 234, 0.3) 48.44%, rgba(234, 234, 234, 0) 99.99%)',
-		opacity: 0.6,
-	},
 	zIndex: 40,
 });
 
-const StyledFeaturesGradient = styled('div', {
+const StyledFeaturesBorder = styled(motion.div, {
+	position: 'absolute',
+	top: 0,
+	left: 'calc(50% - 1100px/2)',
+	width: 1100,
+	height: 1,
+	background:
+		'linear-gradient(90deg, rgba(234, 234, 234, 0) 0.01%, rgba(234, 234, 234, 0.3) 48.44%, rgba(234, 234, 234, 0) 99.99%)',
+});
+
+const StyledFeaturesGradient = styled(motion.div, {
 	position: 'absolute',
 	top: -35,
 	width: 800,
@@ -246,13 +245,12 @@ const StyledFeaturesGradient = styled('div', {
 	borderRadius: 9999,
 	background:
 		'linear-gradient(88.93deg, #EAEAEA 0.76%, #FF27DD 14.6%, #1C94FF 87.89%, #0A0A0A 99.17%)',
-	opacity: 0.3,
 	filter: 'blur(150px)',
 	zIndex: -1,
 });
 
-const StyledFeaturesGrid = styled('div', {
-	marginTop: '6rem',
+const StyledFeaturesGrid = styled(motion.div, {
+	margin: '6rem',
 	display: 'flex',
 	alignItems: 'center',
 	gap: '0.625rem',
@@ -353,8 +351,14 @@ function FeatureCard({ title, description, icon }: FeatureCardProps) {
 
 export default function Home() {
 	const howItWorksRef = useRef<HTMLDivElement>(null);
+	const featuresRef = useRef<HTMLDivElement>(null);
+
 	const howItWorksInView = useInView(howItWorksRef, {
-		amount: 0.2,
+		amount: 0.5,
+		once: true,
+	});
+	const featuresInView = useInView(featuresRef, {
+		amount: 0.5,
 		once: true,
 	});
 
@@ -462,8 +466,8 @@ export default function Home() {
 			<StyledHowItWorksSection ref={howItWorksRef}>
 				<StyledSectionTitle
 					variants={fadeInDownVariants}
-					initial="hidden"
-					animate={howItWorksInView && 'visible'}
+					initial={false}
+					animate={howItWorksInView ? 'visible' : 'hidden'}
 					transition={{
 						duration: 1,
 						ease: DEFAULT_EASE,
@@ -473,8 +477,8 @@ export default function Home() {
 				</StyledSectionTitle>
 				<StyledSectionDescription
 					variants={fadeInDownVariants}
-					initial="hidden"
-					animate={howItWorksInView && 'visible'}
+					initial={false}
+					animate={howItWorksInView ? 'visible' : 'hidden'}
 					transition={{
 						duration: 1.2,
 						delay: 0.4,
@@ -488,11 +492,11 @@ export default function Home() {
 				<Tabs.Root defaultValue="email" orientation="vertical" asChild>
 					<StyledTabsRoot
 						variants={fadeInVariants}
-						initial="hidden"
-						animate={howItWorksInView && 'visible'}
+						initial={false}
+						animate={howItWorksInView ? 'visible' : 'hidden'}
 						transition={{
-							duration: 1.6,
-							delay: 1,
+							duration: 2,
+							delay: 0.8,
 							ease: DEFAULT_EASE,
 						}}
 					>
@@ -541,17 +545,63 @@ export default function Home() {
 				</Tabs.Root>
 			</StyledHowItWorksSection>
 
-			<StyledFeaturesSection>
-				<StyledFeaturesGradient />
+			<StyledFeaturesSection ref={featuresRef}>
+				<StyledFeaturesBorder
+					initial={false}
+					animate={featuresInView ? { opacity: 0.6 } : { opacity: 0 }}
+					transition={{
+						duration: 1,
+						ease: DEFAULT_EASE,
+					}}
+				/>
 
-				<StyledSectionTitle css={{ marginTop: '5rem' }}>
+				<StyledFeaturesGradient
+					initial={false}
+					animate={featuresInView ? { opacity: 0.3 } : { opacity: 0 }}
+					transition={{
+						duration: 1,
+						delay: 0.2,
+						ease: DEFAULT_EASE,
+					}}
+				/>
+
+				<StyledSectionTitle
+					variants={fadeInDownVariants}
+					initial={false}
+					animate={featuresInView ? 'visible' : 'hidden'}
+					transition={{
+						duration: 1.2,
+						delay: 0.4,
+						ease: DEFAULT_EASE,
+					}}
+					css={{ marginTop: '5rem' }}
+				>
 					Privacy-first and features you'll love
 				</StyledSectionTitle>
-				<StyledSectionDescription>
+				<StyledSectionDescription
+					variants={fadeInDownVariants}
+					initial={false}
+					animate={featuresInView ? 'visible' : 'hidden'}
+					transition={{
+						duration: 1.4,
+						delay: 0.8,
+						ease: DEFAULT_EASE,
+					}}
+				>
 					Sign up now and start enjoying the benefits.
 				</StyledSectionDescription>
 
-				<StyledFeaturesGrid>
+				<StyledFeaturesGrid
+					initial={false}
+					animate={
+						featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: '16px' }
+					}
+					transition={{
+						duration: 1.4,
+						delay: 1,
+						ease: DEFAULT_EASE,
+					}}
+				>
 					{features.map((props, i) => (
 						<FeatureCard {...props} key={i} />
 					))}
