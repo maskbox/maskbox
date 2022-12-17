@@ -1,9 +1,9 @@
 import { StackIcon } from '@radix-ui/react-icons';
 import * as Tabs from '@radix-ui/react-tabs';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import { styled } from '../utils/stitches';
 import email from '../../public/email.png';
 import masks from '../../public/masks.png';
@@ -18,6 +18,15 @@ interface FeatureCardProps {
 const DEFAULT_EASE = [0.21, 0.47, 0.32, 0.98];
 
 const fadeInVariants = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+	},
+};
+
+const fadeInDownVariants = {
 	hidden: {
 		opacity: 0,
 		y: '-10px',
@@ -121,6 +130,23 @@ const StyledStartNowButton = styled(motion.a, {
 		'inset 0 1px 0 0 $colors$grayA6, inset 0px 0px 0px 1px $colors$grayA2, 0 5px 30px -5px $colors$blackA7',
 });
 
+const StyledSectionTitle = styled(motion.h2, {
+	maxWidth: '26rem',
+	fontSize: '2.25rem',
+	fontWeight: '$semibold',
+	lineHeight: '3rem',
+	textAlign: 'center',
+});
+
+const StyledSectionDescription = styled(motion.p, {
+	maxWidth: '24rem',
+	marginTop: '1.125rem',
+	fontSize: '1.125rem',
+	lineHeight: '1.5rem',
+	textAlign: 'center',
+	color: '$gray11',
+});
+
 const StyledHowItWorksSection = styled('div', {
 	marginBottom: '15rem',
 	display: 'flex',
@@ -129,7 +155,7 @@ const StyledHowItWorksSection = styled('div', {
 	justifyContent: 'center',
 });
 
-const StyledTabsRoot = styled(Tabs.Root, {
+const StyledTabsRoot = styled(motion.div, {
 	maxWidth: '82.5rem',
 	marginTop: '6rem',
 	display: 'grid',
@@ -222,23 +248,6 @@ const StyledFeaturesGradient = styled('div', {
 	opacity: 0.3,
 	filter: 'blur(150px)',
 	zIndex: -1,
-});
-
-const StyledFeaturesTitle = styled('h2', {
-	maxWidth: '26rem',
-	fontSize: '2.25rem',
-	fontWeight: '$semibold',
-	lineHeight: '3rem',
-	textAlign: 'center',
-});
-
-const StyledFeaturesDescription = styled('p', {
-	maxWidth: '24rem',
-	marginTop: '1.125rem',
-	fontSize: '1.125rem',
-	lineHeight: '1.5rem',
-	textAlign: 'center',
-	color: '$gray11',
 });
 
 const StyledFeaturesGrid = styled('div', {
@@ -342,14 +351,21 @@ function FeatureCard({ title, description, icon }: FeatureCardProps) {
 }
 
 export default function Home() {
+	const howItWorksRef = useRef<HTMLDivElement>(null);
+	const howItWorksInView = useInView(howItWorksRef, {
+		amount: 0.2,
+		once: true,
+	});
+
 	return (
 		<>
 			<StyledTopShadow />
 
 			<StyledHeader>
 				<StyledHeaderLogoContainer
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
+					variants={fadeInVariants}
+					initial="hidden"
+					animate="visible"
 					transition={{
 						duration: 1.8,
 						ease: DEFAULT_EASE,
@@ -401,7 +417,7 @@ export default function Home() {
 
 				<StyledHeaderTextContainer>
 					<StyledTitle
-						variants={fadeInVariants}
+						variants={fadeInDownVariants}
 						initial="hidden"
 						animate="visible"
 						transition={{
@@ -412,7 +428,7 @@ export default function Home() {
 						Keep your online identity hidden and secure
 					</StyledTitle>
 					<StyledDescription
-						variants={fadeInVariants}
+						variants={fadeInDownVariants}
 						initial="hidden"
 						animate="visible"
 						transition={{
@@ -427,7 +443,7 @@ export default function Home() {
 
 					<Link href="/sign-in" passHref legacyBehavior>
 						<StyledStartNowButton
-							variants={fadeInVariants}
+							variants={fadeInDownVariants}
 							initial="hidden"
 							animate="visible"
 							transition={{
@@ -442,55 +458,85 @@ export default function Home() {
 				</StyledHeaderTextContainer>
 			</StyledHeader>
 
-			<StyledHowItWorksSection>
-				<StyledFeaturesTitle>How it works</StyledFeaturesTitle>
-				<StyledFeaturesDescription>
+			<StyledHowItWorksSection ref={howItWorksRef}>
+				<StyledSectionTitle
+					variants={fadeInDownVariants}
+					initial="hidden"
+					animate={howItWorksInView && 'visible'}
+					transition={{
+						duration: 1,
+						ease: DEFAULT_EASE,
+					}}
+				>
+					How it works
+				</StyledSectionTitle>
+				<StyledSectionDescription
+					variants={fadeInDownVariants}
+					initial="hidden"
+					animate={howItWorksInView && 'visible'}
+					transition={{
+						duration: 1.2,
+						delay: 0.4,
+						ease: DEFAULT_EASE,
+					}}
+				>
 					Share mask addresses instead of your real email address to protect
 					your inbox.
-				</StyledFeaturesDescription>
+				</StyledSectionDescription>
 
-				<StyledTabsRoot defaultValue="email">
-					<StyledTabsList>
-						<TabTrigger
-							title="Add your real email address"
-							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+				<Tabs.Root defaultValue="email" asChild>
+					<StyledTabsRoot
+						variants={fadeInVariants}
+						initial="hidden"
+						animate={howItWorksInView && 'visible'}
+						transition={{
+							duration: 1.6,
+							delay: 1,
+							ease: DEFAULT_EASE,
+						}}
+					>
+						<StyledTabsList>
+							<TabTrigger
+								title="Add your real email address"
+								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 								eiusmod tempor incididunt ut labore et dolore magna aliqua.
 								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-							value="email"
-						/>
+								value="email"
+							/>
 
-						<TabTrigger
-							title="Generate your unique mask"
-							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+							<TabTrigger
+								title="Generate your unique mask"
+								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 								eiusmod tempor incididunt ut labore et dolore magna aliqua.
 								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-							value="masks"
-						/>
+								value="masks"
+							/>
 
-						<TabTrigger
-							title="Use your mask everywhere"
-							description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+							<TabTrigger
+								title="Use your mask everywhere"
+								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 								eiusmod tempor incididunt ut labore et dolore magna aliqua.
 								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-							value="usage"
-						/>
-					</StyledTabsList>
+								value="usage"
+							/>
+						</StyledTabsList>
 
-					<TabContent value="email" src={email} alt="" />
-					<TabContent value="masks" src={masks} alt="" />
-					<TabContent value="usage" src={usage} alt="" />
-				</StyledTabsRoot>
+						<TabContent value="email" src={email} alt="" />
+						<TabContent value="masks" src={masks} alt="" />
+						<TabContent value="usage" src={usage} alt="" />
+					</StyledTabsRoot>
+				</Tabs.Root>
 			</StyledHowItWorksSection>
 
 			<StyledFeaturesSection>
 				<StyledFeaturesGradient />
 
-				<StyledFeaturesTitle css={{ marginTop: '5rem' }}>
+				<StyledSectionTitle css={{ marginTop: '5rem' }}>
 					Privacy-first and features you'll love
-				</StyledFeaturesTitle>
-				<StyledFeaturesDescription>
+				</StyledSectionTitle>
+				<StyledSectionDescription>
 					Sign up now and start enjoying the benefits.
-				</StyledFeaturesDescription>
+				</StyledSectionDescription>
 
 				<StyledFeaturesGrid>
 					{features.map((props, i) => (
