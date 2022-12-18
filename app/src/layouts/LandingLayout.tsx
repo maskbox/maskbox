@@ -5,6 +5,7 @@ import { styled } from '../utils/stitches';
 
 const StyledWrapper = styled('div', {
 	background: '$landing',
+	overflow: 'hidden',
 });
 
 const StyledNavbar = styled('nav', {
@@ -13,9 +14,14 @@ const StyledNavbar = styled('nav', {
 	flexDirection: 'row',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	// TODO: Remove 8rem?
-	padding: '1rem 8rem',
+	padding: '1rem 1.5rem',
 	zIndex: 100,
+	'@md': {
+		padding: '1rem 3rem',
+	},
+	'@xl': {
+		padding: '1rem 8rem',
+	},
 });
 
 const StyledLogo = styled(Link, {
@@ -70,8 +76,7 @@ const StyledFooter = styled('footer', {
 	flexDirection: 'row',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	// TODO: Remove 8rem?
-	padding: '1.5rem 8rem',
+	padding: '1rem 1.5rem',
 	'&::before': {
 		position: 'absolute',
 		content: '',
@@ -79,6 +84,12 @@ const StyledFooter = styled('footer', {
 		width: '100%',
 		height: 1,
 		background: 'linear-gradient(90deg, $grayA1 0%, $gray1 50%, $grayA1 100%)',
+	},
+	'@md': {
+		padding: '1rem 3rem',
+	},
+	'@xl': {
+		padding: '1rem 8rem',
 	},
 });
 

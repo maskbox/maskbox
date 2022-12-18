@@ -50,12 +50,16 @@ const StyledTopShadow = styled('div', {
 const StyledHeader = styled('div', {
 	minHeight: '100vh',
 	position: 'relative',
-	padding: '7rem 0',
+	padding: '4rem 1rem',
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
-	gap: '8rem',
+	gap: '4rem',
 	zIndex: 40,
+	'@md': {
+		padding: '7rem 0',
+		gap: '8rem',
+	},
 });
 
 const StyledHeaderLogoContainer = styled(motion.div, {
@@ -97,9 +101,9 @@ const StyledHeaderTextContainer = styled('div', {
 
 const StyledTitle = styled(motion.h1, {
 	maxWidth: '48rem',
-	fontSize: '3.75rem',
+	fontSize: '3rem',
 	fontWeight: '$semibold',
-	lineHeight: '4.5rem',
+	lineHeight: '3.5rem',
 	textAlign: 'center',
 	background:
 		'linear-gradient(180deg, $colors$gray12 1.5%, $colors$gray11 105%)',
@@ -108,6 +112,10 @@ const StyledTitle = styled(motion.h1, {
 	textFillColor: 'transparent',
 	WebkitBackgroundClip: 'text',
 	WebkitTextFillColor: 'transparent',
+	'@md': {
+		fontSize: '3.75rem',
+		lineHeight: '4.5rem',
+	},
 });
 
 const StyledDescription = styled(motion.p, {
@@ -132,19 +140,27 @@ const StyledStartNowButton = styled(motion.a, {
 
 const StyledSectionTitle = styled(motion.h2, {
 	maxWidth: '26rem',
+	padding: '0 1rem',
 	fontSize: '2.25rem',
 	fontWeight: '$semibold',
 	lineHeight: '3rem',
 	textAlign: 'center',
+	'@sm': {
+		padding: 0,
+	},
 });
 
 const StyledSectionDescription = styled(motion.p, {
 	maxWidth: '24rem',
 	marginTop: '1.125rem',
+	padding: '0 1rem',
 	fontSize: '1.125rem',
 	lineHeight: '1.5rem',
 	textAlign: 'center',
 	color: '$gray11',
+	'@sm': {
+		padding: 0,
+	},
 });
 
 const StyledHowItWorksSection = styled('div', {
@@ -250,10 +266,21 @@ const StyledFeaturesGradient = styled(motion.div, {
 });
 
 const StyledFeaturesGrid = styled(motion.div, {
-	margin: '6rem',
-	display: 'flex',
+	margin: '6rem 1rem',
+	display: 'grid',
+	gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
 	alignItems: 'center',
 	gap: '0.625rem',
+	'@md': {
+		margin: '6rem',
+		gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+	},
+	'@lg': {
+		gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+	},
+	'@xl': {
+		gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+	},
 });
 
 const StyledFeatureCard = styled('div', {
