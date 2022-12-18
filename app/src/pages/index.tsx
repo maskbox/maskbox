@@ -175,20 +175,34 @@ const StyledHowItWorksSection = styled('div', {
 });
 
 const StyledTabsRoot = styled(motion.div, {
-	maxWidth: '82.5rem',
+	maxWidth: '83rem',
 	marginTop: '6rem',
-	display: 'grid',
-	gridTemplateColumns: '1fr 1.5fr',
+	padding: '0 1rem',
+	display: 'flex',
+	flexDirection: 'column',
 	alignItems: 'center',
-	gap: '5rem',
+	gap: '3rem',
 	zIndex: 40,
+	'@lg': {
+		display: 'grid',
+		gridTemplateColumns: '1fr 1.5fr',
+		gap: '5rem',
+	},
 });
 
 const StyledTabsList = styled('div', {
 	display: 'flex',
+	padding: '0 1rem',
 	flexDirection: 'column',
 	alignItems: 'start',
-	gap: '2.5rem',
+	gap: '1rem',
+	'@sm': {
+		gap: '1.75rem',
+	},
+	'@lg': {
+		padding: 0,
+		gap: '2.5rem',
+	},
 });
 
 const StyledTabsTrigger = styled('button', {
@@ -203,13 +217,20 @@ const StyledTabsTrigger = styled('button', {
 
 const StyledTabsContentWrapper = styled('div', {
 	position: 'relative',
+	width: '100vw',
+	height: '100%',
+	'@lg': {
+		width: 'auto',
+		height: 'auto',
+	},
 });
 
 const StyledTabsContent = styled(motion.div, {
 	position: 'relative',
+	margin: '0 1.25rem',
 	aspectRatio: '1210/840',
-	'&:focus': {
-		outline: 'none',
+	'@lg': {
+		margin: 0,
 	},
 });
 
@@ -235,8 +256,15 @@ const StyledTabTitle = styled('p', {
 
 const StyledTabDescription = styled('p', {
 	marginTop: '0.75rem',
+	display: 'none',
 	fontSize: '$lg',
 	color: '$gray11',
+	'&[data-state="active"]': {
+		display: 'block',
+	},
+	'@lg': {
+		display: 'block',
+	},
 });
 
 const StyledFeaturesSection = styled('div', {
@@ -379,15 +407,19 @@ const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
 function TabTrigger({
 	title,
 	description,
+	selected,
 	...props
 }: ComponentProps<typeof StyledTabsTrigger> & {
 	title: string;
 	description: string;
+	selected: boolean;
 }) {
 	return (
-		<StyledTabsTrigger {...props}>
+		<StyledTabsTrigger {...props} data-state={selected && 'active'}>
 			<StyledTabTitle>{title}</StyledTabTitle>
-			<StyledTabDescription>{description}</StyledTabDescription>
+			<StyledTabDescription data-state={selected && 'active'}>
+				{description}
+			</StyledTabDescription>
 		</StyledTabsTrigger>
 	);
 }
@@ -582,8 +614,8 @@ export default function Home() {
 								key={id}
 								title={title}
 								description={description}
+								selected={selectedFeature === id}
 								onClick={() => setSelectedFeature(id)}
-								data-state={selectedFeature === id && 'active'}
 							/>
 						))}
 					</StyledTabsList>
