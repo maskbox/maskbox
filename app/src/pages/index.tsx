@@ -1,13 +1,14 @@
 import { StackIcon } from '@radix-ui/react-icons';
 import * as Tabs from '@radix-ui/react-tabs';
+import { ComponentProps } from '@stitches/react';
 import { motion, useInView } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { ReactNode, useRef } from 'react';
-import { styled } from '../utils/stitches';
 import email from '../../public/email.png';
 import masks from '../../public/masks.png';
 import usage from '../../public/usage.png';
+import { styled } from '../utils/stitches';
 
 interface FeatureCardProps {
 	title: string;
@@ -271,7 +272,7 @@ const StyledFeaturesGradient = styled(motion.div, {
 	zIndex: -1,
 });
 
-const StyledFeaturesGrid = styled(motion.div, {
+const StyledFeaturesGrid = styled('div', {
 	margin: '6rem 1rem',
 	display: 'grid',
 	gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
@@ -289,7 +290,7 @@ const StyledFeaturesGrid = styled(motion.div, {
 	},
 });
 
-const StyledFeatureCard = styled('div', {
+const StyledFeatureCard = styled(motion.div, {
 	position: 'relative',
 	maxWidth: '18.75rem',
 	padding: '1.5rem',
@@ -372,9 +373,14 @@ function TabContent({
 	);
 }
 
-function FeatureCard({ title, description, icon }: FeatureCardProps) {
+function FeatureCard({
+	title,
+	description,
+	icon,
+	...props
+}: ComponentProps<typeof StyledFeatureCard> & FeatureCardProps) {
 	return (
-		<StyledFeatureCard>
+		<StyledFeatureCard {...props}>
 			<StyledFeatureIcon>{icon}</StyledFeatureIcon>
 			<StyledFeatureTitle>{title}</StyledFeatureTitle>
 			<StyledFeatureDescription>{description}</StyledFeatureDescription>
@@ -624,19 +630,20 @@ export default function Home() {
 					Sign up now and start enjoying the benefits.
 				</StyledSectionDescription>
 
-				<StyledFeaturesGrid
-					initial={false}
-					animate={
-						featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: '16px' }
-					}
-					transition={{
-						duration: 1.4,
-						delay: 1,
-						ease: DEFAULT_EASE,
-					}}
-				>
+				<StyledFeaturesGrid>
 					{features.map((props, i) => (
-						<FeatureCard {...props} key={i} />
+						<FeatureCard
+							{...props}
+							initial={{ opacity: 0, y: '16px' }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{
+								duration: 1.4,
+								delay: 1,
+								ease: DEFAULT_EASE,
+							}}
+							viewport={{ once: true, amount: 0.01 }}
+							key={i}
+						/>
 					))}
 				</StyledFeaturesGrid>
 			</StyledFeaturesSection>
