@@ -1,4 +1,5 @@
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { styled } from '../utils/stitches';
@@ -104,6 +105,8 @@ const StyledFooterLinks = styled('div', {
 });
 
 export default function LandingLayout({ children }: { children: ReactNode }) {
+	const { data } = useSession();
+
 	return (
 		<StyledWrapper>
 			<StyledNavbar>
@@ -121,7 +124,11 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
 						<GitHubLogoIcon width="16" height="16" />
 					</StyledSocialLink>
 
-					<StyledSignInButton href="/sign-in">Sign in</StyledSignInButton>
+					{data ? (
+						<StyledSignInButton href="/masks">Open app</StyledSignInButton>
+					) : (
+						<StyledSignInButton href="/sign-in">Sign in</StyledSignInButton>
+					)}
 				</StyledNavbarGroup>
 			</StyledNavbar>
 
