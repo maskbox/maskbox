@@ -50,7 +50,7 @@ const StyledTopShadow = styled('div', {
 const StyledHeader = styled('div', {
 	minHeight: '100vh',
 	position: 'relative',
-	padding: '4rem 1rem',
+	padding: '4rem 1rem 7rem',
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
@@ -164,11 +164,14 @@ const StyledSectionDescription = styled(motion.p, {
 });
 
 const StyledHowItWorksSection = styled('div', {
-	marginBottom: '15rem',
+	marginBottom: '8rem',
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'center',
 	justifyContent: 'center',
+	'@md': {
+		marginBottom: '15rem',
+	},
 });
 
 const StyledTabsRoot = styled(motion.div, {
@@ -233,7 +236,7 @@ const StyledTabDescription = styled('p', {
 });
 
 const StyledFeaturesSection = styled('div', {
-	marginBottom: '9rem',
+	marginBottom: '5rem',
 	position: 'relative',
 	display: 'flex',
 	flexDirection: 'column',
@@ -241,6 +244,9 @@ const StyledFeaturesSection = styled('div', {
 	justifyContent: 'center',
 	overflow: 'hidden',
 	zIndex: 40,
+	'@md': {
+		marginBottom: '9rem',
+	},
 });
 
 const StyledFeaturesBorder = styled(motion.div, {
