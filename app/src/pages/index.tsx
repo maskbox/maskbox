@@ -1,10 +1,9 @@
 import { StackIcon } from '@radix-ui/react-icons';
-import * as Tabs from '@radix-ui/react-tabs';
 import { ComponentProps } from '@stitches/react';
-import { motion, useInView } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import email from '../../public/email.png';
 import masks from '../../public/masks.png';
 import usage from '../../public/usage.png';
@@ -185,14 +184,14 @@ const StyledTabsRoot = styled(motion.div, {
 	zIndex: 40,
 });
 
-const StyledTabsList = styled(Tabs.List, {
+const StyledTabsList = styled('div', {
 	display: 'flex',
 	flexDirection: 'column',
 	alignItems: 'start',
 	gap: '2.5rem',
 });
 
-const StyledTabsTrigger = styled(Tabs.Trigger, {
+const StyledTabsTrigger = styled('button', {
 	padding: '1.125rem 1.5rem',
 	borderRadius: '0.75rem',
 	textAlign: 'left',
@@ -202,27 +201,31 @@ const StyledTabsTrigger = styled(Tabs.Trigger, {
 	},
 });
 
-const StyledTabsContent = styled(Tabs.Content, {
+const StyledTabsContentWrapper = styled('div', {
+	position: 'relative',
+});
+
+const StyledTabsContent = styled(motion.div, {
 	position: 'relative',
 	aspectRatio: '1210/840',
 	'&:focus': {
 		outline: 'none',
 	},
-	'&::before': {
-		content: '',
-		position: 'absolute',
-		top: '25%',
-		left: '5%',
-		width: '90%',
-		height: '50%',
-		background:
-			'linear-gradient(1.07deg, #EAEAEA 0.92%, #FF27DD 14.72%, #1C94FF 87.83%, #0A0A0A 99.08%)',
-		aspectRatio: '1210/840',
-		opacity: 0.4,
-		filter: 'blur(150px)',
-		borderRadius: 9999,
-		zIndex: -1,
-	},
+});
+
+const StyledTabsGradient = styled('div', {
+	position: 'absolute',
+	top: '25%',
+	left: '5%',
+	width: '90%',
+	height: '50%',
+	background:
+		'linear-gradient(1.07deg, #EAEAEA 0.92%, #FF27DD 14.72%, #1C94FF 87.83%, #0A0A0A 99.08%)',
+	aspectRatio: '1210/840',
+	opacity: 0.4,
+	filter: 'blur(150px)',
+	borderRadius: 9999,
+	zIndex: -1,
 });
 
 const StyledTabTitle = styled('p', {
@@ -333,6 +336,39 @@ const StyledFeatureDescription = styled('p', {
 	color: '$gray11',
 });
 
+const howItWorksSections: {
+	id: string;
+	title: string;
+	description: string;
+	alt: string;
+	image: StaticImageData;
+}[] = [
+	{
+		id: 'email',
+		title: 'Add your real email address',
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+		alt: 'Image of how to add your real email address',
+		image: email,
+	},
+	{
+		id: 'masks',
+		title: 'Generate your unique mask',
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+		alt: 'Image of the list of generated masks',
+		image: masks,
+	},
+	{
+		id: 'usage',
+		title: 'Use your mask everywhere',
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+		alt: 'Image of the mask used in an application',
+		image: usage,
+	},
+];
+
 const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
 	title: 'Lorem ipsum dolor',
 	description:
@@ -343,31 +379,31 @@ const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
 function TabTrigger({
 	title,
 	description,
-	value,
-}: {
+	...props
+}: ComponentProps<typeof StyledTabsTrigger> & {
 	title: string;
 	description: string;
-	value: string;
 }) {
 	return (
-		<StyledTabsTrigger value={value}>
+		<StyledTabsTrigger {...props}>
 			<StyledTabTitle>{title}</StyledTabTitle>
 			<StyledTabDescription>{description}</StyledTabDescription>
 		</StyledTabsTrigger>
 	);
 }
 
-function TabContent({
-	value,
-	src,
-	alt,
-}: {
-	value: string;
-	src: StaticImageData;
-	alt: string;
-}) {
+function TabContent({ src, alt }: { src: StaticImageData; alt: string }) {
 	return (
-		<StyledTabsContent value={value}>
+		<StyledTabsContent
+			initial={{ opacity: 0, y: '10px' }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: '-10px' }}
+			transition={{
+				duration: 0.1,
+				stiffness: 300,
+				damping: 30,
+			}}
+		>
 			<Image src={src} alt={alt} quality="95" fill />
 		</StyledTabsContent>
 	);
@@ -389,6 +425,8 @@ function FeatureCard({
 }
 
 export default function Home() {
+	const [selectedFeature, setSelectedFeature] = useState('email');
+
 	const howItWorksRef = useRef<HTMLDivElement>(null);
 	const featuresRef = useRef<HTMLDivElement>(null);
 
@@ -528,60 +566,40 @@ export default function Home() {
 					your inbox.
 				</StyledSectionDescription>
 
-				<Tabs.Root defaultValue="email" orientation="vertical" asChild>
-					<StyledTabsRoot
-						variants={fadeInVariants}
-						initial={false}
-						animate={howItWorksInView ? 'visible' : 'hidden'}
-						transition={{
-							duration: 2,
-							delay: 0.8,
-							ease: DEFAULT_EASE,
-						}}
-					>
-						<StyledTabsList>
+				<StyledTabsRoot
+					variants={fadeInVariants}
+					initial={false}
+					animate={howItWorksInView ? 'visible' : 'hidden'}
+					transition={{
+						duration: 2,
+						delay: 0.8,
+						ease: DEFAULT_EASE,
+					}}
+				>
+					<StyledTabsList>
+						{howItWorksSections.map(({ id, title, description }) => (
 							<TabTrigger
-								title="Add your real email address"
-								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-								value="email"
+								key={id}
+								title={title}
+								description={description}
+								onClick={() => setSelectedFeature(id)}
+								data-state={selectedFeature === id && 'active'}
 							/>
+						))}
+					</StyledTabsList>
 
-							<TabTrigger
-								title="Generate your unique mask"
-								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-								value="masks"
-							/>
+					<StyledTabsContentWrapper>
+						<StyledTabsGradient />
 
-							<TabTrigger
-								title="Use your mask everywhere"
-								description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ultricies tristique nulla aliquet enim tortor at auctor urna."
-								value="usage"
-							/>
-						</StyledTabsList>
-
-						<TabContent
-							value="email"
-							src={email}
-							alt="Image of how to add your real email address"
-						/>
-						<TabContent
-							value="masks"
-							src={masks}
-							alt="Image of the list of generated masks"
-						/>
-						<TabContent
-							value="usage"
-							src={usage}
-							alt="Image of the mask used in an application"
-						/>
-					</StyledTabsRoot>
-				</Tabs.Root>
+						<AnimatePresence mode="wait">
+							{howItWorksSections.map(({ id, alt, image }) => {
+								if (selectedFeature === id) {
+									return <TabContent src={image} alt={alt} key={id} />;
+								}
+							})}
+						</AnimatePresence>
+					</StyledTabsContentWrapper>
+				</StyledTabsRoot>
 			</StyledHowItWorksSection>
 
 			<StyledFeaturesSection ref={featuresRef}>
