@@ -467,7 +467,7 @@ export default function Home() {
 		once: true,
 	});
 	const featuresInView = useInView(featuresRef, {
-		amount: 0.5,
+		amount: 0.3,
 		once: true,
 	});
 
