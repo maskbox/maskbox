@@ -36,11 +36,15 @@ function App({
 				<ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
 					<MotionConfig reducedMotion="user">
 						<SessionProvider session={session}>
-							<div className={inter.className}>
-								<Layout>
-									<Component {...pageProps} />
-								</Layout>
-							</div>
+							<style jsx global>{`
+								:root {
+									--font-inter: ${inter.style.fontFamily};
+								}
+							`}</style>
+
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
 						</SessionProvider>
 					</MotionConfig>
 				</ErrorBoundary>
