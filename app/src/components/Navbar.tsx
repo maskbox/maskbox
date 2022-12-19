@@ -10,13 +10,6 @@ import {
 } from '../ui/DropdownMenu';
 import { styled } from '../utils/stitches';
 
-const DummyLogoIcon = styled('div', {
-	width: 32,
-	height: 32,
-	background: '$gray12',
-	borderRadius: '50%',
-});
-
 const StyledNavbar = styled('nav', {
 	width: '100%',
 	padding: '1.5rem 1.5rem 0',
@@ -104,7 +97,20 @@ export function Navbar() {
 			<NavbarContent>
 				<NavbarHeader>
 					<NavbarLogo href="/masks">
-						<DummyLogoIcon />
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="18"
+							height="18"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fillRule="evenodd"
+								clipRule="evenodd"
+								d="M11.992.407A5.793 5.793 0 0 0 6.199 6.2v3.31a3.31 3.31 0 0 0-3.31 3.31v7.449a3.31 3.31 0 0 0 3.31 3.31h11.586a3.31 3.31 0 0 0 3.31-3.31V12.82a3.31 3.31 0 0 0-3.31-3.31V6.2c0-3.2-2.593-5.794-5.793-5.794ZM16.13 9.51V6.2a4.137 4.137 0 1 0-8.276 0v3.31h8.276Zm-4.114 8.71-.003.004-8.497-5.858 8.51 4.723 8.494-4.714-8.497 5.858-.008-.013Z"
+							/>
+						</svg>
+
 						<NavbarLogoText>Maskbox</NavbarLogoText>
 					</NavbarLogo>
 

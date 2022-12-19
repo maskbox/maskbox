@@ -76,14 +76,9 @@ const StyledHeaderLogoContainer = styled(motion.div, {
 	zIndex: -1,
 });
 
-const StyledHeaderLogo = styled('div', {
-	width: 128,
-	height: 128,
-	background: '$landing',
-	borderRadius: '50%',
+const StyledHeaderLogo = styled('svg', {
 	zIndex: 40,
-	boxShadow:
-		'inset 0 1px 0 0 $colors$grayA8, inset 0px 0px 0px 1px $colors$grayA3',
+	filter: 'drop-shadow(0px 4px 15px hsla(0, 0%, 0%, 0.3))',
 });
 
 const StyledBackgroundCircle = styled('div', {
@@ -552,7 +547,33 @@ export default function Home() {
 						}}
 					/>
 
-					<StyledHeaderLogo />
+					<StyledHeaderLogo
+						xmlns="http://www.w3.org/2000/svg"
+						width="128"
+						height="128"
+						fill="none"
+						viewBox="0 0 524 524"
+					>
+						<path
+							fill="url(#a)"
+							fillRule="evenodd"
+							d="M262.5 25a117.942 117.942 0 0 0-83.471 34.635 118.352 118.352 0 0 0-34.574 83.615v67.571a67.396 67.396 0 0 0-47.698 19.792A67.63 67.63 0 0 0 77 278.393v152.036a67.63 67.63 0 0 0 19.757 47.78A67.395 67.395 0 0 0 144.455 498h236.09a67.395 67.395 0 0 0 47.698-19.791A67.631 67.631 0 0 0 448 430.429V278.393a67.631 67.631 0 0 0-19.757-47.78 67.396 67.396 0 0 0-47.698-19.792V143.25C380.545 77.931 327.706 25 262.5 25Zm84.318 185.821V143.25a84.538 84.538 0 0 0-24.696-59.725 84.244 84.244 0 0 0-59.622-24.74 84.244 84.244 0 0 0-59.622 24.74 84.538 84.538 0 0 0-24.696 59.725v67.571h168.636Zm-83.837 177.798-.048.078-173.16-119.585 173.417 96.405 173.105-96.232-173.16 119.585-.154-.251Z"
+							clipRule="evenodd"
+						/>
+						<defs>
+							<linearGradient
+								id="a"
+								x1="262.5"
+								x2="262.5"
+								y1="25"
+								y2="498"
+								gradientUnits="userSpaceOnUse"
+							>
+								<stop stopColor="#EDEDED" stopOpacity=".95" />
+								<stop offset="1" stopColor="#EDEDED" stopOpacity=".55" />
+							</linearGradient>
+						</defs>
+					</StyledHeaderLogo>
 				</StyledHeaderLogoContainer>
 
 				<StyledHeaderTextContainer>
