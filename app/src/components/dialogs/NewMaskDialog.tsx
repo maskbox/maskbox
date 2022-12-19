@@ -33,7 +33,6 @@ function NewMaskDialogForm() {
 		{ onlyVerified: true },
 		{
 			suspense: true,
-			trpc: {},
 		}
 	);
 
