@@ -3,7 +3,7 @@ import { keyframes, styled } from '../../utils/stitches';
 
 const fadeIn = keyframes({
 	'0%': { opacity: 0 },
-	'100%': { opacity: 1 }
+	'100%': { opacity: 1 },
 });
 
 const StyledMessage = styled('p', {
@@ -13,25 +13,25 @@ const StyledMessage = styled('p', {
 	variants: {
 		variant: {
 			info: {
-				color: '$gray11'
+				color: '$gray11',
 			},
 			danger: {
 				color: '$red11',
-				animation: `${fadeIn} 200ms`
-			}
-		}
-	}
+				animation: `${fadeIn} 200ms`,
+			},
+		},
+	},
 });
 
 export function AdditionalMessage({
 	name,
-	message
+	message,
 }: {
 	name: string;
 	message?: string;
 }) {
 	const {
-		formState: { errors }
+		formState: { errors },
 	} = useFormContext();
 	const fieldError = get(errors, name) as FieldError | undefined;
 

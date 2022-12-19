@@ -6,15 +6,15 @@ const toaster = css({
 	background: '$gray2 !important',
 	color: '$gray12 !important',
 	boxShadow: '$border1, $base !important',
-	borderRadius: '0.375rem !important'
+	borderRadius: '0.375rem !important',
 });
 
 const StyledSuccessIcon = styled(CheckCircledIcon, {
-	color: '$green11'
+	color: '$green11',
 });
 
 const StyledErrorIcon = styled(CrossCircledIcon, {
-	color: '$red11'
+	color: '$red11',
 });
 
 export const Toaster = () => (
@@ -24,11 +24,11 @@ export const Toaster = () => (
 			duration: 2000,
 			className: toaster(),
 			success: {
-				icon: <StyledSuccessIcon width="20" height="20" />
+				icon: <StyledSuccessIcon width="20" height="20" />,
 			},
 			error: {
-				icon: <StyledErrorIcon width="20" height="20" />
-			}
+				icon: <StyledErrorIcon width="20" height="20" />,
+			},
 		}}
 	/>
 );

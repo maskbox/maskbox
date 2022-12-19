@@ -15,7 +15,7 @@ export const Button = styled('button', {
 	overflow: 'hidden',
 	userSelect: 'none',
 	'&:disabled': {
-		opacity: 0.85
+		opacity: 0.85,
 	},
 	variants: {
 		variant: {
@@ -23,28 +23,28 @@ export const Button = styled('button', {
 				background: '$gray12',
 				color: '$gray5',
 				'&:hover:enabled': {
-					color: '$gray1'
-				}
+					color: '$gray1',
+				},
 			},
 			outline: {
 				background: 'transparent',
 				color: '$gray12',
 				boxShadow: '$border1',
 				'&:hover:enabled': {
-					background: '$gray3'
-				}
+					background: '$gray3',
+				},
 			},
 			ghost: {
 				background: 'transparent',
 				color: '$gray11',
 				'&:hover:enabled': {
 					background: '$gray3',
-					color: '$gray12'
-				}
-			}
-		}
+					color: '$gray12',
+				},
+			},
+		},
 	},
 	defaultVariants: {
-		variant: 'primary'
-	}
+		variant: 'primary',
+	},
 });

@@ -6,7 +6,7 @@ import {
 	SubmitHandler,
 	useForm,
 	UseFormProps,
-	UseFormReturn
+	UseFormReturn,
 } from 'react-hook-form';
 import { z } from 'zod';
 import { styled } from '../../utils/stitches';
@@ -18,7 +18,7 @@ interface Props<T extends FieldValues>
 }
 
 const StyledForm = styled('form', {
-	width: '100%'
+	width: '100%',
 });
 
 export function useZodForm<
@@ -32,7 +32,7 @@ export function useZodForm<
 } & UseFormProps<FieldValues>) {
 	const form = useForm<FieldValues>({
 		...props,
-		resolver: zodResolver(schema)
+		resolver: zodResolver(schema),
 	});
 
 	return form;

@@ -5,7 +5,7 @@ const StyledContainer = styled('main', {
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
-	minHeight: '100vh'
+	minHeight: '100vh',
 });
 
 export function Loading() {

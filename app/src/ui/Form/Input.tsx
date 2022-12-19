@@ -7,13 +7,13 @@ import { AdditionalMessage } from './AdditionalMessage';
 const StyledGroup = styled('div', {
 	width: '100%',
 	display: 'flex',
-	flexDirection: 'column'
+	flexDirection: 'column',
 });
 
 const StyledLabel = styled('label', {
 	width: 'fit-content',
 	fontWeight: '$semibold',
-	marginBottom: '0.25rem'
+	marginBottom: '0.25rem',
 });
 
 const StyledInput = styled('input', {
@@ -23,11 +23,11 @@ const StyledInput = styled('input', {
 	boxShadow: '$border1',
 	borderRadius: '0.375rem',
 	'&::placeholder': {
-		color: '$gray9'
+		color: '$gray9',
 	},
 	'&:focus': {
-		boxShadow: '$border2'
-	}
+		boxShadow: '$border2',
+	},
 });
 
 export function Input({
@@ -46,7 +46,7 @@ export function Input({
 } & ComponentProps<typeof StyledInput>) {
 	const {
 		register,
-		formState: { errors }
+		formState: { errors },
 	} = useFormContext();
 
 	return (
@@ -63,8 +63,8 @@ export function Input({
 						? {
 								boxShadow: '$colors$red9 0px 0px 0px 1px',
 								'&:focus': {
-									boxShadow: '$colors$red9 0px 0px 0px 1px'
-								}
+									boxShadow: '$colors$red9 0px 0px 0px 1px',
+								},
 						  }
 						: undefined
 				}

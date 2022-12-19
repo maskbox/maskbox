@@ -48,11 +48,11 @@ export default async function handle(
 
 		const { forwardTo } = await prisma.mask.findFirstOrThrow({
 			where: {
-				identifier
+				identifier,
 			},
 			select: {
-				forwardTo: true
-			}
+				forwardTo: true,
+			},
 		});
 
 		return res.json({ success: true, data: forwardTo.email });

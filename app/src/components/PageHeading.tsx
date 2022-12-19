@@ -9,25 +9,25 @@ const StyledHeadingContainer = styled('div', {
 	'@md': {
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between'
-	}
+		justifyContent: 'space-between',
+	},
 });
 
 const StyledTextContainer = styled('div', {
 	marginBottom: '0.75rem',
 	'@md': {
-		marginBottom: 0
-	}
+		marginBottom: 0,
+	},
 });
 
 const StyledHeading = styled('h1', {
 	fontSize: '$xl',
-	fontWeight: '$semibold'
+	fontWeight: '$semibold',
 });
 
 const StyledDescription = styled('p', {
 	marginTop: '0.25rem',
-	color: '$gray11'
+	color: '$gray11',
 });
 
 export function PageHeading({
@@ -61,8 +61,8 @@ export function PageHeadingSkeleton() {
 						marginTop: '0.25rem',
 						width: '100%',
 						'@md': {
-							width: '24rem'
-						}
+							width: '24rem',
+						},
 					}}
 				/>
 			</StyledTextContainer>
@@ -72,8 +72,8 @@ export function PageHeadingSkeleton() {
 					width: '100%',
 					height: '2rem',
 					'@md': {
-						width: '6rem'
-					}
+						width: '6rem',
+					},
 				}}
 			/>
 		</StyledHeadingContainer>

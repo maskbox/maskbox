@@ -30,14 +30,14 @@ export const maskRouter = router({
 	getMasks: protectedProcedure.query(async ({ ctx }) => {
 		const masks = await prisma.mask.findMany({
 			where: {
-				userId: ctx.session.user.id
+				userId: ctx.session.user.id,
 			},
 			include: {
-				forwardTo: true
+				forwardTo: true,
 			},
 			orderBy: {
-				createdAt: 'desc'
-			}
+				createdAt: 'desc',
+			},
 		});
 
 		return masks;
@@ -47,32 +47,32 @@ export const maskRouter = router({
 		.mutation(async ({ ctx, input }) => {
 			const count = await prisma.mask.count({
 				where: {
-					userId: ctx.session.user.id
-				}
+					userId: ctx.session.user.id,
+				},
 			});
 
 			if (count >= MAX_MASKS_PER_ACCOUNT) {
 				throw new TRPCError({
 					code: 'CONFLICT',
-					message: 'You reached the limit of maximum masks per account.'
+					message: 'You reached the limit of maximum masks per account.',
 				});
 			}
 
 			const forwardToEmail = await prisma.email.findFirstOrThrow({
 				where: {
 					id: input.forwardTo,
-					userId: ctx.session.user.id
+					userId: ctx.session.user.id,
 				},
 				select: {
 					id: true,
-					verifiedAt: true
-				}
+					verifiedAt: true,
+				},
 			});
 
 			if (!forwardToEmail.verifiedAt) {
 				throw new TRPCError({
 					code: 'BAD_REQUEST',
-					message: 'Email is not verified.'
+					message: 'Email is not verified.',
 				});
 			}
 
@@ -81,19 +81,19 @@ export const maskRouter = router({
 					identifier: generateIdentifier(input.algorithm),
 					forwardTo: {
 						connect: {
-							id: forwardToEmail.id
-						}
+							id: forwardToEmail.id,
+						},
 					},
 					name: input.name,
 					user: {
 						connect: {
-							id: ctx.session.user.id
-						}
-					}
+							id: ctx.session.user.id,
+						},
+					},
 				},
 				include: {
-					forwardTo: true
-				}
+					forwardTo: true,
+				},
 			});
 
 			return mask;
@@ -101,23 +101,23 @@ export const maskRouter = router({
 	deleteMask: protectedProcedure
 		.input(
 			z.object({
-				id: z.string().cuid()
+				id: z.string().cuid(),
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
 			const maskToDelete = await prisma.mask.findFirstOrThrow({
 				where: {
 					id: input.id,
-					userId: ctx.session.user.id
-				}
+					userId: ctx.session.user.id,
+				},
 			});
 
 			const deletedMask = await prisma.mask.delete({
 				where: {
-					id: maskToDelete.id
-				}
+					id: maskToDelete.id,
+				},
 			});
 
 			return deletedMask;
-		})
+		}),
 });

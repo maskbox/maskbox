@@ -17,30 +17,30 @@ const StyledIconButton = styled('button', {
 	borderRadius: '0.25rem',
 	baseTransition: 'background, color',
 	'&:hover': {
-		background: '$gray3'
+		background: '$gray3',
 	},
 	variants: {
 		variant: {
 			primary: {
 				color: '$gray11',
 				'&:hover': {
-					color: '$gray12'
-				}
+					color: '$gray12',
+				},
 			},
 			success: {
-				color: '$green11'
+				color: '$green11',
 			},
 			danger: {
 				color: '$red11',
 				'&:hover': {
-					color: '$red12'
-				}
-			}
-		}
+					color: '$red12',
+				},
+			},
+		},
 	},
 	defaultVariants: {
-		variant: 'primary'
-	}
+		variant: 'primary',
+	},
 });
 
 export function IconButton({

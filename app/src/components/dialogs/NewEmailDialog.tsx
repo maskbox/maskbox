@@ -7,7 +7,7 @@ import {
 	DialogHeader,
 	DialogTrigger,
 	useDialog,
-	useDialogContext
+	useDialogContext,
 } from '../../ui/Dialog';
 import { Form, useZodForm } from '../../ui/Form';
 import { Input } from '../../ui/Form/Input';
@@ -23,8 +23,8 @@ function NewEmailDialogContent() {
 	const form = useZodForm({
 		schema: emailSchema,
 		defaultValues: {
-			email: ''
-		}
+			email: '',
+		},
 	});
 
 	const { mutateAsync } = trpc.email.addEmail.useMutation({
@@ -43,7 +43,7 @@ function NewEmailDialogContent() {
 			if (data?.code === 'CONFLICT') {
 				form.setError('email', { message });
 			}
-		}
+		},
 	});
 
 	return (

@@ -9,30 +9,30 @@ const StyledCard = styled('div', {
 	alignItems: 'center',
 	background: '$gray2',
 	borderRadius: '0.375rem',
-	boxShadow: '$border1'
+	boxShadow: '$border1',
 });
 
 const StyledIcon = styled(ExclamationTriangleIcon, {
 	flexShrink: 0,
-	color: '$red11'
+	color: '$red11',
 });
 
 const StyledContainer = styled('div', {
-	marginLeft: '0.75rem'
+	marginLeft: '0.75rem',
 });
 
 const StyledTitle = styled('p', {
 	marginBottom: '0.125rem',
-	fontWeight: '$semibold'
+	fontWeight: '$semibold',
 });
 
 const StyledDescription = styled('p', {
-	color: '$gray11'
+	color: '$gray11',
 });
 
 export function Alert({
 	title,
-	description
+	description,
 }: {
 	title: string;
 	description: string;

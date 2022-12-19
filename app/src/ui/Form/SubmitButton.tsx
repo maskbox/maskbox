@@ -5,7 +5,7 @@ import { Button } from '../Button';
 
 const pulse = keyframes({
 	'0%, 100%': { opacity: 1 },
-	'50%': { opacity: 0.6 }
+	'50%': { opacity: 0.6 },
 });
 
 const LoadingDot = styled('span', {
@@ -15,8 +15,8 @@ const LoadingDot = styled('span', {
 	borderRadius: '50%',
 	animation: `${pulse} 1.4s linear infinite`,
 	'&:not(:last-of-type)': {
-		marginRight: '0.125rem'
-	}
+		marginRight: '0.125rem',
+	},
 });
 
 const LoadingDots = styled('div', {
@@ -27,7 +27,7 @@ const LoadingDots = styled('div', {
 	width: '100%',
 	height: '100%',
 	inset: 0,
-	background: 'inherit'
+	background: 'inherit',
 });
 
 export function SubmitButton({

@@ -4,7 +4,7 @@ import { maskRouter } from './mask';
 
 export const appRouter = router({
 	email: emailRouter,
-	mask: maskRouter
+	mask: maskRouter,
 });
 
 export type AppRouter = typeof appRouter;
