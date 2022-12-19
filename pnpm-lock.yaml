@@ -49,6 +49,7 @@ importers:
       mjml-react: ^2.0.8
       next: ^13.0.6
       next-auth: ^4.18.6
+      next-seo: ^5.15.0
       nodemailer: ^6.8.0
       prisma: ^4.7.1
       react: ^18.2.0
@@ -92,6 +93,7 @@ importers:
       mjml-react: 2.0.8_7tbcn2mecc3yvuxakflodiks3m
       next: 13.0.7_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.18.6_gxrb4puqhmlxj5cjmftw47fgty
+      next-seo: 5.15.0_gvvct4imq5upoiloat43sswrza
       nodemailer: 6.8.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -4453,6 +4455,18 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       uuid: 8.3.2
+    dev: false
+
+  /next-seo/5.15.0_gvvct4imq5upoiloat43sswrza:
+    resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 13.0.7_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next/13.0.7_biqbaboplfbrettd7655fr4n2y:

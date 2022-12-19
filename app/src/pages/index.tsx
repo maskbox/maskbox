@@ -6,6 +6,7 @@ import {
 } from '@radix-ui/react-icons';
 import { ComponentProps } from '@stitches/react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { NextSeo } from 'next-seo';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { ReactNode, useRef, useState } from 'react';
@@ -496,6 +497,8 @@ export default function Home() {
 
 	return (
 		<>
+			<NextSeo title="Keep your online identity hidden and secure" />
+
 			<StyledTopShadow />
 
 			<StyledHeader>

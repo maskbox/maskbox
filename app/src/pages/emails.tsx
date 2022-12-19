@@ -1,5 +1,6 @@
 import { TrashIcon } from '@radix-ui/react-icons';
 import { useSession } from 'next-auth/react';
+import { NextSeo } from 'next-seo';
 import toast from 'react-hot-toast';
 import { NewEmailDialog } from '../components/dialogs/NewEmailDialog';
 import { PageHeading, PageHeadingSkeleton } from '../components/PageHeading';
@@ -180,6 +181,8 @@ export default function Emails() {
 	if (!data) {
 		return (
 			<>
+				<NextSeo title="Emails" noindex nofollow />
+
 				<PageHeadingSkeleton />
 
 				<StyledSkeletonTableHead>
@@ -268,6 +271,8 @@ export default function Emails() {
 
 	return (
 		<>
+			<NextSeo title="Emails" noindex nofollow />
+
 			{data.length === MAX_EMAILS_PER_ACCOUNT && (
 				<Alert
 					title="Emails limit reached"

@@ -1,4 +1,5 @@
 import { StackIcon } from '@radix-ui/react-icons';
+import { NextSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 import { NewMaskDialog } from '../components/dialogs/NewMaskDialog';
 import { PageHeading, PageHeadingSkeleton } from '../components/PageHeading';
@@ -60,6 +61,8 @@ export default function Masks() {
 	if (!data) {
 		return (
 			<>
+				<NextSeo title="Masks" noindex nofollow />
+
 				<PageHeadingSkeleton />
 
 				{Array.from({ length: 5 }).map((_, i) => (
@@ -87,6 +90,8 @@ export default function Masks() {
 	if (!data.length) {
 		return (
 			<StyledEmptyContainer>
+				<NextSeo title="Masks" noindex nofollow />
+
 				<StackIcon width="64" height="64" />
 				<StyledEmptyHeader>Welcome to Maskbox</StyledEmptyHeader>
 				<StyledEmptyDescription>
@@ -100,6 +105,8 @@ export default function Masks() {
 
 	return (
 		<>
+			<NextSeo title="Masks" noindex nofollow />
+
 			{data.length === MAX_MASKS_PER_ACCOUNT && (
 				<Alert
 					title="Masks limit reached"

@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { signIn } from 'next-auth/react';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { Button } from '../ui/Button';
 import { Form, useZodForm } from '../ui/Form';
@@ -58,6 +59,8 @@ export default function SignIn() {
 
 	return (
 		<AnimatePresence mode="wait" initial={false}>
+			<NextSeo title="Sign in" noindex nofollow />
+
 			<StyledContent
 				key={email ? 'signInSuccess' : 'signInForm'}
 				variants={variants}
