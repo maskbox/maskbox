@@ -4,8 +4,8 @@ import { buildSendMail } from 'mailing-core';
 
 const ses = new aws.SES({
 	credentials: {
-		accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+		accessKeyId: process.env.SES_ACCESS_KEY_ID as string,
+		secretAccessKey: process.env.SES_SECRET_ACCESS_KEY as string,
 	},
 	region: 'us-east-1',
 });
