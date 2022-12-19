@@ -1,4 +1,9 @@
-import { StackIcon } from '@radix-ui/react-icons';
+import {
+	CodeIcon,
+	LapTimerIcon,
+	PlusCircledIcon,
+	StackIcon,
+} from '@radix-ui/react-icons';
 import { ComponentProps } from '@stitches/react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
@@ -375,7 +380,7 @@ const howItWorksSections: {
 		id: 'email',
 		title: 'Add your real email address',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+			'By adding your real email address, you can ensure that you receive all of your messages to it while still keeping your real email address private.',
 		alt: 'Image of how to add your real email address',
 		image: email,
 	},
@@ -383,7 +388,7 @@ const howItWorksSections: {
 		id: 'masks',
 		title: 'Generate your unique mask',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+			'Select from a set of algorithms to generate your unique mask. This mask acts as a buffer between your real email address and the outside world.',
 		alt: 'Image of the list of generated masks',
 		image: masks,
 	},
@@ -391,18 +396,37 @@ const howItWorksSections: {
 		id: 'usage',
 		title: 'Use your mask everywhere',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies tristique nulla aliquet enim tortor at auctor urna.',
+			'Once your unique mask is generated, you can use it to protect your emails wherever you go. Messages sent to your mask address are instantly forwarded to your inbox.',
 		alt: 'Image of the mask used in an application',
 		image: usage,
 	},
 ];
 
-const features: FeatureCardProps[] = Array.from({ length: 4 }).map(() => ({
-	title: 'Lorem ipsum dolor',
-	description:
-		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sunt eius, quas asperiores nihil magnam molestiae autem.',
-	icon: <StackIcon width="30" height="30" />,
-}));
+const features: FeatureCardProps[] = [
+	{
+		title: '100% open source',
+		description:
+			'Our code is available for anyone to review and improve. This ensures transparency, security, and constant improvement.',
+		icon: <CodeIcon width="30" height="30" />,
+	},
+	{
+		title: 'Free forever',
+		description:
+			'No hidden fees or costs. Sign in now and start protecting your privacy without spending a penny.',
+		icon: <LapTimerIcon width="30" height="30" />,
+	},
+	{
+		title: 'One email, multiple masks',
+		description:
+			'Protect your privacy and keep your personal information safe, no matter how many masks you need.',
+		icon: <StackIcon width="30" height="30" />,
+	},
+	{
+		title: 'Use everywhere (soon)',
+		description: `Easily install our extension on your preferred browser and protect your emails while you're browsing the web.`,
+		icon: <PlusCircledIcon width="30" height="30" />,
+	},
+];
 
 function TabTrigger({
 	title,
@@ -677,7 +701,7 @@ export default function Home() {
 						ease: DEFAULT_EASE,
 					}}
 				>
-					Sign up now and start enjoying the benefits.
+					Experience the best of both worlds with Maskbox and our features.
 				</StyledSectionDescription>
 
 				<StyledFeaturesGrid>
