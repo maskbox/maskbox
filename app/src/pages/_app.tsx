@@ -69,6 +69,9 @@ function App({
 									site_name: 'maskbox.app',
 									images: [{ url: `${BASE_URL}/og.png` }],
 								}}
+								twitter={{
+									cardType: 'summary_large_image',
+								}}
 							/>
 
 							<style jsx global>{`
