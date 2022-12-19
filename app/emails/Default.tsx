@@ -76,7 +76,7 @@ export default function Default({
 							width="80px"
 							height="80px"
 							align="left"
-							src="https://via.placeholder.com/80x80.png"
+							src="https://maskbox.app/logo.png"
 						/>
 					</MjmlColumn>
 				</MjmlSection>
