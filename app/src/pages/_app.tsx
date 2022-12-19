@@ -23,7 +23,7 @@ const inter = Inter();
 const layouts = {
 	auth: dynamic(() => import('../layouts/AuthLayout'), { ssr: false }),
 	app: dynamic(() => import('../layouts/AppLayout'), { ssr: false }),
-	landing: dynamic(() => import('../layouts/LandingLayout')),
+	landing: dynamic(() => import('../layouts/LandingLayout'), { ssr: false }),
 };
 
 function App({
