@@ -8,3 +8,6 @@ clean:
 
 deploy: clean build
 	sls deploy --verbose
+
+deploy-prod: clean build
+	sls deploy --verbose --stage production
