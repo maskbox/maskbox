@@ -24,7 +24,7 @@ privacy of email users by obscuring or altering their email addresses.
 
 By using these masks in place of real email addresses, you can avoid the risk of
 your email addresses being harvested by spam bots or other malicious actors,
-and can also prevent unwanted solicitations or spam from reaching their
+and can also prevent unwanted solicitations or spam from reaching your
 inboxes.
 
 ## Built with

@@ -53,10 +53,6 @@ function App({
 										content: 'width=device-width, initial-scale=1.0',
 									},
 									{
-										name: 'theme-color',
-										content: '#060606',
-									},
-									{
 										name: 'url',
 										content: url,
 									},

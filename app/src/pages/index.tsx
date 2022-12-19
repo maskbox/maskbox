@@ -78,7 +78,7 @@ const StyledHeaderLogoContainer = styled(motion.div, {
 
 const StyledHeaderLogo = styled('svg', {
 	zIndex: 40,
-	filter: 'drop-shadow(0px 4px 15px hsla(0, 0%, 0%, 0.3))',
+	filter: 'drop-shadow(0px 4px 20px hsla(0, 0%, 0%, 0.4))',
 });
 
 const StyledBackgroundCircle = styled('div', {
@@ -570,7 +570,7 @@ export default function Home() {
 								gradientUnits="userSpaceOnUse"
 							>
 								<stop stopColor="#EDEDED" stopOpacity=".95" />
-								<stop offset="1" stopColor="#EDEDED" stopOpacity=".55" />
+								<stop offset="1" stopColor="#EDEDED" stopOpacity=".6" />
 							</linearGradient>
 						</defs>
 					</StyledHeaderLogo>
