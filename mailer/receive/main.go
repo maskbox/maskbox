@@ -122,7 +122,7 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 	identifier := strings.Split(toAddress, "@")
 
 	name, address := ExtractNameAndAddress(from)
-	newFrom := FormatFromAddress(address) + RandStringBytes(15) + "@relay.laniakea.host"
+	newFrom := FormatFromAddress(address) + RandStringBytes(15) + "@relay.maskbox.app"
 	if name != "" {
 		newFrom = fmt.Sprintf("%s <%s>", name, newFrom)
 	}
