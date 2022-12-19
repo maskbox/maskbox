@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
 
 const sendMail = buildSendMail({
 	transport,
-	defaultFrom: 'verification@relay.laniakea.host',
+	defaultFrom: 'verification@relay.maskbox.app',
 	configPath: './mailing.config.json',
 });
 
