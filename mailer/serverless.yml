@@ -1,4 +1,5 @@
 service: mailer
+useDotenv: true
 
 frameworkVersion: '3'
 
@@ -30,5 +31,5 @@ functions:
   receive:
     handler: bin/receive
     environment:
-      API_URL: https://tunnel.laniakea.host/api/internal/exchange
-      SIGNATURE_SECRET_KEY: secret@key123
+      API_URL: ${env:API_URL}
+      SIGNATURE_SECRET_KEY: ${env:SIGNATURE_SECRET_KEY}
