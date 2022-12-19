@@ -312,7 +312,6 @@ const StyledFeaturesGrid = styled('div', {
 	margin: '6rem 1rem',
 	display: 'grid',
 	gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-	alignItems: 'center',
 	gap: '0.625rem',
 	'@md': {
 		margin: '6rem',
@@ -404,7 +403,7 @@ const howItWorksSections: {
 
 const features: FeatureCardProps[] = [
 	{
-		title: '100% open source',
+		title: '100% open-source',
 		description:
 			'Our code is available for anyone to review and improve. This ensures transparency, security, and constant improvement.',
 		icon: <CodeIcon width="30" height="30" />,
