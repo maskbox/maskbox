@@ -1,5 +1,6 @@
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { useSession } from 'next-auth/react';
+import { Analytics } from '@vercel/analytics/react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { styled } from '../utils/stitches';
@@ -102,6 +103,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
 
 	return (
 		<StyledWrapper>
+			<Analytics />
 			<StyledNavbar>
 				<StyledLogo href="/">
 					<svg
