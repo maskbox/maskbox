@@ -134,6 +134,7 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 
 	e.SetHeader("From", []string{newFrom})
 	e.SetHeader("To", []string{forwardTo})
+	e.SetHeader("Return-Path", []string{""})
 	e.SetHeader("Reply-To", []string{from})
 
 	buf := &bytes.Buffer{}
