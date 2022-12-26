@@ -10,8 +10,8 @@ import (
 	"io"
 	"math/rand"
 	"net/http"
+	"net/mail"
 	"os"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -115,16 +115,25 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 		return nil, fmt.Errorf("could not read mail parts: %w", err)
 	}
 
-	from := e.GetHeader("From")
+	from, _ := mail.ParseAddress(e.GetHeader("From"))
 	to := e.GetHeader("To")
 
-	_, toAddress := ExtractNameAndAddress(to)
-	identifier := strings.Split(toAddress, "@")
+	toParts, err := mail.ParseAddress(to)
+	if err != nil {
+		return nil, fmt.Errorf("could not parse to address: %w", err)
+	}
+	identifier := strings.Split(toParts.Address, "@")
 
-	name, address := ExtractNameAndAddress(from)
-	newFrom := FormatFromAddress(address) + RandStringBytes(15) + "@relay.maskbox.app"
-	if name != "" {
-		newFrom = fmt.Sprintf("%s <%s>", name, newFrom)
+	fromParts, err := mail.ParseAddress(from.String())
+	if err != nil {
+		return nil, fmt.Errorf("could not parse from address: %w", err)
+	}
+
+	fromAddress := FormatFromAddress(fromParts.Address) + RandStringBytes(15) + "@relay.maskbox.app"
+	var newFrom mail.Address
+	newFrom = mail.Address{Address: fromAddress}
+	if fromParts.Name != "" {
+		newFrom = mail.Address{Name: fromParts.Name, Address: fromAddress}
 	}
 
 	forwardTo, err := ResolveAddress(identifier[0])
@@ -132,10 +141,10 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 		return nil, fmt.Errorf("resolve address error: %w", err)
 	}
 
-	e.SetHeader("From", []string{newFrom})
+	e.SetHeader("From", []string{newFrom.String()})
 	e.SetHeader("To", []string{forwardTo})
+	e.SetHeader("Reply-To", []string{from.String()})
 	e.SetHeader("Return-Path", []string{""})
-	e.SetHeader("Reply-To", []string{from})
 
 	buf := &bytes.Buffer{}
 	err = e.Root.Encode(buf)
@@ -158,17 +167,6 @@ func SignRequest(message []byte) (string, string) {
 	hexSigned := hex.EncodeToString(signed)
 
 	return hexSigned, timestamp
-}
-
-func ExtractNameAndAddress(s string) (string, string) {
-	ex := regexp.MustCompile(`(?:(\w+(\s+)?\w+)?\s+)?(?:<?)((?:[\w-]+(?:\.[\w-]+)*)(?:@)(?:(?:[\w-]+\.)*\w[\w-]{0,66}))(?:>?)`)
-	matches := ex.FindStringSubmatch(s)
-
-	if matches[1] == "" {
-		return "", matches[3]
-	} else {
-		return matches[1], matches[3]
-	}
 }
 
 func FormatFromAddress(s string) string {
