@@ -42,21 +42,25 @@ func Handler(event events.SimpleEmailEvent) (interface{}, error) {
 	mailClient := ses.New(session)
 
 	for _, record := range event.Records {
+		// Get raw email from S3 bucket
 		obj, err := s3Client.GetObject(&s3.GetObjectInput{Bucket: aws.String("maskbox-receive"), Key: aws.String(record.SES.Mail.MessageID)})
 		if err != nil {
 			return nil, fmt.Errorf("could not get object: %w", err)
 		}
 
+		// Translate email
 		rewrittenMail, err := TranslateEmail(obj.Body)
 		if err != nil {
 			return nil, fmt.Errorf("could not rewrite mail: %w", err)
 		}
 
+		// Send translated email
 		_, err = mailClient.SendRawEmail(&ses.SendRawEmailInput{RawMessage: &ses.RawMessage{Data: rewrittenMail}})
 		if err != nil {
 			return nil, fmt.Errorf("could not forward mail: %w", err)
 		}
 
+		// Remove raw email from S3 bucket
 		_, err = s3Client.DeleteObject(&s3.DeleteObjectInput{Bucket: aws.String("maskbox-receive"), Key: aws.String(record.SES.Mail.MessageID)})
 		if err != nil {
 			return nil, fmt.Errorf("could not delete email from s3: %w", err)
@@ -73,6 +77,7 @@ func main() {
 func ResolveAddress(identifier string) (string, error) {
 	url := os.Getenv("API_URL")
 
+	// Request body
 	body, err := json.Marshal(map[string]string{
 		"identifier": identifier,
 	})
@@ -80,8 +85,10 @@ func ResolveAddress(identifier string) (string, error) {
 		return "", fmt.Errorf("could not encode api request JSON body: %w", err)
 	}
 
+	// Create request signature
 	sig, timestamp := SignRequest(body)
 
+	// Create HTTP request to maskbox API
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
 	req.Header = http.Header{
 		"x-signature-sha256":    {sig},
@@ -92,6 +99,7 @@ func ResolveAddress(identifier string) (string, error) {
 		return "", fmt.Errorf("could not build http request: %w", err)
 	}
 
+	// Send HTTP request
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -99,6 +107,7 @@ func ResolveAddress(identifier string) (string, error) {
 	}
 	defer resp.Body.Close()
 
+	// Parse API response
 	var res ApiResponse
 	json.NewDecoder(resp.Body).Decode(&res)
 
@@ -118,17 +127,20 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 	from, _ := mail.ParseAddress(e.GetHeader("From"))
 	to := e.GetHeader("To")
 
+	// Extract identifier from To header
 	toParts, err := mail.ParseAddress(to)
 	if err != nil {
 		return nil, fmt.Errorf("could not parse to address: %w", err)
 	}
 	identifier := strings.Split(toParts.Address, "@")
 
+	// Replace From header - preserve name and replace email
 	fromParts, err := mail.ParseAddress(from.String())
 	if err != nil {
 		return nil, fmt.Errorf("could not parse from address: %w", err)
 	}
 
+	// Put together new From header with original name and new From address.
 	fromAddress := FormatFromAddress(fromParts.Address) + RandStringBytes(15) + "@relay.maskbox.app"
 	var newFrom mail.Address
 	newFrom = mail.Address{Address: fromAddress}
@@ -136,14 +148,18 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 		newFrom = mail.Address{Name: fromParts.Name, Address: fromAddress}
 	}
 
+	// Resolve forward address
 	forwardTo, err := ResolveAddress(identifier[0])
 	if err != nil {
 		return nil, fmt.Errorf("resolve address error: %w", err)
 	}
 
+	// Replace headers
 	e.SetHeader("From", []string{newFrom.String()})
 	e.SetHeader("To", []string{forwardTo})
 	e.SetHeader("Reply-To", []string{from.String()})
+
+	// Remove headers
 	e.SetHeader("Return-Path", []string{""})
 	e.SetHeader("Message-ID", []string{""})
 	e.SetHeader("Sender", []string{""})
