@@ -145,6 +145,9 @@ func TranslateEmail(reader io.Reader) ([]byte, error) {
 	e.SetHeader("To", []string{forwardTo})
 	e.SetHeader("Reply-To", []string{from.String()})
 	e.SetHeader("Return-Path", []string{""})
+	e.SetHeader("Message-ID", []string{""})
+	e.SetHeader("Sender", []string{""})
+	e.SetHeader("DKIM-Signature", []string{""})
 
 	buf := &bytes.Buffer{}
 	err = e.Root.Encode(buf)
