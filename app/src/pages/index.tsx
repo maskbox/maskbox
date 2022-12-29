@@ -87,11 +87,11 @@ const StyledBackgroundCircle = styled('div', {
 	opacity: 0.3,
 });
 
-const StyledBackgroundGradient = styled('div', {
+const StyledBackgroundGradient = styled('span', {
 	position: 'absolute',
-	background:
-		'conic-gradient(from 180deg at 50% 50%, #FF1DDB 0deg, #0087FF 360deg)',
-	borderRadius: '50%',
+	borderRadius: '100%',
+	mixBlendMode: 'normal',
+	willChange: 'filter',
 });
 
 const StyledHeaderTextContainer = styled('div', {
@@ -533,9 +533,12 @@ export default function Home() {
 
 					<StyledBackgroundGradient
 						css={{
-							width: 380,
-							height: 380,
-							filter: 'blur(300px)',
+							width: 800,
+							height: 800,
+							filter: 'blur(160px)',
+							opacity: 0.2,
+							background:
+								'conic-gradient(from 180deg at 50% 50%, #FF1DDB 0deg, #0087FF 360deg)',
 						}}
 					/>
 					<StyledBackgroundGradient
@@ -543,7 +546,8 @@ export default function Home() {
 							width: 156,
 							height: 156,
 							filter: 'blur(60px)',
-							opacity: 0.8,
+							background:
+								'conic-gradient(from 180deg at 50% 50%, #FF1DDB 0deg, #0087FF 360deg)',
 						}}
 					/>
 
