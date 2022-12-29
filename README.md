@@ -1,5 +1,5 @@
 <a href="https://maskbox.app">
-  <img alt="Maskbox – Keep your online identity hidden and secure" src=".github/banner.png">
+  <img alt="Maskbox – Keep your online identity hidden and secure" src=".github/banner.png" />
   <h1 align="center">Maskbox</h1>
 </a>
 
@@ -49,6 +49,8 @@ Any contributions you make are appreciated. Here is how you can contribute:
 - [Make a pull request](https://github.com/maskbox/maskbox/pulls) to add new
   features or fix bugs. Before making a pull request, please discuss the change
   you wish to make via issue.
+
+<br />
 
 <a href="https://github.com/maskbox/maskbox/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=maskbox/maskbox" />
