@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-ses": "^3.229.0",
+		"@aws-sdk/util-retry": "^3.229.0",
 		"@hookform/resolvers": "^2.9.10",
 		"@next-auth/prisma-adapter": "^1.0.5",
 		"@next/font": "^13.0.3",
@@ -34,6 +35,7 @@
 		"@vercel/analytics": "^0.1.6",
 		"aws-crt": "^1.15.5",
 		"aws-sdk": "^2.1274.0",
+		"bufferutil": "^4.0.7",
 		"copy-to-clipboard": "^3.3.3",
 		"framer-motion": "^7.9.1",
 		"mailing-core": "^0.9.7",
@@ -51,6 +53,7 @@
 		"react-loading-icons": "^1.1.0",
 		"react-query": "^3.39.2",
 		"superjson": "^1.12.0",
+		"utf-8-validate": "^5.0.10",
 		"zod": "^3.20.2"
 	},
 	"devDependencies": {
