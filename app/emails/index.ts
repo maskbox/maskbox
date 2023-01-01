@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import * as aws from '@aws-sdk/client-ses';
 import { buildSendMail } from 'mailing-core';
+import { RELAY_DOMAIN } from '../src/constants';
 
 const ses = new aws.SES({
 	credentials: {
@@ -16,7 +17,7 @@ const transport = nodemailer.createTransport({
 
 const sendMail = buildSendMail({
 	transport,
-	defaultFrom: 'verification@relay.maskbox.app',
+	defaultFrom: 'verification@' + RELAY_DOMAIN,
 	configPath: './mailing.config.json',
 });
 

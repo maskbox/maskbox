@@ -9,6 +9,7 @@ import copy from 'copy-to-clipboard';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import { RELAY_DOMAIN } from '../constants';
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -146,7 +147,7 @@ export default function Mask({
 		};
 	}, []);
 
-	const maskAddress = `${identifier}@relay.maskbox.app`;
+	const maskAddress = `${identifier}@${RELAY_DOMAIN}`;
 
 	function copyMaskAddress() {
 		copy(maskAddress);
