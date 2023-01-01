@@ -103,6 +103,20 @@ export default function SignIn() {
 										callbackUrl: '/masks',
 									});
 
+									if (result?.error) {
+										form.setError(
+											'email',
+											{
+												message:
+													'You cannot use email address with this domain.',
+											},
+											{
+												shouldFocus: true,
+											}
+										);
+										return;
+									}
+
 									if (result?.ok) {
 										setEmail(data.email);
 									}

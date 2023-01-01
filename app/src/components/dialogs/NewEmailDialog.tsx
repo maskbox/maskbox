@@ -39,9 +39,14 @@ function NewEmailDialogContent() {
 			setOpen(false);
 			toast.success('Email address successfully added.');
 		},
+		// TODO: Global error handling:
 		onError({ message, data }) {
 			if (data?.code === 'CONFLICT') {
 				form.setError('email', { message });
+			} else if (data?.zodError) {
+				form.setError('email', {
+					message: 'You cannot use email address with this domain.',
+				});
 			}
 		},
 	});

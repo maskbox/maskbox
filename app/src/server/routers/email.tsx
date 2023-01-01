@@ -9,7 +9,7 @@ import {
 	MAX_EMAILS_PER_ACCOUNT,
 } from '../../constants';
 import { prisma } from '../../utils/prisma';
-import { emailSchema } from '../../utils/schema';
+import { emailSchemaWithDisposableEmailCheck } from '../../utils/schema';
 import { protectedProcedure, router } from '../trpc';
 
 export const emailRouter = router({
@@ -39,7 +39,7 @@ export const emailRouter = router({
 			return emails;
 		}),
 	addEmail: protectedProcedure
-		.input(emailSchema)
+		.input(emailSchemaWithDisposableEmailCheck)
 		.mutation(async ({ ctx, input }) => {
 			const count = await prisma.email.count({
 				where: {
