@@ -5,7 +5,7 @@ import sendMail from '../../../../emails';
 import Default from '../../../../emails/Default';
 import { SIGN_IN_CODE_MAX_AGE } from '../../../constants';
 import { prisma } from '../../../utils/prisma';
-import { emailSchema } from '../../../utils/schema';
+import { emailStringSchema } from '../../../utils/schema';
 
 export const authOptions: NextAuthOptions = {
 	providers: [
@@ -47,8 +47,8 @@ export const authOptions: NextAuthOptions = {
 
 			return session;
 		},
-		signIn({ email }) {
-			const { success } = emailSchema.safeParse(email);
+		signIn({ user }) {
+			const { success } = emailStringSchema.safeParse(user.email);
 
 			return success;
 		},

@@ -3,13 +3,15 @@ import { RELAY_DOMAIN } from '../constants';
 
 export const ALGORITHMS = ['PERSON', 'RANDOM'] as const;
 
+export const emailStringSchema = z
+	.string()
+	.email({ message: 'Please enter a valid email address.' })
+	.refine((val) => val.split('@')[1] !== RELAY_DOMAIN, {
+		message: 'You cannot use email address with this domain.',
+	});
+
 export const emailSchema = z.object({
-	email: z
-		.string()
-		.email({ message: 'Please enter a valid email address.' })
-		.refine((val) => val.split('@')[1] !== RELAY_DOMAIN, {
-			message: 'You cannot use email address with this domain.',
-		}),
+	email: emailStringSchema,
 });
 
 export const maskSchema = z.object({
