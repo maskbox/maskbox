@@ -1,9 +1,15 @@
 import { z } from 'zod';
+import { RELAY_DOMAIN } from '../constants';
 
 export const ALGORITHMS = ['PERSON', 'RANDOM'] as const;
 
 export const emailSchema = z.object({
-	email: z.string().email({ message: 'Please enter a valid email address.' }),
+	email: z
+		.string()
+		.email({ message: 'Please enter a valid email address.' })
+		.refine((val) => val.split('@')[1] !== RELAY_DOMAIN, {
+			message: 'You cannot use email address with this domain.',
+		}),
 });
 
 export const maskSchema = z.object({
