@@ -11,7 +11,6 @@
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
   <a href="#built-with"><strong>Built with</strong></a> ·
-  <a href="#deployment"><strong>Deployment</strong></a> ·
   <a href="#contributing"><strong>Contributing</strong></a> ·
   <a href="#license"><strong>License</strong></a>
 </p>
