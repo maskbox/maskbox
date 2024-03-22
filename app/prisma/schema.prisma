@@ -3,11 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  // NOTE: We need to emulate referential integrity in the Prisma client because
-  // PlanetScale does not allow the use of foreign key constraints.
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
