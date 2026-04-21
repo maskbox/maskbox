@@ -33,7 +33,7 @@ function NewMaskDialogForm() {
 		{ onlyVerified: true },
 		{
 			suspense: true,
-		}
+		},
 	);
 
 	const context = trpc.useContext();
@@ -68,7 +68,12 @@ function NewMaskDialogForm() {
 				))}
 			</Select>
 
-			<Select name="algorithm" label="Algorithm" css={{ marginTop: '1rem' }}>
+			<Select
+				name="algorithm"
+				label="Algorithm"
+				message="Person generates a name-based address (e.g., john.doe), while Random creates a random string of characters."
+				css={{ marginTop: '1rem' }}
+			>
 				{ALGORITHMS.map((algorithm) => (
 					<SelectItem key={algorithm} value={algorithm}>
 						{capitalize(algorithm)}
